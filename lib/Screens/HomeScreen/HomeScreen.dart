@@ -11,6 +11,7 @@ import 'package:tuition_app_project/Widgets/homeScreenButton.dart';
 import 'package:tuition_app_project/Widgets/sideDrawer.dart';
 import 'package:tuition_app_project/Models/userModel.dart';
 
+import '../../Widgets/teacherList.dart';
 import '../../main.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -77,7 +78,7 @@ class HomeScreen extends StatelessWidget {
                         drawer: side_drawer(User: snapshot.data),
                         bottomNavigationBar: bottomNavigationBar(
                             index: state.selectedIndex, homeBloc: homeBloc),
-                        body: Column(
+                        body: ListView(
                           children: [
                             Container(
                               height: 80,
@@ -146,26 +147,47 @@ class HomeScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: RichText(
-                                text: TextSpan(
-                                    text: "Your Meetings",
-                                    style: GoogleFonts.arvo(
-                                      textStyle: const TextStyle(
-                                          decoration: TextDecoration.underline,
-                                          color:
-                                              Color.fromARGB(255, 3, 66, 102),
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 20),
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: "Your Meetings",
+                                      style: GoogleFonts.arvo(
+                                        textStyle: const TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            color:
+                                                Color.fromARGB(255, 3, 66, 102),
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                ),
                               ),
                             ),
-                            const Expanded(
-                                child: Padding(
+                            const Padding(
                               padding: EdgeInsets.all(15),
                               child: meetingList(),
-                            ))
+                            ),
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 7, bottom: 10),
+                                child: RichText(
+                                  text: TextSpan(
+                                      text: "Teachers",
+                                      style: GoogleFonts.arvo(
+                                        textStyle: const TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            color:
+                                                Color.fromARGB(255, 3, 66, 102),
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                ),
+                              ),
+                            ),
+                            const teacherList()
                           ],
                         ),
                       );

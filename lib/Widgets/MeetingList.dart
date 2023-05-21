@@ -8,6 +8,8 @@ class meetingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
+      height: 300,
       decoration: BoxDecoration(
         color: Colors.lightBlueAccent[100],
         borderRadius: BorderRadius.circular(30),
