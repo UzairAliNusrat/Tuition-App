@@ -8,44 +8,54 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeInitial()) {
-    on<HomeInitialEvent>(
-        homeInitialEvent);
+    on<HomeInitialEvent>(homeInitialEvent);
 
-    on<bottomNavigationBarItemHomeClickedEvent>(
-        BottomNavigationBarItemHomeClickedEvent);
+    on<BottomNavigationBarItemHomeClickedEvent>(
+        bottomNavigationBarItemHomeClickedEvent);
 
+    on<BottomNavigationBarItemMeetingsClickedEvent>(
+        bottomNavigationBarItemMeetingsClickedEvent);
 
-    on<bottomNavigationBarItemMeetingsClickedEvent>(
-        BottomNavigationBarItemMeetingsClickedEvent);
+    on<BottomNavigationBarItemChatClickedEvent>(
+        bottomNavigationBarItemChatClickedEvent);
 
-    on<bottomNavigationBarItemChatClickedEvent>(
-        BottomNavigationBarItemChatClickedEvent);
+    on<LearnButtonClickedEvent>(learnButtonClickedEvent);
+
+    on<TeachButtonClickedEvent>(teachButtonClickedEvent);
   }
 
-  FutureOr<void> homeInitialEvent(HomeInitialEvent event, Emitter<HomeState> emit) {
+  FutureOr<void> homeInitialEvent(
+      HomeInitialEvent event, Emitter<HomeState> emit) {
     emit(HomeLoadingState());
     emit(HomeLoadedState(0));
   }
 
-  FutureOr<void> BottomNavigationBarItemHomeClickedEvent(
-      bottomNavigationBarItemHomeClickedEvent event, Emitter<HomeState> emit) {
+  FutureOr<void> bottomNavigationBarItemHomeClickedEvent(
+      BottomNavigationBarItemHomeClickedEvent event, Emitter<HomeState> emit) {
     emit(HomeLoadedState(0));
     print("Home Clicked");
   }
 
-  FutureOr<void> BottomNavigationBarItemMeetingsClickedEvent(
-      bottomNavigationBarItemMeetingsClickedEvent event,
+  FutureOr<void> bottomNavigationBarItemMeetingsClickedEvent(
+      BottomNavigationBarItemMeetingsClickedEvent event,
       Emitter<HomeState> emit) {
     emit(HomeLoadedState(1));
     print("Meetings Clicked");
   }
 
-  FutureOr<void> BottomNavigationBarItemChatClickedEvent(
-      bottomNavigationBarItemChatClickedEvent event,
-      Emitter<HomeState> emit) {
+  FutureOr<void> bottomNavigationBarItemChatClickedEvent(
+      BottomNavigationBarItemChatClickedEvent event, Emitter<HomeState> emit) {
     emit(HomeLoadedState(2));
     print("Chat Clicked");
   }
 
-  
+  FutureOr<void> learnButtonClickedEvent(
+      LearnButtonClickedEvent event, Emitter<HomeState> emit) {
+    emit(HomeNavigateToLearnScreenState());
+  }
+
+  FutureOr<void> teachButtonClickedEvent(
+      TeachButtonClickedEvent event, Emitter<HomeState> emit) {
+    emit(HomeNavigateToTeachScreenState());
+  }
 }

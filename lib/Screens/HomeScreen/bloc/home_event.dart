@@ -6,15 +6,23 @@ abstract class HomeEvent {}
 class HomeInitialEvent extends HomeEvent {}
 
 
-class bottomNavigationBarItemHomeClickedEvent extends HomeEvent {
+class BottomNavigationBarItemHomeClickedEvent extends HomeEvent {
 
 }
 
-class bottomNavigationBarItemMeetingsClickedEvent extends HomeEvent {
+class BottomNavigationBarItemMeetingsClickedEvent extends HomeEvent {
   
 }
 
 
-class bottomNavigationBarItemChatClickedEvent extends HomeEvent {
+class BottomNavigationBarItemChatClickedEvent extends HomeEvent {
   
+}
+
+class LearnButtonClickedEvent extends HomeEvent {
+
+}
+
+class TeachButtonClickedEvent extends HomeEvent {
+
 }

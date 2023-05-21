@@ -7,14 +7,16 @@ abstract class HomeActionState extends HomeState{}
 
 class HomeInitial extends HomeState {}
 
-class HomeLoadingState extends HomeState {
-}
+class HomeLoadingState extends HomeState {}
 
 class HomeLoadedState extends HomeState {
-  int selectedIndex;
+  final int selectedIndex;
 
   HomeLoadedState(this.selectedIndex);
 }
 
 class HomeErrorState extends HomeState {}
 
+class HomeNavigateToLearnScreenState extends HomeActionState {}
+
+class HomeNavigateToTeachScreenState extends HomeActionState {}

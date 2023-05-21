@@ -3,22 +3,34 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../Screens/HomeScreen/bloc/home_bloc.dart';
+
 class homeScreenButton extends StatelessWidget {
   final String text;
-  const homeScreenButton({super.key, required this.text});
+  final HomeBloc homeBloc;
+  const homeScreenButton(
+      {super.key, required this.text, required this.homeBloc});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Card(
-        elevation: 5,
-        color: Colors.cyan,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30),
-        ),
-        child: SizedBox(
-          height: 40,
-          width: 180,
+    return SizedBox(
+        width: 170,
+        height: 50,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.cyan,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+          ),
+          onPressed: () {
+            if (text == "Learn") {
+              homeBloc.add(LearnButtonClickedEvent());
+            }
+            else if(text == "Teach"){
+              homeBloc.add(TeachButtonClickedEvent());
+            }
+          },
           child: Center(
             child: Text(
               text,
@@ -28,9 +40,6 @@ class homeScreenButton extends StatelessWidget {
               ),
             ),
           ),
-        ),
-      ),
-      onTap: () {},
-    );
+        ));
   }
 }

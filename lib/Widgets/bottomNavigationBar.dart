@@ -38,13 +38,13 @@ class bottomNavigationBar extends StatelessWidget {
       onTap: (value) {
         switch (value) {
           case 0:
-            homeBloc.add(bottomNavigationBarItemHomeClickedEvent());
+            homeBloc.add(BottomNavigationBarItemHomeClickedEvent());
             break;
           case 1:
-            homeBloc.add(bottomNavigationBarItemMeetingsClickedEvent());
+            homeBloc.add(BottomNavigationBarItemMeetingsClickedEvent());
             break;
           case 2:
-            homeBloc.add(bottomNavigationBarItemChatClickedEvent());
+            homeBloc.add(BottomNavigationBarItemChatClickedEvent());
             break;
         }
       },
