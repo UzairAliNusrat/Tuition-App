@@ -9,7 +9,7 @@ class homeScreenButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       child: Card(
         elevation: 5,
         color: Colors.cyan,
