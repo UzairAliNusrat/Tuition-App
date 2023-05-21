@@ -14,14 +14,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<bottomNavigationBarItemHomeClickedEvent>(
         BottomNavigationBarItemHomeClickedEvent);
 
-    on<bottomNavigationBarItemCoursesClickedEvent>(
-        BottomNavigationBarItemCoursesClickedEvent);
 
     on<bottomNavigationBarItemMeetingsClickedEvent>(
         BottomNavigationBarItemMeetingsClickedEvent);
 
-    on<bottomNavigationBarItemAccountClickedEvent>(
-        BottomNavigationBarItemAccountClickedEvent);
+    on<bottomNavigationBarItemChatClickedEvent>(
+        BottomNavigationBarItemChatClickedEvent);
   }
 
   FutureOr<void> homeInitialEvent(HomeInitialEvent event, Emitter<HomeState> emit) {
@@ -35,25 +33,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     print("Home Clicked");
   }
 
-  FutureOr<void> BottomNavigationBarItemCoursesClickedEvent(
-      bottomNavigationBarItemCoursesClickedEvent event,
-      Emitter<HomeState> emit) {
-    emit(HomeLoadedState(1));
-    print("Courses Clicked");
-  }
-
   FutureOr<void> BottomNavigationBarItemMeetingsClickedEvent(
       bottomNavigationBarItemMeetingsClickedEvent event,
       Emitter<HomeState> emit) {
-    emit(HomeLoadedState(2));
+    emit(HomeLoadedState(1));
     print("Meetings Clicked");
   }
 
-  FutureOr<void> BottomNavigationBarItemAccountClickedEvent(
-      bottomNavigationBarItemAccountClickedEvent event,
+  FutureOr<void> BottomNavigationBarItemChatClickedEvent(
+      bottomNavigationBarItemChatClickedEvent event,
       Emitter<HomeState> emit) {
-    emit(HomeLoadedState(3));
-    print("Account Clicked");
+    emit(HomeLoadedState(2));
+    print("Chat Clicked");
   }
 
   

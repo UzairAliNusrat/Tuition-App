@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                         appBar: AppBar(
                           title: Center(
                               child: Text(
-                            'Teach and Learn',
+                            'Teach n Learn',
                             style: GoogleFonts.arvo(
                               textStyle: const TextStyle(
                                   color: Color.fromARGB(255, 3, 66, 102),
@@ -152,14 +152,14 @@ class HomeScreen extends StatelessWidget {
                                 padding: const EdgeInsets.only(top: 20),
                                 child: RichText(
                                   text: TextSpan(
-                                      text: "Your Meetings",
+                                      text: "Your Scheduled Meetings",
                                       style: GoogleFonts.arvo(
                                         textStyle: const TextStyle(
                                             decoration:
                                                 TextDecoration.underline,
                                             color:
                                                 Color.fromARGB(255, 3, 66, 102),
-                                            fontSize: 25,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold),
                                       )),
                                 ),
@@ -174,7 +174,7 @@ class HomeScreen extends StatelessWidget {
                                 padding: const EdgeInsets.only(top: 7, bottom: 10),
                                 child: RichText(
                                   text: TextSpan(
-                                      text: "Teachers",
+                                      text: "Top Ranking Teachers",
                                       style: GoogleFonts.arvo(
                                         textStyle: const TextStyle(
                                             decoration:
@@ -187,25 +187,16 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const teacherList()
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: teacherList(),
+                            )
                           ],
                         ),
                       );
                     }
+                  
                   case 1:
-                    {
-                      return Scaffold(
-                        backgroundColor: Colors.cyan[100],
-                        body: const Center(
-                            child: Text(
-                          "Courses",
-                          style: TextStyle(fontSize: 20),
-                        )),
-                        bottomNavigationBar: bottomNavigationBar(
-                            index: state.selectedIndex, homeBloc: homeBloc),
-                      );
-                    }
-                  case 2:
                     {
                       return Scaffold(
                         backgroundColor: Colors.cyan[100],
@@ -218,13 +209,13 @@ class HomeScreen extends StatelessWidget {
                             index: state.selectedIndex, homeBloc: homeBloc),
                       );
                     }
-                  case 3:
+                  case 2:
                     {
                       return Scaffold(
                         backgroundColor: Colors.cyan[100],
                         body: const Center(
                             child: Text(
-                          "Account",
+                          "Chat",
                           style: TextStyle(fontSize: 20),
                         )),
                         bottomNavigationBar: bottomNavigationBar(

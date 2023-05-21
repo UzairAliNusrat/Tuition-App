@@ -17,14 +17,14 @@ class homeScreenButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
         ),
         child: SizedBox(
-          height: 70,
+          height: 40,
           width: 180,
           child: Center(
             child: Text(
               text,
               style: GoogleFonts.arvo(
                 textStyle: const TextStyle(
-                    color: Color.fromARGB(255, 3, 66, 102), fontSize: 40),
+                    color: Color.fromARGB(255, 3, 66, 102), fontSize: 30),
               ),
             ),
           ),

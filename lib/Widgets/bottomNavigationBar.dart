@@ -23,18 +23,13 @@ class bottomNavigationBar extends StatelessWidget {
           backgroundColor: Colors.blue[200]
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.menu_book_outlined),
-          label: 'Courses',
-          backgroundColor: Colors.blue[200]
-        ),
-        BottomNavigationBarItem(
           icon: const Icon(Icons.class_outlined),
           label: 'Meetings',
           backgroundColor: Colors.blue[200]
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.person),
-          label: "Account",
+          icon: const Icon(Icons.chat_outlined),
+          label: "Chat",
           backgroundColor: Colors.blue[200]
         ),
       ],
@@ -46,13 +41,10 @@ class bottomNavigationBar extends StatelessWidget {
             homeBloc.add(bottomNavigationBarItemHomeClickedEvent());
             break;
           case 1:
-            homeBloc.add(bottomNavigationBarItemCoursesClickedEvent());
-            break;
-          case 2:
             homeBloc.add(bottomNavigationBarItemMeetingsClickedEvent());
             break;
-          case 3:
-            homeBloc.add(bottomNavigationBarItemAccountClickedEvent());
+          case 2:
+            homeBloc.add(bottomNavigationBarItemChatClickedEvent());
             break;
         }
       },
