@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "682052365327",
+    "project_id": "tuition-app-181c4",
+    "storage_bucket": "tuition-app-181c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682052365327:android:acda74719416c542f8c77a",
+        "android_client_info": {
+          "package_name": "com.example.tuition_app_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682052365327-50cmgrfi5s91508m3s3n8q76lb3ai49l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-PmIQdtIftE609vkPmsYNAXhtDJ1Ipb0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682052365327-50cmgrfi5s91508m3s3n8q76lb3ai49l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
