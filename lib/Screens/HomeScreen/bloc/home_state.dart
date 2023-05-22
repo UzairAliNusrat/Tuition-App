@@ -11,7 +11,6 @@ class HomeLoadingState extends HomeState {}
 
 class HomeLoadedState extends HomeState {
   final int selectedIndex;
-
   HomeLoadedState(this.selectedIndex);
 }
 

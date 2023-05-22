@@ -56,8 +56,12 @@ class HomeScreen extends StatelessWidget {
             },
             builder: (context, state) {
               if (state is HomeLoadingState) {
-                return const Center(
-                  child: CircularProgressIndicator(),
+                return Scaffold(
+                  backgroundColor: Colors.cyan[100],
+
+                  body: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               } else if (state is HomeLoadedState) {
                 switch (state.selectedIndex) {
