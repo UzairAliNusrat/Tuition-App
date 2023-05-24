@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuition_app_project/Auth.dart';
-import 'package:tuition_app_project/Screens/signup.dart';
 import 'package:tuition_app_project/Widgets/loginbutton.dart';
+import 'package:tuition_app_project/Screens/signUp/signUp.dart';
 
-import '../Widgets/textFormField.dart';
-import 'HomeScreen/HomeScreen.dart';
+
+import '../../Widgets/textFormField.dart';
+import '../HomeScreen/HomeScreen.dart';
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);

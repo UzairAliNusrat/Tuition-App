@@ -23,7 +23,7 @@ class textFormField extends StatelessWidget {
         decoration: InputDecoration(
             prefixIcon: Icon(prefixIcon),
             hintText: hintText,
-            border: OutlineInputBorder(
+            border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(30)),
                 borderSide: BorderSide(color: Colors.blue))),
         validator: (value) {
@@ -40,7 +40,7 @@ class textFormField extends StatelessWidget {
       decoration: InputDecoration(
           prefixIcon: Icon(prefixIcon),
           hintText: hintText,
-          border: OutlineInputBorder(
+          border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(30)),
               borderSide: BorderSide(color: Colors.blue))),
       validator: (value) {

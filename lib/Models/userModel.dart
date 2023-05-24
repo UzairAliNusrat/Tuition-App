@@ -5,13 +5,14 @@ class user {
   String last_name;
   String email;
   String id;
+  String ProfileImagePath;
 
-  user({
-    required this.first_name,
-    required this.last_name,
-    required this.email,
-    required this.id
-  });
+  user(
+      {required this.first_name,
+      required this.last_name,
+      required this.email,
+      required this.id,
+      required this.ProfileImagePath});
 
   static user fromJson(DocumentSnapshot<Map<String, dynamic>> json) {
     return user(
@@ -19,10 +20,18 @@ class user {
       last_name: json['LastName'] as String? ?? 'field empty',
       email: json['email'] as String? ?? 'field empty',
       id: json['id'] as String? ?? 'field empty',
+      ProfileImagePath: json['ProfileImagePath'] as String? ?? 'field empty',
+
     );
   }
 
   Map<String, dynamic> toJson() {
-    return {'Firstname': first_name, 'LastName': last_name, 'email': email, 'id': id};
+    return {
+      'Firstname': first_name,
+      'LastName': last_name,
+      'email': email,
+      'id': id,
+      'ProfileImagePath': ProfileImagePath,
+    };
   }
 }

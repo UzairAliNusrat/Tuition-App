@@ -1,0 +1,20 @@
+import 'dart:async';
+
+import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+
+part 'learn_event.dart';
+part 'learn_state.dart';
+
+class LearnBloc extends Bloc<LearnEvent, LearnState> {
+  LearnBloc() : super(LearnInitial()) {
+    on<LearnInitialEvent>(learnInitialEvent);
+  }
+
+  FutureOr<void> learnInitialEvent(
+      LearnInitialEvent event, Emitter<LearnState> emit) async{
+    emit(LearnLoadingState());
+    await Future.delayed(const Duration(seconds: 1));
+    emit(LearnLoadedSuccessState());
+  }
+}

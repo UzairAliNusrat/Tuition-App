@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const learnScreen()));
+                        builder: (context) => learnScreen()));
               } else if (state is HomeNavigateToTeachScreenState) {
                 Navigator.push(
                     context,

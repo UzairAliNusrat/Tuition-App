@@ -1,3 +1,6 @@
+
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -29,14 +32,10 @@ class side_drawer extends StatelessWidget {
                         color: Color.fromARGB(255, 3, 66, 102), fontSize: 25),
                   )),
               accountEmail: null,
-              currentAccountPictureSize: const Size.square(50),
-              currentAccountPicture: const CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 165, 255, 137),
-                child: Text(
-                  "A",
-                  style: TextStyle(fontSize: 30.0, color: Colors.blue),
-                ), //Text
-              ),
+              currentAccountPictureSize: const Size.square(55),
+              currentAccountPicture: CircleAvatar(
+                            radius: 50,
+                            foregroundImage: FileImage(File(User!.ProfileImagePath))),
             ), //UserAccountDrawerHeader
           ),
           ListTile(

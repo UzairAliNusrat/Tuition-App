@@ -46,7 +46,7 @@ class Auth {
   var userRepo = FirebaseUserRepository();
 
   Future signUp(BuildContext context, String email, String password,
-      String firstName, String lastName) async {
+      String firstName, String lastName, String imagePath) async {
     bool signedUp = true;
     try {
       showDialog(
@@ -78,8 +78,7 @@ class Auth {
 
     if (signedUp) {
       String id = FirebaseAuth.instance.currentUser!.uid;
-      var User = user(
-          first_name: firstName, last_name: lastName, email: email, id: id);
+      var User = user(first_name: firstName, last_name: lastName, email: email, id: id, ProfileImagePath: imagePath);
       userRepo.setuser(User);
       await FirebaseAuth.instance.signOut();
       Navigator.popUntil(context, (route) => route.isFirst);

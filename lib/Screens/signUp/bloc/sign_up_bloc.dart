@@ -1,0 +1,43 @@
+import 'dart:async';
+import 'dart:io';
+
+import 'package:bloc/bloc.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:meta/meta.dart';
+
+part 'sign_up_event.dart';
+part 'sign_up_state.dart';
+
+class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
+  SignUpBloc() : super(SignUpInitial()) {
+    on<SignUpInitialEvent>(signUpInitialEvent);
+    on<DropDownValueChangedEvent>(dropDownValueChangedEvent);
+    on<ImagePickerEvent>(imagePickerEvent);
+  }
+
+  FutureOr<void> signUpInitialEvent(
+      SignUpInitialEvent event, Emitter<SignUpState> emit) {
+    emit(SignUpLoadingState());
+    emit(SignUpLoadedSuccessfulState(selectedValue: event.selectedValue, image: ""));
+  }
+
+  FutureOr<void> dropDownValueChangedEvent(
+      DropDownValueChangedEvent event, Emitter<SignUpState> emit) {
+    emit(SignUpLoadedSuccessfulState(selectedValue: event.selectedValue, image: event.image));
+  }
+
+  FutureOr<void> imagePickerEvent(
+      ImagePickerEvent event, Emitter<SignUpState> emit) async {
+    final imagePicker = ImagePicker();
+    final XFile? PickedImage =
+        await imagePicker.pickImage(source: ImageSource.gallery);
+        if(PickedImage != null){
+          var path = PickedImage.path;
+          emit(SignUpLoadedSuccessfulState(selectedValue: event.selectedValue, image: path));
+        }
+        else{
+          emit(SignUpLoadedSuccessfulState(selectedValue: event.selectedValue, image: ""));
+        }
+    
+  }
+}

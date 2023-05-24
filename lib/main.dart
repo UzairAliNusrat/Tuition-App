@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tuition_app_project/Screens/HomeScreen/HomeScreen.dart';
-import 'package:tuition_app_project/Screens/login.dart';
+import 'package:tuition_app_project/Screens/login/login.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
