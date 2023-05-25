@@ -76,7 +76,7 @@ class learnScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 50),
                       child: SizedBox(
                         height: 40,
-                        width: 100,
+                        width: 120,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue,
@@ -91,7 +91,7 @@ class learnScreen extends StatelessWidget {
                               print("Not Validated");
                             }
                           } , 
-                          child: Text("Process")),
+                          child: Text("Find Teachers")),
                       ),
                     )
 

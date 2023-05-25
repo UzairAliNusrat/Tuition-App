@@ -11,7 +11,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../Models/userModel.dart';
 
 class side_drawer extends StatelessWidget {
-  user? User;
+  user User;
   side_drawer({super.key, required this.User});
 
   @override

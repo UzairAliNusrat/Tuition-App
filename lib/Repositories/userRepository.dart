@@ -10,37 +10,31 @@ class FirebaseUserRepository implements UserRepository {
   static var i = 0;
   final db = FirebaseFirestore.instance;
   List<user> teachers = [];
+  late user User;
+
   @override
   setuser(user User) async {
+    await db.collection("Users").doc(User.id).set(User.toJson());
+
     if (User.UserType == "Student") {
       await db.collection("Students").doc(User.id).set(User.toJson());
-    }
-    else{
+    } else {
       await db.collection("Teachers").doc(User.id).set(User.toJson());
     }
-    
+
     i++;
   }
 
-  Future<user?> getUser(String userId) async {
-    try {
-      // Get the user document from Firestore based on the provided user ID
-      final userDoc = await FirebaseFirestore.instance
-          .collection("Students")
-          .doc(userId)
-          .get();
-      return user.fromJson(userDoc);
-    } catch (e) {
-      // Handle any errors that occur while fetching the user document
-      print('Error getting user: $e');
-      return null;
-    }
+  getUser(String userId) async {
+    // Get the user document from Firestore based on the provided user ID
+    final userDoc =
+        await FirebaseFirestore.instance.collection("Users").doc(userId).get();
+    User = user.fromJson(userDoc);
   }
 
   fetchTeacherList() async {
     try {
-      final QuerySnapshot result =
-          await FirebaseFirestore.instance.collection("Teachers").get();
+      final QuerySnapshot result = await db.collection("Teachers").get();
       final List<DocumentSnapshot<Map<String, dynamic>>> documents =
           result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
       for (var element in documents) {
@@ -51,8 +45,7 @@ class FirebaseUserRepository implements UserRepository {
     }
   }
 
-  
-  void dispose(){
+  dispose() {
     teachers = [];
   }
 }

@@ -33,17 +33,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       HomeInitialEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState());
     Userrepo.userRepo.dispose();
+    await Userrepo.userRepo.getUser(event.id);
     await Userrepo.userRepo.fetchTeacherList();
-    emit(HomeLoadedState(0, Userrepo.userRepo.teachers));
+    emit(HomeLoadedState(0, Userrepo.userRepo.teachers, Userrepo.userRepo.User));
   }
 
   Future<FutureOr<void>> bottomNavigationBarItemHomeClickedEvent(
       BottomNavigationBarItemHomeClickedEvent event,
       Emitter<HomeState> emit) async {
-    emit(HomeLoadingState());
+    //emit(HomeLoadingState());
     Userrepo.userRepo.dispose();
     await Userrepo.userRepo.fetchTeacherList();
-    emit(HomeLoadedState(0, Userrepo.userRepo.teachers));
+    emit(HomeLoadedState(0, Userrepo.userRepo.teachers, Userrepo.userRepo.User));
     print("Home Clicked");
   }
 
@@ -51,14 +52,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       BottomNavigationBarItemMeetingsClickedEvent event,
       Emitter<HomeState> emit) {
     emit(HomeLoadingState());
-    emit(HomeLoadedState(1, []));
+    emit(HomeLoadedState(1, [], Userrepo.userRepo.User));
     print("Meetings Clicked");
   }
 
   FutureOr<void> bottomNavigationBarItemChatClickedEvent(
       BottomNavigationBarItemChatClickedEvent event, Emitter<HomeState> emit) {
     emit(HomeLoadingState());
-    emit(HomeLoadedState(2, []));
+    emit(HomeLoadedState(2, [], Userrepo.userRepo.User));
     print("Chat Clicked");
   }
 

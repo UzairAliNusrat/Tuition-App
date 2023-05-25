@@ -10,9 +10,10 @@ class HomeInitial extends HomeState {}
 class HomeLoadingState extends HomeState {}
 
 class HomeLoadedState extends HomeState {
+  final user User;
   final List<user> Teachers;
   final int selectedIndex;
-  HomeLoadedState(this.selectedIndex, this.Teachers);
+  HomeLoadedState(this.selectedIndex, this.Teachers, this.User);
 }
 
 class HomeErrorState extends HomeState {}
