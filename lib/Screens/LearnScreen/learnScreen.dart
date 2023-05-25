@@ -71,7 +71,30 @@ class learnScreen extends StatelessWidget {
                               borderSide: BorderSide(color: Colors.blue))),
                       maxLines: null,
                     ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: SizedBox(
+                        height: 40,
+                        width: 100,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                          onPressed: () {
+                            if (formKey.currentState!.validate()) {
+                              print("Validated");
+                            } else {
+                              print("Not Validated");
+                            }
+                          } , 
+                          child: Text("Process")),
+                      ),
                     )
+
                   
                 ],
               ),

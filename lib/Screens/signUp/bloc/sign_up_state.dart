@@ -16,3 +16,5 @@ class SignUpLoadedSuccessfulState extends SignUpState {
 
   SignUpLoadedSuccessfulState({required this.selectedValue, required this.image});
 }
+
+class NavigateToLoginScreenState extends SignUpActionState {}

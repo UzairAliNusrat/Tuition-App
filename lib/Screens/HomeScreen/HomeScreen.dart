@@ -6,14 +6,14 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:tuition_app_project/Repositories/userRepository.dart';
 import 'package:tuition_app_project/Screens/HomeScreen/bloc/home_bloc.dart';
 import 'package:tuition_app_project/Screens/TeachScreen/teachScreen.dart';
+import 'package:tuition_app_project/Screens/TeacherProfileScreen/TeacherProfileScreen.dart';
+import 'package:tuition_app_project/Utils/constants.dart';
 import 'package:tuition_app_project/Widgets/MeetingList.dart';
 import 'package:tuition_app_project/Widgets/bottomNavigationBar.dart';
 import 'package:tuition_app_project/Widgets/homeScreenButton.dart';
 import 'package:tuition_app_project/Widgets/sideDrawer.dart';
 import 'package:tuition_app_project/Models/userModel.dart';
-
 import '../../Widgets/teacherList.dart';
-import '../../main.dart';
 import '../LearnScreen/learnScreen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -22,9 +22,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final userRepo = FirebaseUserRepository();
     final currentUserFuture =
-        userRepo.getUser(FirebaseAuth.instance.currentUser!.uid);
+        Userrepo.userRepo.getUser(FirebaseAuth.instance.currentUser!.uid);
     return FutureBuilder<user?>(
       future: currentUserFuture,
       builder: (context, snapshot) {
@@ -43,22 +42,25 @@ class HomeScreen extends StatelessWidget {
             listener: (context, state) {
               // TODO: implement listener
               if (state is HomeNavigateToLearnScreenState) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => learnScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => learnScreen()));
               } else if (state is HomeNavigateToTeachScreenState) {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const teachScreen()));
+              } else if (state is HomeNavigateToTeacherProfileScreenState) {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const teacherProfileScreen()));
               }
             },
             builder: (context, state) {
               if (state is HomeLoadingState) {
+                Userrepo.userRepo.dispose();
                 return Scaffold(
                   backgroundColor: Colors.cyan[100],
-
                   body: const Center(
                     child: CircularProgressIndicator(),
                   ),
@@ -207,9 +209,12 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: teacherList(),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: teacherList(
+                                teachers: state.Teachers,
+                                homebloc: homeBloc,
+                              ),
                             )
                           ],
                         ),
@@ -256,9 +261,7 @@ class HomeScreen extends StatelessWidget {
                     }
                 }
               } else {
-                return const Scaffold(
-                  body: CircularProgressIndicator(),
-                );
+                return Container();
               }
             },
           );

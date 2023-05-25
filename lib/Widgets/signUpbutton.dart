@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tuition_app_project/Screens/signUp/bloc/sign_up_bloc.dart';
+import 'package:tuition_app_project/Screens/signUp/signup.dart';
 
 import '../Auth.dart';
 
@@ -12,7 +14,9 @@ class signUp_button extends StatelessWidget {
   final TextEditingController firstNameController;
   final TextEditingController lastNameController;
   final String imagePath;
+  final String userType;
   final auth = Auth();
+  final SignUpBloc signUpBloc;
 
   signUp_button(
       {super.key,
@@ -21,7 +25,9 @@ class signUp_button extends StatelessWidget {
       required this.passwordController,
       required this.firstNameController,
       required this.lastNameController,
-      required this.imagePath});
+      required this.imagePath,
+      required this.userType,
+      required this.signUpBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +40,15 @@ class signUp_button extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30))),
         onPressed: () {
           if (formkey.currentState!.validate() && imagePath != "") {
-            auth.signUp(
-                context,
-                emailController.text.trim(),
-                passwordController.text.trim(),
-                firstNameController.text.trim(),
-                lastNameController.text.toString(),
-                imagePath);
-          }
-          else{
+            signUpBloc.add(SignUpButtonClickedEvent(
+                context: context,
+                email: emailController.text.trim(),
+                password: passwordController.text.trim(),
+                firstName: firstNameController.text.trim(),
+                lastName: lastNameController.text.trim(),
+                imagePath: imagePath,
+                userType: userType));
+          } else {
             showDialog(
                 context: context,
                 builder: (BuildContext context) {

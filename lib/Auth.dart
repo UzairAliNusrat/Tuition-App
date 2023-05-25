@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:tuition_app_project/main.dart';
 import 'Models/userModel.dart';
-import 'Repositories/userRepository.dart';
+import 'Utils/constants.dart';
 
 class Auth {
   Future<UserCredential?> signInWithGoogle(BuildContext context) async {
@@ -43,10 +42,14 @@ class Auth {
     }
   }
 
-  var userRepo = FirebaseUserRepository();
-
-  Future signUp(BuildContext context, String email, String password,
-      String firstName, String lastName, String imagePath) async {
+  Future signUp(
+      BuildContext context,
+      String email,
+      String password,
+      String firstName,
+      String lastName,
+      String imagePath,
+      String userType) async {
     bool signedUp = true;
     try {
       showDialog(
@@ -78,8 +81,14 @@ class Auth {
 
     if (signedUp) {
       String id = FirebaseAuth.instance.currentUser!.uid;
-      var User = user(first_name: firstName, last_name: lastName, email: email, id: id, ProfileImagePath: imagePath);
-      userRepo.setuser(User);
+      var User = user(
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          id: id,
+          ProfileImagePath: imagePath,
+          UserType: userType);
+      Userrepo.userRepo.setuser(User);
       await FirebaseAuth.instance.signOut();
       Navigator.popUntil(context, (route) => route.isFirst);
     }

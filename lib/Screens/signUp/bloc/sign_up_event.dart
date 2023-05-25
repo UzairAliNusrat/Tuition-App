@@ -20,3 +20,27 @@ class ImagePickerEvent extends SignUpEvent {
 
   ImagePickerEvent({required this.selectedValue});
 }
+
+class BackArrowIconClickedEvent extends SignUpEvent {
+  BuildContext context;
+  BackArrowIconClickedEvent({required this.context});
+}
+
+class SignUpButtonClickedEvent extends SignUpEvent {
+  final BuildContext context;
+  final String email;
+  final String password;
+  final String firstName;
+  final String lastName;
+  final String imagePath;
+  final String userType;
+
+  SignUpButtonClickedEvent(
+      {required this.context,
+      required this.email,
+      required this.password,
+      required this.firstName,
+      required this.lastName,
+      required this.imagePath,
+      required this.userType});
+}

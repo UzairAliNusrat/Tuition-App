@@ -9,9 +9,16 @@ abstract class UserRepository {
 class FirebaseUserRepository implements UserRepository {
   static var i = 0;
   final db = FirebaseFirestore.instance;
+  List<user> teachers = [];
   @override
   setuser(user User) async {
-    await db.collection("Users").doc(User.id).set(User.toJson());
+    if (User.UserType == "Student") {
+      await db.collection("Students").doc(User.id).set(User.toJson());
+    }
+    else{
+      await db.collection("Teachers").doc(User.id).set(User.toJson());
+    }
+    
     i++;
   }
 
@@ -19,7 +26,7 @@ class FirebaseUserRepository implements UserRepository {
     try {
       // Get the user document from Firestore based on the provided user ID
       final userDoc = await FirebaseFirestore.instance
-          .collection("Users")
+          .collection("Students")
           .doc(userId)
           .get();
       return user.fromJson(userDoc);
@@ -28,5 +35,24 @@ class FirebaseUserRepository implements UserRepository {
       print('Error getting user: $e');
       return null;
     }
+  }
+
+  fetchTeacherList() async {
+    try {
+      final QuerySnapshot result =
+          await FirebaseFirestore.instance.collection("Teachers").get();
+      final List<DocumentSnapshot<Map<String, dynamic>>> documents =
+          result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
+      for (var element in documents) {
+        teachers.add(user.fromJson(element));
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  
+  void dispose(){
+    teachers = [];
   }
 }

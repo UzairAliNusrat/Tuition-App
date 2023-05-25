@@ -22,10 +22,10 @@ class side_drawer extends StatelessWidget {
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: Colors.green,
+              color: Color.fromARGB(255, 139, 193, 238),
             ), //BoxDecoration
             child: UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(color: Colors.green),
+              decoration: const BoxDecoration(color: Color.fromARGB(255, 139, 193, 238)),
               accountName: Text(User?.first_name ?? FirebaseAuth.instance.currentUser?.displayName ?? "",
                   style: GoogleFonts.arvo(
                     textStyle: const TextStyle(

@@ -14,7 +14,6 @@ class LearnBloc extends Bloc<LearnEvent, LearnState> {
   FutureOr<void> learnInitialEvent(
       LearnInitialEvent event, Emitter<LearnState> emit) async{
     emit(LearnLoadingState());
-    await Future.delayed(const Duration(seconds: 1));
     emit(LearnLoadedSuccessState());
   }
 }

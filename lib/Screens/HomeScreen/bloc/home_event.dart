@@ -26,3 +26,6 @@ class LearnButtonClickedEvent extends HomeEvent {
 class TeachButtonClickedEvent extends HomeEvent {
 
 }
+
+class TeacherListItemClickedEvent extends HomeEvent {
+}

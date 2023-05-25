@@ -43,7 +43,7 @@ class SignUp extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             color: Colors.black,
-            onPressed: () => Navigator.pop(context, false),
+            onPressed: () => signUpBloc.add(BackArrowIconClickedEvent(context: context)),
           ),
           actions: const [
             Padding(
@@ -61,7 +61,7 @@ class SignUp extends StatelessWidget {
         body: BlocConsumer<SignUpBloc, SignUpState>(
           bloc: signUpBloc,
           listenWhen: (previous, current) => current is SignUpActionState,
-          buildWhen: (previous, current) => current is! SignUpActionState,
+          buildWhen: (previous, current) => current is !SignUpActionState,
           listener: (context, state) {
             // TODO: implement listener
           },
@@ -153,7 +153,9 @@ class SignUp extends StatelessWidget {
                                 passwordController: passwordController,
                                 firstNameController: firstNameController,
                                 lastNameController: lastNameController,
-                                imagePath: state.image,)),
+                                imagePath: state.image,
+                                userType: state.selectedValue.trim(),
+                                signUpBloc: signUpBloc,)),
                       ],
                     ),
                   ),

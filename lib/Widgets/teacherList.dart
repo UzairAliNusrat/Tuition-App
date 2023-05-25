@@ -1,9 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:tuition_app_project/Models/userModel.dart';
+import 'package:tuition_app_project/Screens/HomeScreen/bloc/home_bloc.dart';
 
 class teacherList extends StatelessWidget {
-  const teacherList({super.key});
+  final List<user> teachers;
+  final HomeBloc homebloc;
+  const teacherList(
+      {super.key, required this.teachers, required this.homebloc});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +18,7 @@ class teacherList extends StatelessWidget {
       width: double.infinity,
       height: 250,
       child: ListView.builder(
-        itemCount: 10,
+        itemCount: teachers.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Container(
@@ -25,24 +32,33 @@ class teacherList extends StatelessWidget {
               padding: const EdgeInsets.all(15),
               child: Column(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 50,
-                    backgroundImage: AssetImage("assets/images/teacher.png"),
+                    backgroundImage:
+                        FileImage(File(teachers[index].ProfileImagePath)),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(12),
-                    child: Text("Teacher Name:", style: TextStyle(color: Colors.black)),
+                  Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Text(
+                        teachers[index].first_name +
+                            " " +
+                            teachers[index].last_name,
+                        style: const TextStyle(color: Colors.black)),
                   ),
-                  const Text("Teacher Expertise:", style: TextStyle(color: Colors.black)),
+                  const Text("Teacher Expertise:",
+                      style: TextStyle(color: Colors.black)),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      homebloc.add(TeacherListItemClickedEvent());
+                    },
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                       side: const BorderSide(width: 2.0, color: Colors.blue),
                     ),
-                    child: const Text("View profile", style: TextStyle(color: Colors.black)),
+                    child: const Text("View profile",
+                        style: TextStyle(color: Colors.black)),
                   )
                 ],
               ),
