@@ -49,7 +49,7 @@ class teacherList extends StatelessWidget {
                       style: TextStyle(color: Colors.black)),
                   OutlinedButton(
                     onPressed: () {
-                      homebloc.add(TeacherListItemClickedEvent());
+                      homebloc.add(TeacherListItemClickedEvent(id: teachers[index].id, imagepath: teachers[index].ProfileImagePath, fullname: teachers[index].first_name + " " + teachers[index].last_name));
                     },
                     style: OutlinedButton.styleFrom(
                       shape: RoundedRectangleBorder(

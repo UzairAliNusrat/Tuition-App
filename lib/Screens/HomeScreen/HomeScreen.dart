@@ -19,6 +19,7 @@ import '../LearnScreen/learnScreen.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   final HomeBloc homeBloc = HomeBloc();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +40,11 @@ class HomeScreen extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const teacherProfileScreen()));
+                  builder: (context) => teacherProfileScreen(id: state.id, fullname: state.fullname, imagepath: state.imagepath)));
         }
       },
       builder: (context, state) {
         if (state is HomeLoadingState) {
-          Userrepo.userRepo.dispose();
           return Scaffold(
             backgroundColor: Colors.cyan[100],
             bottomNavigationBar:

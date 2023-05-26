@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'Models/userModel.dart';
 import 'Utils/constants.dart';
+import 'SignUpPage2/signupPage2.dart';
 
 class Auth {
   Future<UserCredential?> signInWithGoogle(BuildContext context) async {
@@ -90,7 +91,9 @@ class Auth {
           UserType: userType);
       Userrepo.userRepo.setuser(User);
       await FirebaseAuth.instance.signOut();
-      Navigator.popUntil(context, (route) => route.isFirst);
+      Navigator.push(
+              context, MaterialPageRoute(builder: (context) => signupPage2(id: id, userType: userType,)));
+      //Navigator.popUntil(context, (route) => route.isFirst);
     }
   }
 }

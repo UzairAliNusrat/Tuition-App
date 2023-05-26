@@ -26,6 +26,10 @@ class BackArrowIconClickedEvent extends SignUpEvent {
   BackArrowIconClickedEvent({required this.context});
 }
 
+class SignUpNextButtonClickedEvent extends SignUpEvent {
+  
+}
+
 class SignUpButtonClickedEvent extends SignUpEvent {
   final BuildContext context;
   final String email;

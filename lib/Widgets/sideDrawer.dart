@@ -18,6 +18,7 @@ class side_drawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       width: 250,
+      backgroundColor: Colors.cyan[100],
       child: ListView(
         children: [
           DrawerHeader(
@@ -35,23 +36,10 @@ class side_drawer extends StatelessWidget {
               currentAccountPictureSize: const Size.square(55),
               currentAccountPicture: CircleAvatar(
                             radius: 50,
-                            foregroundImage: FileImage(File(User!.ProfileImagePath))),
+                            foregroundImage: FileImage(File(User.ProfileImagePath))),
             ), //UserAccountDrawerHeader
           ),
-          ListTile(
-            leading: const Icon(Icons.person),
-            title: const Text(' My Profile '),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.book),
-            title: const Text(' My Course '),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
+          
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('LogOut'),

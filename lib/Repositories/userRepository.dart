@@ -3,13 +3,14 @@ import '../Models/userModel.dart';
 
 abstract class UserRepository {
   setuser(user User);
-  Future<user?> getUser(String userId);
+  getUser(String userId);
+  Future<List<user>> fetchTeacherList();
 }
 
 class FirebaseUserRepository implements UserRepository {
   static var i = 0;
   final db = FirebaseFirestore.instance;
-  List<user> teachers = [];
+
   late user User;
 
   @override
@@ -25,6 +26,7 @@ class FirebaseUserRepository implements UserRepository {
     i++;
   }
 
+  @override
   getUser(String userId) async {
     // Get the user document from Firestore based on the provided user ID
     final userDoc =
@@ -32,20 +34,15 @@ class FirebaseUserRepository implements UserRepository {
     User = user.fromJson(userDoc);
   }
 
-  fetchTeacherList() async {
-    try {
-      final QuerySnapshot result = await db.collection("Teachers").get();
-      final List<DocumentSnapshot<Map<String, dynamic>>> documents =
-          result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
-      for (var element in documents) {
-        teachers.add(user.fromJson(element));
-      }
-    } catch (e) {
-      print(e);
+  @override
+  Future<List<user>> fetchTeacherList() async {
+    List<user> teachers = [];
+    final QuerySnapshot result = await db.collection("Teachers").get();
+    final List<DocumentSnapshot<Map<String, dynamic>>> documents =
+        result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
+    for (var element in documents) {
+      teachers.add(user.fromJson(element));
     }
-  }
-
-  dispose() {
-    teachers = [];
+    return teachers;
   }
 }

@@ -17,6 +17,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<ImagePickerEvent>(imagePickerEvent);
     on<BackArrowIconClickedEvent>(backArrowIconClickedEvent);
     on<SignUpButtonClickedEvent>(signUpButtonClickedEvent);
+    on<SignUpNextButtonClickedEvent>(signUpNextButtonClickedEvent);
   }
 
   FutureOr<void> signUpInitialEvent(
@@ -57,5 +58,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       SignUpButtonClickedEvent event, Emitter<SignUpState> emit) {
     auth.signUp(event.context, event.email, event.password, event.firstName,
         event.lastName, event.imagePath, event.userType);
+  }
+
+  FutureOr<void> signUpNextButtonClickedEvent(SignUpNextButtonClickedEvent event, Emitter<SignUpState> emit) {
+    emit(NavigateToSignUpPage2State());
   }
 }

@@ -19,4 +19,11 @@ class LearnButtonClickedEvent extends HomeEvent {}
 
 class TeachButtonClickedEvent extends HomeEvent {}
 
-class TeacherListItemClickedEvent extends HomeEvent {}
+class TeacherListItemClickedEvent extends HomeEvent {
+  final String id;
+  final String imagepath;
+  final String fullname;
+
+  TeacherListItemClickedEvent(
+      {required this.id, required this.imagepath, required this.fullname});
+}

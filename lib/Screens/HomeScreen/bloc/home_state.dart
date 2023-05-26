@@ -23,4 +23,9 @@ class HomeNavigateToLearnScreenState extends HomeActionState {}
 class HomeNavigateToTeachScreenState extends HomeActionState {}
 
 class HomeNavigateToTeacherProfileScreenState extends HomeActionState {
+  final String id;
+  final String imagepath;
+  final String fullname;
+  HomeNavigateToTeacherProfileScreenState(
+      {required this.id, required this.imagepath, required this.fullname});
 }

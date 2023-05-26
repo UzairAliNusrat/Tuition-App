@@ -43,7 +43,8 @@ class SignUp extends StatelessWidget {
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             color: Colors.black,
-            onPressed: () => signUpBloc.add(BackArrowIconClickedEvent(context: context)),
+            onPressed: () =>
+                signUpBloc.add(BackArrowIconClickedEvent(context: context)),
           ),
           actions: const [
             Padding(
@@ -61,9 +62,13 @@ class SignUp extends StatelessWidget {
         body: BlocConsumer<SignUpBloc, SignUpState>(
           bloc: signUpBloc,
           listenWhen: (previous, current) => current is SignUpActionState,
-          buildWhen: (previous, current) => current is !SignUpActionState,
+          buildWhen: (previous, current) => current is! SignUpActionState,
           listener: (context, state) {
             // TODO: implement listener
+            if (state is NavigateToSignUpPage2State){
+              // Navigator.push(
+              // context, MaterialPageRoute(builder: (context) => signupPage2()));
+            }
           },
           builder: (context, state) {
             if (state is SignUpLoadingState) {
@@ -81,17 +86,18 @@ class SignUp extends StatelessWidget {
                         GestureDetector(
                           child: CircleAvatar(
                             radius: 50,
-                            foregroundImage: state.image == "" 
-                            ? const AssetImage("assets/images/profile.png")
-                            : FileImage(File(state.image)) as ImageProvider,
+                            foregroundImage: state.image == ""
+                                ? const AssetImage("assets/images/profile.png")
+                                : FileImage(File(state.image)) as ImageProvider,
                           ),
                           onTap: () {
-                            signUpBloc.add(ImagePickerEvent(selectedValue: state.selectedValue));
+                            signUpBloc.add(ImagePickerEvent(
+                                selectedValue: state.selectedValue));
                           },
                         ),
                         Padding(
                             padding: const EdgeInsets.only(
-                                top: 50, right: 50, left: 50, bottom: 20),
+                                top: 20, right: 50, left: 50, bottom: 20),
                             child: Container(
                               decoration: BoxDecoration(
                                 border: Border.all(
@@ -109,7 +115,8 @@ class SignUp extends StatelessWidget {
                                     value: state.selectedValue,
                                     onChanged: (value) {
                                       signUpBloc.add(DropDownValueChangedEvent(
-                                          selectedValue: value!, image: state.image));
+                                          selectedValue: value!,
+                                          image: state.image));
                                     }),
                               ),
                             )),
@@ -148,14 +155,15 @@ class SignUp extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 left: 50, right: 50, top: 40),
                             child: signUp_button(
-                                formkey: _formKey,
-                                emailController: emailController,
-                                passwordController: passwordController,
-                                firstNameController: firstNameController,
-                                lastNameController: lastNameController,
-                                imagePath: state.image,
-                                userType: state.selectedValue.trim(),
-                                signUpBloc: signUpBloc,)),
+                            formkey: _formKey,
+                            emailController: emailController,
+                            passwordController: passwordController,
+                            firstNameController: firstNameController,
+                            lastNameController: lastNameController,
+                            imagePath: state.image,
+                            userType: state.selectedValue.trim(),
+                            signUpBloc: signUpBloc,))
+                        
                       ],
                     ),
                   ),
@@ -168,7 +176,3 @@ class SignUp extends StatelessWidget {
         ));
   }
 }
-
-
-
-
