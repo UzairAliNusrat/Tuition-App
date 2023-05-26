@@ -4,3 +4,9 @@ part of 'learn_bloc.dart';
 abstract class LearnEvent {}
 
 class LearnInitialEvent extends LearnEvent {}
+
+class FindTeacherButtonClickedEvent extends LearnEvent {
+  final String subject;
+
+  FindTeacherButtonClickedEvent({required this.subject});
+}
