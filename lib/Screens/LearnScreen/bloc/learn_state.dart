@@ -9,10 +9,15 @@ class LearnInitial extends LearnState {}
 
 class LearnLoadingState extends LearnState {}
 
-class LearnLoadedSuccessState extends LearnState {}
+class LearnLoadedSuccessState extends LearnState {
+}
 
 class NavigatetoFindTeacherScreenState extends LearnActionState {
+  final String studentId;
   final String subject;
+  final String topic;
+  final String note;
 
-  NavigatetoFindTeacherScreenState({required this.subject});
+  NavigatetoFindTeacherScreenState(
+      {required this.studentId, required this.subject, required this.topic, required this.note});
 }

@@ -19,6 +19,6 @@ class LearnBloc extends Bloc<LearnEvent, LearnState> {
   }
 
   FutureOr<void> findTeacherButtonClickedEvent(FindTeacherButtonClickedEvent event, Emitter<LearnState> emit) {
-    emit(NavigatetoFindTeacherScreenState(subject: event.subject));
+    emit(NavigatetoFindTeacherScreenState(studentId: event.studentId,subject: event.subject, topic: event.topic, note: event.note));
   }
 }

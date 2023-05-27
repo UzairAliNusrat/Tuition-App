@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:meta/meta.dart';
+import 'package:tuition_app_project/Models/meetingRequestModel.dart';
 import 'package:tuition_app_project/Models/teacherInfoModel.dart';
 import 'package:tuition_app_project/Models/userModel.dart';
+import 'package:tuition_app_project/Repositories/meetingRequestRepository.dart';
 import 'package:tuition_app_project/Repositories/teacherRepository.dart';
+import 'package:tuition_app_project/Screens/LearnScreen/bloc/learn_bloc.dart';
 import 'package:tuition_app_project/Utils/constants.dart';
 
 part 'findteachers_event.dart';
@@ -14,6 +17,7 @@ part 'findteachers_state.dart';
 class FindteachersBloc extends Bloc<FindteachersEvent, FindteachersState> {
   FindteachersBloc() : super(FindteachersInitial()) {
     on<FindTeachersInitialEvent>(findTeachersInitialEvent);
+    on<MeetingRequestButtonClickedEvent>(meetingRequestButtonClickedEvent);
   }
 
   FutureOr<void> findTeachersInitialEvent(
@@ -33,7 +37,15 @@ class FindteachersBloc extends Bloc<FindteachersEvent, FindteachersState> {
         }
       }
     }
-    emit(FindTeachersLoadedSuccessState(
-        teachers: teacherslist));
+    List<bool> teacherRequestSent = List.generate(teacherslist.length, (index) => false);
+    emit(FindTeachersLoadedSuccessState(teachers: teacherslist, teacherRequestSent: teacherRequestSent));
+  }
+
+  Future<FutureOr<void>> meetingRequestButtonClickedEvent(MeetingRequestButtonClickedEvent event, Emitter<FindteachersState> emit) async {
+    FirebaseMeetingRequestRepository meetingRequestRepository = FirebaseMeetingRequestRepository();
+
+    await meetingRequestRepository.setMeetingRequest(meetingRequestModel(teacherId: event.teacherId, studentId: event.studentId, subject: event.subject, topic: event.topic, note: event.note));
+    event.teacherRequestSent[event.teacherIndex] = true;
+    emit(FindTeachersLoadedSuccessState(teachers: event.teachers, teacherRequestSent: event.teacherRequestSent));
   }
 }

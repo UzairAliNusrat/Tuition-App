@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
         // TODO: implement listener
         if (state is HomeNavigateToLearnScreenState) {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => learnScreen()));
+              context, MaterialPageRoute(builder: (context) => learnScreen(studentId: state.id)));
         } else if (state is HomeNavigateToTeachScreenState) {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => const teachScreen()));
@@ -142,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 15, left: 100, right: 100),
-                        child: homeScreenButton(text: "Learn", homeBloc: homeBloc),
+                        child: homeScreenButton(text: "Learn", homeBloc: homeBloc, studentId: state.User.id),
                           
                       ),
                       Center(

@@ -18,7 +18,10 @@ class HomeLoadedState extends HomeState {
 
 class HomeErrorState extends HomeState {}
 
-class HomeNavigateToLearnScreenState extends HomeActionState {}
+class HomeNavigateToLearnScreenState extends HomeActionState {
+  final String id;
+  HomeNavigateToLearnScreenState(this.id);
+}
 
 class HomeNavigateToTeachScreenState extends HomeActionState {}
 

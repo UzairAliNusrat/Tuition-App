@@ -11,6 +11,9 @@ class FindTeachersLoadingState extends FindteachersState {}
 
 class FindTeachersLoadedSuccessState extends FindteachersState {
   final List<user> teachers;
+  final List<bool> teacherRequestSent;
 
-  FindTeachersLoadedSuccessState({required this.teachers});
+  FindTeachersLoadedSuccessState({required this.teachers, required this.teacherRequestSent});
 }
+
+

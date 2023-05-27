@@ -24,19 +24,20 @@ class FirebaseTeacherRepository implements TeacherRepository {
   }
 
   @override
-  Future<List<Teacherinfo>> fetchTeacherinfoListbySubject(String subject) async {
+  Future<List<Teacherinfo>> fetchTeacherinfoListbySubject(
+      String subject) async {
     List<Teacherinfo> teachersinfo = [];
-    final QuerySnapshot result = await db.collection("Teacher Information").get();
+    final QuerySnapshot result =
+        await db.collection("Teacher Information").get();
     final List<DocumentSnapshot<Map<String, dynamic>>> documents =
         result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
     for (var element in documents) {
-      for(i = 0; i < Teacherinfo.fromJson(element).subjects.length; i++){
-        if (Teacherinfo.fromJson(element).subjects[i].trim().toLowerCase() == subject){
-        teachersinfo.add(Teacherinfo.fromJson(element));
+      for (i = 0; i < Teacherinfo.fromJson(element).subjects.length; i++) {
+        if (Teacherinfo.fromJson(element).subjects[i].trim().toLowerCase() ==
+            subject) {
+          teachersinfo.add(Teacherinfo.fromJson(element));
+        }
       }
-      }
-      
-      
     }
     return teachersinfo;
   }

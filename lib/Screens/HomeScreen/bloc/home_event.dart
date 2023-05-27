@@ -15,7 +15,11 @@ class BottomNavigationBarItemMeetingsClickedEvent extends HomeEvent {}
 
 class BottomNavigationBarItemChatClickedEvent extends HomeEvent {}
 
-class LearnButtonClickedEvent extends HomeEvent {}
+class LearnButtonClickedEvent extends HomeEvent {
+  final String studentId;
+
+  LearnButtonClickedEvent(this.studentId);
+}
 
 class TeachButtonClickedEvent extends HomeEvent {}
 

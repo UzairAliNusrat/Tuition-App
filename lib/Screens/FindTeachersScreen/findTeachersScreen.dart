@@ -6,8 +6,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tuition_app_project/Screens/FindTeachersScreen/bloc/findteachers_bloc.dart';
 
 class findTeachers extends StatelessWidget {
+  final String studentId;
   final String subject;
-  findTeachers({super.key, required this.subject});
+  final String topic;
+  final String note;
+  findTeachers(
+      {super.key,
+      required this.studentId,
+      required this.subject,
+      required this.topic,
+      required this.note});
 
   final FindteachersBloc findteachersBloc = FindteachersBloc();
 
@@ -37,7 +45,7 @@ class findTeachers extends StatelessWidget {
         body: BlocConsumer<FindteachersBloc, FindteachersState>(
           bloc: findteachersBloc,
           listenWhen: (previous, current) => current is FindteachersActionState,
-          buildWhen: (previous, current) => current is !FindteachersActionState,
+          buildWhen: (previous, current) => current is! FindteachersActionState,
           listener: (context, state) {
             // TODO: implement listener
           },
@@ -46,45 +54,71 @@ class findTeachers extends StatelessWidget {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            }
-            else if (state is FindTeachersLoadedSuccessState){
+            } else if (state is FindTeachersLoadedSuccessState) {
               return SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: double.infinity,
-                  child: ListView.builder(
-                    itemCount: state.teachers.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        color: Colors.cyan[400],
-                        elevation: 5,
-                        margin: const EdgeInsets.symmetric(vertical: 6),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: ListTile(
-                          leading: CircleAvatar(
-                            foregroundImage:
-                                FileImage(File(state.teachers[index].ProfileImagePath)),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: ListView.builder(
+                      itemCount: state.teachers.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          color: Colors.cyan[400],
+                          elevation: 5,
+                          margin: const EdgeInsets.symmetric(vertical: 6),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          title: Text(state.teachers[index].first_name + " " + state.teachers[index].last_name),
-                          trailing: const Text('Teacher Rating'),
-                        ),
-                      );
-                    },
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              foregroundImage: FileImage(
+                                  File(state.teachers[index].ProfileImagePath)),
+                            ),
+                            title: Text(state.teachers[index].first_name +
+                                " " +
+                                state.teachers[index].last_name),
+                            subtitle: const Text('Teacher Rating'),
+                            trailing: Container(
+                              width: 40,
+                              height: 40,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(
+                                color: Colors.blue[100],
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: state.teacherRequestSent[index]
+                                  ? const Icon(Icons.check)
+                                  : IconButton(
+                                      onPressed: () {
+                                        findteachersBloc.add(
+                                            MeetingRequestButtonClickedEvent(
+                                                teacherId:
+                                                    state.teachers[index].id,
+                                                studentId: studentId,
+                                                subject: subject,
+                                                topic: topic,
+                                                note: note,
+                                                teacherIndex: index,
+                                                teacherRequestSent:
+                                                    state.teacherRequestSent,
+                                                teachers: state.teachers));
+                                      },
+                                      icon: const Icon(Icons.send)),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-              ),
-            );
-            }
-            else{
+              );
+            } else {
               return const Center(
                 child: Text("No Teachers Available"),
               );
             }
-            
           },
         ));
   }

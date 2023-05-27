@@ -7,10 +7,12 @@ import 'package:tuition_app_project/Widgets/textFormField.dart';
 import '../FindTeachersScreen/findTeachersScreen.dart';
 
 class learnScreen extends StatelessWidget {
-  learnScreen({super.key});
+  final String studentId;
+  learnScreen({super.key, required this.studentId});
 
   final subjectNameController = TextEditingController();
   final topicController = TextEditingController();
+  final noteController = TextEditingController();
 
   var formKey = GlobalKey<FormState>();
 
@@ -50,7 +52,7 @@ class learnScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          findTeachers(subject: state.subject.trim().toLowerCase())));
+                          findTeachers(studentId: state.studentId, subject: state.subject.trim().toLowerCase(), topic: state.topic.trim(), note: state.note.trim(),)));
             }
           },
           builder: (context, state) {
@@ -84,11 +86,12 @@ class learnScreen extends StatelessWidget {
                               hintText: "Topic",
                               prefixIcon: Icons.topic_sharp),
                         ),
-                        const Padding(
+                        Padding(
                           padding:
-                              EdgeInsets.only(left: 50, right: 50, top: 20),
+                              const EdgeInsets.only(left: 50, right: 50, top: 20),
                           child: TextField(
-                            decoration: InputDecoration(
+                            controller: noteController,
+                            decoration: const InputDecoration(
                                 prefixIcon: Icon(Icons.description),
                                 hintText: "Description",
                                 border: OutlineInputBorder(
@@ -113,15 +116,15 @@ class learnScreen extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
-                                    learnBloc.add(FindTeacherButtonClickedEvent(
+                                    learnBloc.add(FindTeacherButtonClickedEvent(studentId: studentId,
                                         subject:
-                                            subjectNameController.text.trim()));
+                                            subjectNameController.text.trim().toLowerCase(), topic: topicController.text.trim(), note: noteController.text.trim()));
                                     print("Validated");
                                   } else {
                                     print("Not Validated");
                                   }
                                 },
-                                child: Text("Find Teachers")),
+                                child: const Text("Find Teachers")),
                           ),
                         )
                       ],

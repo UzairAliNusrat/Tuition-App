@@ -7,9 +7,10 @@ import '../Screens/HomeScreen/bloc/home_bloc.dart';
 
 class homeScreenButton extends StatelessWidget {
   final String text;
+  final String studentId;
   final HomeBloc homeBloc;
   const homeScreenButton(
-      {super.key, required this.text, required this.homeBloc});
+      {super.key, required this.text, required this.homeBloc, required this.studentId});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class homeScreenButton extends StatelessWidget {
           ),
           onPressed: () {
             if (text == "Learn") {
-              homeBloc.add(LearnButtonClickedEvent());
+              homeBloc.add(LearnButtonClickedEvent(studentId));
             }
             else if(text == "Teach"){
               homeBloc.add(TeachButtonClickedEvent());

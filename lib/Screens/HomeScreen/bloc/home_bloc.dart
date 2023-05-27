@@ -62,7 +62,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   FutureOr<void> learnButtonClickedEvent(
       LearnButtonClickedEvent event, Emitter<HomeState> emit) {
-    emit(HomeNavigateToLearnScreenState());
+    emit(HomeNavigateToLearnScreenState(event.studentId));
   }
 
   FutureOr<void> teachButtonClickedEvent(
