@@ -7,6 +7,8 @@ import 'package:tuition_app_project/Screens/FindTeachersScreen/bloc/findteachers
 
 class findTeachers extends StatelessWidget {
   final String studentId;
+  final String studentName;
+  final String studentPicturePath;
   final String subject;
   final String topic;
   final String note;
@@ -15,7 +17,9 @@ class findTeachers extends StatelessWidget {
       required this.studentId,
       required this.subject,
       required this.topic,
-      required this.note});
+      required this.note,
+      required this.studentName,
+      required this.studentPicturePath});
 
   final FindteachersBloc findteachersBloc = FindteachersBloc();
 
@@ -94,16 +98,23 @@ class findTeachers extends StatelessWidget {
                                       onPressed: () {
                                         findteachersBloc.add(
                                             MeetingRequestButtonClickedEvent(
-                                                teacherId:
-                                                    state.teachers[index].id,
-                                                studentId: studentId,
-                                                subject: subject,
-                                                topic: topic,
-                                                note: note,
-                                                teacherIndex: index,
-                                                teacherRequestSent:
-                                                    state.teacherRequestSent,
-                                                teachers: state.teachers));
+                                          teacherId: state.teachers[index].id,
+                                          studentId: studentId,
+                                          subject: subject,
+                                          topic: topic,
+                                          note: note,
+                                          teacherIndex: index,
+                                          teacherRequestSent:
+                                              state.teacherRequestSent,
+                                          teachers: state.teachers,
+                                          studentName: studentName,
+                                          Studentimagepath: studentPicturePath,
+                                          teacherName: state
+                                                  .teachers[index].first_name +
+                                              " " +
+                                              state.teachers[index].last_name,
+                                          teacherImagepath: state.teachers[index].ProfileImagePath
+                                        ));
                                       },
                                       icon: const Icon(Icons.send)),
                             ),

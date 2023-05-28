@@ -5,8 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuition_app_project/Models/studentInfoModel.dart';
 import 'package:tuition_app_project/Models/teacherInfoModel.dart';
-import 'package:tuition_app_project/SignUpPage2/bloc/page2_bloc.dart';
 import 'package:tuition_app_project/Widgets/textFormField.dart';
+
+import 'bloc/page2_bloc.dart';
 
 class signupPage2 extends StatelessWidget {
   final String id;

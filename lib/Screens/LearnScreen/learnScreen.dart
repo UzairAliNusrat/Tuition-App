@@ -8,7 +8,9 @@ import '../FindTeachersScreen/findTeachersScreen.dart';
 
 class learnScreen extends StatelessWidget {
   final String studentId;
-  learnScreen({super.key, required this.studentId});
+  final String studentName;
+  final String studentPicturePath;
+  learnScreen({super.key, required this.studentId, required this.studentName, required this.studentPicturePath});
 
   final subjectNameController = TextEditingController();
   final topicController = TextEditingController();
@@ -51,8 +53,14 @@ class learnScreen extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          findTeachers(studentId: state.studentId, subject: state.subject.trim().toLowerCase(), topic: state.topic.trim(), note: state.note.trim(),)));
+                      builder: (context) => findTeachers(
+                            studentId: state.studentId,
+                            subject: state.subject.trim().toLowerCase(),
+                            topic: state.topic.trim(),
+                            note: state.note.trim(),
+                            studentName: state.studentName,
+                            studentPicturePath: state.imagepath,
+                          )));
             }
           },
           builder: (context, state) {
@@ -87,8 +95,8 @@ class learnScreen extends StatelessWidget {
                               prefixIcon: Icons.topic_sharp),
                         ),
                         Padding(
-                          padding:
-                              const EdgeInsets.only(left: 50, right: 50, top: 20),
+                          padding: const EdgeInsets.only(
+                              left: 50, right: 50, top: 20),
                           child: TextField(
                             controller: noteController,
                             decoration: const InputDecoration(
@@ -116,9 +124,15 @@ class learnScreen extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
-                                    learnBloc.add(FindTeacherButtonClickedEvent(studentId: studentId,
-                                        subject:
-                                            subjectNameController.text.trim().toLowerCase(), topic: topicController.text.trim(), note: noteController.text.trim()));
+                                    learnBloc.add(FindTeacherButtonClickedEvent(
+                                        studentId: studentId,
+                                        studentName: studentName,
+                                        subject: subjectNameController.text
+                                            .trim()
+                                            .toLowerCase(),
+                                        topic: topicController.text.trim(),
+                                        note: noteController.text.trim(),
+                                        imagepath: studentPicturePath),);
                                     print("Validated");
                                   } else {
                                     print("Not Validated");

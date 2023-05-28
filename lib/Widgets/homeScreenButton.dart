@@ -8,9 +8,17 @@ import '../Screens/HomeScreen/bloc/home_bloc.dart';
 class homeScreenButton extends StatelessWidget {
   final String text;
   final String studentId;
+  final String studentName;
+  final String imagepath;
   final HomeBloc homeBloc;
+
   const homeScreenButton(
-      {super.key, required this.text, required this.homeBloc, required this.studentId});
+      {super.key,
+      required this.text,
+      required this.homeBloc,
+      required this.studentId,
+      required this.studentName,
+      required this.imagepath,});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +34,11 @@ class homeScreenButton extends StatelessWidget {
           ),
           onPressed: () {
             if (text == "Learn") {
-              homeBloc.add(LearnButtonClickedEvent(studentId));
-            }
-            else if(text == "Teach"){
+              homeBloc.add(LearnButtonClickedEvent(
+                  studentId: studentId,
+                  studentName: studentName,
+                  imagepath: imagepath,));
+            } else if (text == "Teach") {
               homeBloc.add(TeachButtonClickedEvent());
             }
           },

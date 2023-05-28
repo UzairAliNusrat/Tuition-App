@@ -12,12 +12,16 @@ class FindTeachersInitialEvent extends FindteachersEvent {
 class MeetingRequestButtonClickedEvent extends FindteachersEvent {
   final String teacherId;
   final String studentId;
+  final String studentName;
+  final String Studentimagepath;
   final String subject;
   final String topic;
   final String note;
   final int teacherIndex;
+  final String teacherName;
   final List<bool> teacherRequestSent;
   final List<user> teachers;
+  final String teacherImagepath;
 
   MeetingRequestButtonClickedEvent(
       {required this.teacherId,
@@ -27,5 +31,9 @@ class MeetingRequestButtonClickedEvent extends FindteachersEvent {
       required this.note,
       required this.teacherIndex,
       required this.teacherRequestSent,
-      required this.teachers});
+      required this.teachers,
+      required this.studentName,
+      required this.Studentimagepath,
+      required this.teacherName,
+      required this.teacherImagepath});
 }

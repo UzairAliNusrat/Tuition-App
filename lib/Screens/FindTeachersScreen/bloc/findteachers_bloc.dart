@@ -44,7 +44,7 @@ class FindteachersBloc extends Bloc<FindteachersEvent, FindteachersState> {
   Future<FutureOr<void>> meetingRequestButtonClickedEvent(MeetingRequestButtonClickedEvent event, Emitter<FindteachersState> emit) async {
     FirebaseMeetingRequestRepository meetingRequestRepository = FirebaseMeetingRequestRepository();
 
-    await meetingRequestRepository.setMeetingRequest(meetingRequestModel(teacherId: event.teacherId, studentId: event.studentId, subject: event.subject, topic: event.topic, note: event.note));
+    await meetingRequestRepository.setMeetingRequest(meetingRequestModel(meetingId: IDgenerator.uuid.v4(), studentName: event.studentName, Studentimagepath: event.Studentimagepath,teacherId: event.teacherId, studentId: event.studentId, subject: event.subject, topic: event.topic, note: event.note, teacherName: event.teacherName, teacherimagepath: event.teacherImagepath));
     event.teacherRequestSent[event.teacherIndex] = true;
     emit(FindTeachersLoadedSuccessState(teachers: event.teachers, teacherRequestSent: event.teacherRequestSent));
   }
