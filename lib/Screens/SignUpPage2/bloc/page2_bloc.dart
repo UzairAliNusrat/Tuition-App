@@ -34,12 +34,16 @@ class Page2Bloc extends Bloc<Page2Event, Page2State> {
     emit(NavigateToLoginPageState());
   }
 
-  FutureOr<void> signUpbuttonStudentClickedEvent(SignUpbuttonStudentClickedEvent event, Emitter<Page2State> emit) {
+  Future<FutureOr<void>> signUpbuttonStudentClickedEvent(SignUpbuttonStudentClickedEvent event, Emitter<Page2State> emit) async {
     FirebaseStudentRepository firebaseStudentinfoRepository =
         FirebaseStudentRepository();
+    
+    await firebaseStudentinfoRepository.setStudentInfo(event.studentinfo);
     emit(Page2LoadingState());
-    firebaseStudentinfoRepository.setStudentInfo(event.studentinfo);
-    Future.delayed(const Duration(seconds: 1));
-    emit(NavigateToLoginPageState());
+    await Future.delayed(const Duration(seconds: 1), () {
+      emit(NavigateToLoginPageState());
+    });
+    
+    
   }
 }

@@ -77,8 +77,7 @@ class findTeachers extends StatelessWidget {
                           ),
                           child: ListTile(
                             leading: CircleAvatar(
-                              foregroundImage: FileImage(
-                                  File(state.teachers[index].ProfileImagePath)),
+                              foregroundImage: NetworkImage(state.teachers[index].ProfileImagePath),
                             ),
                             title: Text(state.teachers[index].first_name +
                                 " " +

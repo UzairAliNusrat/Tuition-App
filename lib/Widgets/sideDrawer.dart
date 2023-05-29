@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,10 +8,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../Models/userModel.dart';
+import '../Screens/HomeScreen/bloc/home_bloc.dart';
 
 class side_drawer extends StatelessWidget {
   user User;
-  side_drawer({super.key, required this.User});
+  final HomeBloc homeBloc;
+  side_drawer({super.key, required this.User, required this.homeBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +27,12 @@ class side_drawer extends StatelessWidget {
               color: Color.fromARGB(255, 139, 193, 238),
             ), //BoxDecoration
             child: UserAccountsDrawerHeader(
-              decoration: const BoxDecoration(color: Color.fromARGB(255, 139, 193, 238)),
-              accountName: Text(User?.first_name ?? FirebaseAuth.instance.currentUser?.displayName ?? "",
+              decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 139, 193, 238)),
+              accountName: Text(
+                  "${User.first_name} ${User.last_name}" ??
+                      FirebaseAuth.instance.currentUser?.displayName ??
+                      "",
                   style: GoogleFonts.arvo(
                     textStyle: const TextStyle(
                         color: Color.fromARGB(255, 3, 66, 102), fontSize: 25),
@@ -35,17 +40,22 @@ class side_drawer extends StatelessWidget {
               accountEmail: null,
               currentAccountPictureSize: const Size.square(55),
               currentAccountPicture: CircleAvatar(
-                            radius: 50,
-                            foregroundImage: FileImage(File(User.ProfileImagePath))),
+                  radius: 50,
+                  foregroundImage: NetworkImage(User.ProfileImagePath)),
             ), //UserAccountDrawerHeader
           ),
-          
+          ListTile(
+            leading: const Icon(Icons.person),
+            title: const Text('Profile'),
+            onTap: () {
+              homeBloc.add(ProfileButtonClickedEvent(User: User));
+            },
+          ),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('LogOut'),
-            onTap: () async {
-              await FirebaseAuth.instance.signOut();
-              await GoogleSignIn().signOut();
+            onTap: () {
+              homeBloc.add(SignOutButtonClickedEvent());
             },
           ),
         ],

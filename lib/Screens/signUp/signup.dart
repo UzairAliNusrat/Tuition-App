@@ -88,7 +88,7 @@ class SignUp extends StatelessWidget {
                             radius: 50,
                             foregroundImage: state.image == ""
                                 ? const AssetImage("assets/images/profile.png")
-                                : FileImage(File(state.image)) as ImageProvider,
+                                : NetworkImage(state.image) as ImageProvider,
                           ),
                           onTap: () {
                             signUpBloc.add(ImagePickerEvent(

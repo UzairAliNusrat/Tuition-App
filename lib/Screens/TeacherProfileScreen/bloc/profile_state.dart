@@ -7,7 +7,7 @@ abstract class ProfileActionState extends ProfileState {}
 
 class ProfileInitial extends ProfileState {}
 
-class ProfileLoading extends ProfileState {}
+class ProfileLoadingState extends ProfileState {}
 
 class ProfileLoadedState extends ProfileState {
   final String fullname;
@@ -16,6 +16,8 @@ class ProfileLoadedState extends ProfileState {
   final String qualification;
   final List<String> subjects;
   final String description;
+  final int rating;
+  final int initialRating;
 
   ProfileLoadedState(
       {required this.fullname,
@@ -23,6 +25,8 @@ class ProfileLoadedState extends ProfileState {
       required this.age,
       required this.qualification,
       required this.subjects,
-      required this.description});
+      required this.description,
+      required this.rating,
+      required this.initialRating});
 
 }

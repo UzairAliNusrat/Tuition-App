@@ -1,12 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tuition_app_project/Screens/HomeScreen/bloc/home_bloc.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'bloc/profile_bloc.dart';
 
 class teacherProfileScreen extends StatelessWidget {
@@ -55,7 +50,7 @@ class teacherProfileScreen extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
-          if (state is ProfileLoading) {
+          if (state is ProfileLoadingState) {
             return const Center(
               child: CircularProgressIndicator(),
             );
@@ -63,10 +58,10 @@ class teacherProfileScreen extends StatelessWidget {
             return Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 40),
+                  padding: const EdgeInsets.only(top: 20),
                   child: CircleAvatar(
                     radius: 60,
-                    foregroundImage: FileImage(File(state.imagepath)),
+                    foregroundImage: NetworkImage(state.imagepath),
                   ),
                 ),
                 const SizedBox(height: 30),
@@ -85,23 +80,91 @@ class teacherProfileScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
+                const SizedBox(height: 15),
+                Text(
+                  "Rating: ${state.rating}",
+                  style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+                RatingBar.builder(
+                  initialRating: state.rating.toDouble(),
+                  minRating: 0,
+                  direction: Axis.horizontal,
+                  allowHalfRating: false,
+                  ignoreGestures: true,
+                  itemCount: 5,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {},
+                ),
                 const SizedBox(height: 20),
                 ListTile(
-                  leading: const Icon(Icons.subject),
-                  title: Text("Subjects: " + state.subjects.toString().substring(1,state.subjects.toString().length-1), style: const TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold),)
-                ),
+                    leading: const Icon(Icons.subject),
+                    title: Text(
+                      "Subjects: ${state.subjects.toString().substring(
+                              1, state.subjects.toString().length - 1)}",
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    )),
                 ListTile(
                   leading: const Icon(Icons.person),
-                  title: Text("Age: " + state.age, style: const TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold)),
+                  title: Text("Age: ${state.age}",
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
                 ),
                 ListTile(
                   leading: const Icon(Icons.description),
-                  title: Text("About: " + state.description, style: const TextStyle(fontSize: 16, color: Colors.black, fontWeight: FontWeight.bold)),
+                  title: Text("About: ${state.description}",
+                      style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold)),
+                ),
+                const SizedBox(height: 30),
+                const Text(
+                  "Rate Teacher: ",
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                ),
+                RatingBar.builder(
+                  initialRating: state.initialRating.toDouble(),
+                  minRating: 0,
+                  direction: Axis.horizontal,
+                  allowHalfRating: false,
+                  itemCount: 5,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                  itemBuilder: (context, _) => const Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                  ),
+                  onRatingUpdate: (rating) {
+                    profileBloc.add(NewRatingEvent(
+                        fullname: fullname,
+                        subjects: state.subjects,
+                        age: state.age,
+                        qualification: state.qualification,
+                        description: state.description,
+                        rating: rating.toInt(),
+                        userId: id,
+                        imagepath: imagepath));
+                    rating = state.initialRating.toDouble();
+                  },
                 ),
               ],
             );
           } else {
-            return Center(child: Text('Error'));
+            return const Center(child: Text('Error'));
           }
         },
       ),

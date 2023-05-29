@@ -20,10 +20,11 @@ class LearnButtonClickedEvent extends HomeEvent {
   final String studentName;
   final String imagepath;
 
-  LearnButtonClickedEvent(
-      {required this.studentId,
-      required this.studentName,
-      required this.imagepath,});
+  LearnButtonClickedEvent({
+    required this.studentId,
+    required this.studentName,
+    required this.imagepath,
+  });
 }
 
 class TeachButtonClickedEvent extends HomeEvent {}
@@ -62,4 +63,22 @@ class MeetingRequestTickButtonClickedEvent extends HomeEvent {
       required this.date,
       required this.time,
       required this.teacherName});
+}
+
+class MeetingRequestCrossButtonClickedEvent extends HomeEvent {
+  final String meetingId;
+
+  MeetingRequestCrossButtonClickedEvent({
+    required this.meetingId,
+  });
+}
+
+class SignOutButtonClickedEvent extends HomeEvent {}
+
+class ProfileButtonClickedEvent extends HomeEvent {
+  final user User;
+
+  ProfileButtonClickedEvent({
+    required this.User,
+  });
 }

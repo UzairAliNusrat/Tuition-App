@@ -14,8 +14,8 @@ class bottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      //backgroundColor: Colors.cyan[100],
-      type: BottomNavigationBarType.shifting,
+      backgroundColor: Colors.cyan[100],
+      type: BottomNavigationBarType.fixed,
       items:  [
         BottomNavigationBarItem(
           icon: const Icon(Icons.home),
@@ -24,7 +24,7 @@ class bottomNavigationBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.class_outlined),
-          label: 'Meetings',
+          label: 'Meeting Requests',
           backgroundColor: Colors.blue[200]
         ),
         BottomNavigationBarItem(

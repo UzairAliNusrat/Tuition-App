@@ -1,14 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tuition_app_project/Models/Ratings.dart';
 import '../Models/userModel.dart';
 
 abstract class UserRepository {
   setuser(user User);
   getUser(String userId);
   Future<List<user>> fetchTeacherList();
+  setRating(Ratings rating);
+  Future<int> getAvgUserRating(String userId);
 }
 
 class FirebaseUserRepository implements UserRepository {
-  static var i = 0;
   final db = FirebaseFirestore.instance;
 
   late user User;
@@ -22,8 +24,6 @@ class FirebaseUserRepository implements UserRepository {
     } else {
       await db.collection("Teachers").doc(User.id).set(User.toJson());
     }
-
-    i++;
   }
 
   @override
@@ -44,5 +44,32 @@ class FirebaseUserRepository implements UserRepository {
       teachers.add(user.fromJson(element));
     }
     return teachers;
+  }
+
+  @override
+  setRating(Ratings rating) async {
+    await db
+        .collection("Ratings ${rating.userId}")
+        .doc(rating.ratingID)
+        .set(rating.toJson());
+  }
+
+  @override
+  Future<int> getAvgUserRating(String userID) async {
+    int avgRating = 0;
+    int count = 0;
+    final QuerySnapshot result = await db.collection("Ratings $userID").get();
+    if (result.size == 0) {
+      return 0;
+    } else {
+      final List<DocumentSnapshot<Map<String, dynamic>>> documents =
+        result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
+    for (var element in documents) {
+      avgRating += Ratings.fromJson(element).rating;
+      count++;
+    }
+    return avgRating ~/ count;
+    }
+    
   }
 }

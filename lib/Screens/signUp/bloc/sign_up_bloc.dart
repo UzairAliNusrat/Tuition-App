@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:tuition_app_project/Screens/login/bloc/login_bloc.dart';
+import 'package:tuition_app_project/Utils/constants.dart';
 
 part 'sign_up_event.dart';
 part 'sign_up_state.dart';
@@ -40,8 +42,15 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         await imagePicker.pickImage(source: ImageSource.gallery);
     if (PickedImage != null) {
       var path = PickedImage.path;
-      emit(SignUpLoadedSuccessfulState(
-          selectedValue: event.selectedValue, image: path));
+      final FirebaseStorage storage = FirebaseStorage.instance;
+      final Reference storageReference =
+          storage.ref().child('Profile Pictures/${IDgenerator.uuid.v4()}');
+      final UploadTask uploadTask = storageReference.putFile(File(path));
+      await uploadTask.whenComplete(() async {
+        String downloadUrl = await storageReference.getDownloadURL();
+        emit(SignUpLoadedSuccessfulState(
+          selectedValue: event.selectedValue, image: downloadUrl));
+      });
     } else {
       emit(SignUpLoadedSuccessfulState(
           selectedValue: event.selectedValue, image: ""));
@@ -60,7 +69,8 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
         event.lastName, event.imagePath, event.userType);
   }
 
-  FutureOr<void> signUpNextButtonClickedEvent(SignUpNextButtonClickedEvent event, Emitter<SignUpState> emit) {
+  FutureOr<void> signUpNextButtonClickedEvent(
+      SignUpNextButtonClickedEvent event, Emitter<SignUpState> emit) {
     emit(NavigateToSignUpPage2State());
   }
 }

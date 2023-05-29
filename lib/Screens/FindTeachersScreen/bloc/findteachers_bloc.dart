@@ -37,15 +37,43 @@ class FindteachersBloc extends Bloc<FindteachersEvent, FindteachersState> {
         }
       }
     }
-    List<bool> teacherRequestSent = List.generate(teacherslist.length, (index) => false);
-    emit(FindTeachersLoadedSuccessState(teachers: teacherslist, teacherRequestSent: teacherRequestSent));
+    List<bool> teacherRequestSent =
+        List.generate(teacherslist.length, (index) => false);
+    emit(FindTeachersLoadedSuccessState(
+        teachers: teacherslist, teacherRequestSent: teacherRequestSent));
   }
 
-  Future<FutureOr<void>> meetingRequestButtonClickedEvent(MeetingRequestButtonClickedEvent event, Emitter<FindteachersState> emit) async {
-    FirebaseMeetingRequestRepository meetingRequestRepository = FirebaseMeetingRequestRepository();
-
-    await meetingRequestRepository.setMeetingRequest(meetingRequestModel(meetingId: IDgenerator.uuid.v4(), studentName: event.studentName, Studentimagepath: event.Studentimagepath,teacherId: event.teacherId, studentId: event.studentId, subject: event.subject, topic: event.topic, note: event.note, teacherName: event.teacherName, teacherimagepath: event.teacherImagepath));
+  Future<FutureOr<void>> meetingRequestButtonClickedEvent(
+      MeetingRequestButtonClickedEvent event,
+      Emitter<FindteachersState> emit) async {
+    FirebaseMeetingRequestRepository meetingRequestRepository =
+        FirebaseMeetingRequestRepository();
+    String meetingId = IDgenerator.uuid.v4();
+    await meetingRequestRepository.setMeetingRequest(meetingRequestModel(
+        meetingId: meetingId,
+        studentName: event.studentName,
+        Studentimagepath: event.Studentimagepath,
+        teacherId: event.teacherId,
+        studentId: event.studentId,
+        subject: event.subject,
+        topic: event.topic,
+        note: event.note,
+        teacherName: event.teacherName,
+        teacherimagepath: event.teacherImagepath));
+    await meetingRequestRepository.setMeetingHistory(meetingRequestModel(
+        meetingId: meetingId,
+        studentName: event.studentName,
+        Studentimagepath: event.Studentimagepath,
+        teacherId: event.teacherId,
+        studentId: event.studentId,
+        subject: event.subject,
+        topic: event.topic,
+        note: event.note,
+        teacherName: event.teacherName,
+        teacherimagepath: event.teacherImagepath));
     event.teacherRequestSent[event.teacherIndex] = true;
-    emit(FindTeachersLoadedSuccessState(teachers: event.teachers, teacherRequestSent: event.teacherRequestSent));
+    emit(FindTeachersLoadedSuccessState(
+        teachers: event.teachers,
+        teacherRequestSent: event.teacherRequestSent));
   }
 }

@@ -45,7 +45,17 @@ class Login extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(top: 90),
+                        padding: const EdgeInsets.only(top: 50),
+                        child: Text(
+                          'Teach N Learn',
+                          style: GoogleFonts.arvo(
+                            textStyle: const TextStyle(
+                                color: Colors.blue, fontSize: 30),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 50),
                         child: Text(
                           'Login',
                           style: GoogleFonts.arvo(

@@ -7,7 +7,10 @@ abstract class HomeActionState extends HomeState {}
 
 class HomeInitial extends HomeState {}
 
-class HomeLoadingState extends HomeState {}
+class HomeLoadingState extends HomeState {
+  final int selectedIndex;
+  HomeLoadingState(this.selectedIndex);
+}
 
 class HomeLoadedState extends HomeState {
   final user User;
@@ -15,8 +18,9 @@ class HomeLoadedState extends HomeState {
   final int selectedIndex;
   final List<meetingRequestModel> meetingRequests;
   final List<meetingAcceptedModel> acceptedMeetings;
-  HomeLoadedState(
-      this.selectedIndex, this.Teachers, this.User, this.meetingRequests, this.acceptedMeetings);
+  final List<meetingRequestModel> meetingHistory;
+  HomeLoadedState(this.selectedIndex, this.Teachers, this.User,
+      this.meetingRequests, this.acceptedMeetings, this.meetingHistory);
 }
 
 class HomeErrorState extends HomeState {}
@@ -37,4 +41,9 @@ class HomeNavigateToTeacherProfileScreenState extends HomeActionState {
   final String fullname;
   HomeNavigateToTeacherProfileScreenState(
       {required this.id, required this.imagepath, required this.fullname});
+}
+
+class HomeNavigateToProfileScreenState extends HomeActionState {
+  final user User;
+  HomeNavigateToProfileScreenState({required this.User});
 }

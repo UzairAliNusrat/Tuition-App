@@ -12,6 +12,8 @@ abstract class MeetingRequestRepository {
   setAcceptedMeeting(meetingAcceptedModel acceptedMeeting);
   Future<List<meetingAcceptedModel>> fetchAcceptedMeetingList(
       String Id, String userType);
+  setMeetingHistory(meetingRequestModel meetingRequest);
+  Future<List<meetingRequestModel>> fetchMeetingHistoryList(String Id);
 }
 
 class FirebaseMeetingRequestRepository implements MeetingRequestRepository {
@@ -24,28 +26,25 @@ class FirebaseMeetingRequestRepository implements MeetingRequestRepository {
       String Id, String userType) async {
     List<meetingRequestModel> meetingRequests = [];
     final QuerySnapshot result = await db.collection("Meeting Requests").get();
-    
+
     final List<DocumentSnapshot<Map<String, dynamic>>> documents =
         result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
-    
+
     if (userType == "Student") {
       for (var element in documents) {
         if (meetingRequestModel.fromJson(element).studentId == Id) {
           meetingRequests.add(meetingRequestModel.fromJson(element));
         }
       }
-      
     } else {
-      
       for (var element in documents) {
         if (meetingRequestModel.fromJson(element).teacherId == Id) {
           print("hello1");
           meetingRequests.add(meetingRequestModel.fromJson(element));
         }
       }
-      
     }
-    
+
     return meetingRequests;
   }
 
@@ -91,5 +90,30 @@ class FirebaseMeetingRequestRepository implements MeetingRequestRepository {
   @override
   deleteMeetingRequest(String meetingId) async {
     await db.collection("Meeting Requests").doc(meetingId).delete();
+  }
+
+  @override
+  setMeetingHistory(meetingRequestModel meetingRequest) async {
+    await db
+        .collection("Meeting History")
+        .doc(meetingRequest.meetingId)
+        .set(meetingRequest.toJson());
+  }
+
+  @override
+  Future<List<meetingRequestModel>> fetchMeetingHistoryList(String Id) async {
+    List<meetingRequestModel> meetingHistory = [];
+    final QuerySnapshot result = await db.collection("Meeting History").get();
+
+    final List<DocumentSnapshot<Map<String, dynamic>>> documents =
+        result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
+
+    for (var element in documents) {
+      if (meetingRequestModel.fromJson(element).studentId == Id) {
+        meetingHistory.add(meetingRequestModel.fromJson(element));
+      }
+    }
+
+    return meetingHistory;
   }
 }

@@ -35,7 +35,7 @@ class teacherList extends StatelessWidget {
                   CircleAvatar(
                     radius: 50,
                     backgroundImage:
-                        FileImage(File(teachers[index].ProfileImagePath)),
+                        NetworkImage(teachers[index].ProfileImagePath),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(12),
