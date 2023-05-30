@@ -7,31 +7,37 @@ import '../Screens/HomeScreen/bloc/home_bloc.dart';
 class bottomNavigationBar extends StatelessWidget {
   final int index;
   final HomeBloc homeBloc;
-  const bottomNavigationBar({super.key, required this.index, required this.homeBloc});
-
-  
+  final String userType;
+  const bottomNavigationBar(
+      {super.key,
+      required this.index,
+      required this.homeBloc,
+      required this.userType});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       backgroundColor: Colors.cyan[100],
       type: BottomNavigationBarType.fixed,
-      items:  [
+      items: [
         BottomNavigationBarItem(
-          icon: const Icon(Icons.home),
-          label: 'Home',
-          backgroundColor: Colors.blue[200]
-        ),
+            icon: const Icon(Icons.home),
+            label: 'Home',
+            backgroundColor: Colors.blue[200]),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.class_outlined),
-          label: 'Meeting Requests',
-          backgroundColor: Colors.blue[200]
-        ),
+            icon: const Icon(Icons.class_outlined),
+            label: 'Meeting Requests',
+            backgroundColor: Colors.blue[200]),
+        userType == "Student" ?
         BottomNavigationBarItem(
-          icon: const Icon(Icons.chat_outlined),
-          label: "Chat",
-          backgroundColor: Colors.blue[200]
-        ),
+            icon: const Icon(Icons.chat_outlined),
+            label: "Teachers",
+            backgroundColor: Colors.blue[200])
+        :
+        BottomNavigationBarItem(
+            icon: const Icon(Icons.chat_outlined),
+            label: "Students",
+            backgroundColor: Colors.blue[200])
       ],
       selectedItemColor: const Color.fromARGB(255, 9, 137, 160),
       currentIndex: index,
@@ -44,8 +50,12 @@ class bottomNavigationBar extends StatelessWidget {
             homeBloc.add(BottomNavigationBarItemMeetingsClickedEvent());
             break;
           case 2:
-            homeBloc.add(BottomNavigationBarItemChatClickedEvent());
-            break;
+            if (userType == "Student") {
+              homeBloc.add(BottomNavigationBarItemTeachersClickedEvent());
+            }
+            else{
+              homeBloc.add(BottomNavigationBarItemStudentsClickedEvent());
+            }
         }
       },
     );

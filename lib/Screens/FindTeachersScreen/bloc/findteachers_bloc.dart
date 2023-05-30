@@ -29,18 +29,28 @@ class FindteachersBloc extends Bloc<FindteachersEvent, FindteachersState> {
     List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
     List<Teacherinfo> teachersinfo = await teacherInfoRepository
         .fetchTeacherinfoListbySubject(event.subject);
-    for (int i = 0; i < teachers.length; i++) {
-      for (int j = 0; j < teachersinfo.length; j++) {
-        if (teachers[i].id == teachersinfo[j].id) {
-          teacherslist.add(teachers[i]);
-          break;
+    if (teachersinfo.isEmpty) {
+      emit(FindTeachersErrorState(message: "No teachers found"));
+    } else {
+      for (int i = 0; i < teachers.length; i++) {
+        for (int j = 0; j < teachersinfo.length; j++) {
+          if (teachers[i].id == teachersinfo[j].id) {
+            teacherslist.add(teachers[i]);
+            break;
+          }
         }
       }
+      List<bool> teacherRequestSent =
+          List.generate(teacherslist.length, (index) => false);
+      List<double> teacherRatings = [];
+      for (int i = 0; i < teacherslist.length; i++) {
+        teacherRatings
+            .add(await Userrepo.userRepo.getAvgUserRating(teacherslist[i].id));
+      }
+
+      emit(FindTeachersLoadedSuccessState(
+          teachers: teacherslist, teacherRequestSent: teacherRequestSent, teacherRatings: teacherRatings));
     }
-    List<bool> teacherRequestSent =
-        List.generate(teacherslist.length, (index) => false);
-    emit(FindTeachersLoadedSuccessState(
-        teachers: teacherslist, teacherRequestSent: teacherRequestSent));
   }
 
   Future<FutureOr<void>> meetingRequestButtonClickedEvent(
@@ -71,9 +81,18 @@ class FindteachersBloc extends Bloc<FindteachersEvent, FindteachersState> {
         note: event.note,
         teacherName: event.teacherName,
         teacherimagepath: event.teacherImagepath));
+
     event.teacherRequestSent[event.teacherIndex] = true;
+
+    List<double> teacherRatings = [];
+      for (int i = 0; i < event.teachers.length; i++) {
+        teacherRatings
+            .add(await Userrepo.userRepo.getAvgUserRating(event.teachers[i].id));
+      }
+    
     emit(FindTeachersLoadedSuccessState(
         teachers: event.teachers,
-        teacherRequestSent: event.teacherRequestSent));
+        teacherRequestSent: event.teacherRequestSent,
+        teacherRatings: teacherRatings));
   }
 }

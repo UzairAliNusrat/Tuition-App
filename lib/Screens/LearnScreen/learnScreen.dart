@@ -10,7 +10,11 @@ class learnScreen extends StatelessWidget {
   final String studentId;
   final String studentName;
   final String studentPicturePath;
-  learnScreen({super.key, required this.studentId, required this.studentName, required this.studentPicturePath});
+  learnScreen(
+      {super.key,
+      required this.studentId,
+      required this.studentName,
+      required this.studentPicturePath});
 
   final subjectNameController = TextEditingController();
   final topicController = TextEditingController();
@@ -79,6 +83,14 @@ class learnScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
+                          padding: const EdgeInsets.only(top: 50),
+                          child: Text("Pick a subject",
+                              style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 30))),
+                        ),
+                        Padding(
                           padding: const EdgeInsets.only(
                               left: 50, right: 50, top: 80),
                           child: textFormField(
@@ -124,15 +136,17 @@ class learnScreen extends StatelessWidget {
                                 ),
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
-                                    learnBloc.add(FindTeacherButtonClickedEvent(
-                                        studentId: studentId,
-                                        studentName: studentName,
-                                        subject: subjectNameController.text
-                                            .trim()
-                                            .toLowerCase(),
-                                        topic: topicController.text.trim(),
-                                        note: noteController.text.trim(),
-                                        imagepath: studentPicturePath),);
+                                    learnBloc.add(
+                                      FindTeacherButtonClickedEvent(
+                                          studentId: studentId,
+                                          studentName: studentName,
+                                          subject: subjectNameController.text
+                                              .trim()
+                                              .toLowerCase(),
+                                          topic: topicController.text.trim(),
+                                          note: noteController.text.trim(),
+                                          imagepath: studentPicturePath),
+                                    );
                                     print("Validated");
                                   } else {
                                     print("Not Validated");

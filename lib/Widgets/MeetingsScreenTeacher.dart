@@ -36,7 +36,7 @@ class MeetingsScreenTeacher extends StatelessWidget {
         elevation: 0,
       ),
       bottomNavigationBar: bottomNavigationBar(
-          index: bottomNavigationBarIndex, homeBloc: homeBloc),
+          index: bottomNavigationBarIndex, homeBloc: homeBloc, userType: "Teacher"),
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
@@ -105,7 +105,7 @@ class MeetingsScreenTeacher extends StatelessWidget {
                                                     meetingRequests[
                                                             index]
                                                         .studentName,
-                                                imagepath:
+                                                studentimagepath:
                                                     meetingRequests[
                                                             index]
                                                         .Studentimagepath,
@@ -125,7 +125,10 @@ class MeetingsScreenTeacher extends StatelessWidget {
                                                     meetingRequests[index]
                                                         .teacherName,
                                                 date: formattedDate,
-                                                time: formattedTime));
+                                                time: formattedTime,
+                                                teacherimagepath:
+                                                    meetingRequests[index]
+                                                        .teacherimagepath));
                                       }
                                     },
                                     icon: const Icon(Icons.check)),

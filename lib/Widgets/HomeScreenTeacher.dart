@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuition_app_project/Widgets/sideDrawer.dart';
+import 'package:tuition_app_project/Widgets/userList.dart';
 
 import '../Models/meetingAcceptedModel.dart';
 import '../Models/userModel.dart';
@@ -16,12 +17,14 @@ class HomeScreenTeacher extends StatelessWidget {
   final user User;
   final int bottomNavigationBarIndex;
   final List<meetingAcceptedModel> acceptedMeetings;
+  final List<user> students;
   const HomeScreenTeacher(
       {super.key,
       required this.homeBloc,
       required this.User,
       required this.bottomNavigationBarIndex,
-      required this.acceptedMeetings});
+      required this.acceptedMeetings,
+      required this.students});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,7 @@ class HomeScreenTeacher extends StatelessWidget {
       ),
       drawer: side_drawer(User: User, homeBloc: homeBloc),
       bottomNavigationBar:
-          bottomNavigationBar(index: bottomNavigationBarIndex, homeBloc: homeBloc),
+          bottomNavigationBar(index: bottomNavigationBarIndex, homeBloc: homeBloc, userType: "Teacher",),
       body: ListView(
         children: [
           Container(
@@ -122,9 +125,35 @@ class HomeScreenTeacher extends StatelessWidget {
             padding: const EdgeInsets.all(15),
             child: meetingList(
               acceptedMeetings: acceptedMeetings,
-              userType: "Teacher",
+              User: User,
+              homeBloc: homeBloc,
             ),
           ),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 7, bottom: 10),
+              child: RichText(
+                text: TextSpan(
+                    text: "Top Rated Students",
+                    style: GoogleFonts.arvo(
+                      textStyle: const TextStyle(
+                          decoration: TextDecoration.underline,
+                          color: Color.fromARGB(255, 3, 66, 102),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    )),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: userList(
+              teachers: const [],
+              homebloc: homeBloc,
+              students: students,
+              userType: "Student",
+            ),
+          )
         ],
       ),
     );

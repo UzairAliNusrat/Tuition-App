@@ -5,12 +5,14 @@ class Studentinfo {
   String qualification;
   String id;
   String description;
+  String phoneNumber;
 
   Studentinfo(
       {required this.age,
       required this.qualification,
       required this.id,
-      required this.description});
+      required this.description,
+      required this.phoneNumber});
 
   static Studentinfo fromJson(DocumentSnapshot<Map<String, dynamic>> json) {
     return Studentinfo(
@@ -18,6 +20,7 @@ class Studentinfo {
       qualification: json['qualification'] as String? ?? 'field empty',
       id: json['id'] as String? ?? 'field empty',
       description: json['description'] as String? ?? 'field empty',
+      phoneNumber: json['phoneNumber'] as String? ?? 'field empty',
     );
   }
 
@@ -27,6 +30,7 @@ class Studentinfo {
       'qualification': qualification,
       'id': id,
       'description': description,
+      'phoneNumber': phoneNumber,
     };
   }
 }

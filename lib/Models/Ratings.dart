@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Ratings {
-  int rating;
+  double rating;
   String userId;
   String ratingID;
 

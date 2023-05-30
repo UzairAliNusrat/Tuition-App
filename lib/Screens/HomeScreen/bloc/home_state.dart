@@ -15,12 +15,13 @@ class HomeLoadingState extends HomeState {
 class HomeLoadedState extends HomeState {
   final user User;
   final List<user> Teachers;
+  final List<user> Students;
   final int selectedIndex;
   final List<meetingRequestModel> meetingRequests;
   final List<meetingAcceptedModel> acceptedMeetings;
   final List<meetingRequestModel> meetingHistory;
   HomeLoadedState(this.selectedIndex, this.Teachers, this.User,
-      this.meetingRequests, this.acceptedMeetings, this.meetingHistory);
+      this.meetingRequests, this.acceptedMeetings, this.meetingHistory, this.Students);
 }
 
 class HomeErrorState extends HomeState {}
@@ -35,12 +36,13 @@ class HomeNavigateToLearnScreenState extends HomeActionState {
 
 class HomeNavigateToTeachScreenState extends HomeActionState {}
 
-class HomeNavigateToTeacherProfileScreenState extends HomeActionState {
+class HomeNavigateToListProfileScreenState extends HomeActionState {
   final String id;
   final String imagepath;
   final String fullname;
-  HomeNavigateToTeacherProfileScreenState(
-      {required this.id, required this.imagepath, required this.fullname});
+  final String userType;
+  HomeNavigateToListProfileScreenState(
+      {required this.id, required this.imagepath, required this.fullname, required this.userType});
 }
 
 class HomeNavigateToProfileScreenState extends HomeActionState {

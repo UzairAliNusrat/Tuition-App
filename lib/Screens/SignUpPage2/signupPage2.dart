@@ -18,6 +18,8 @@ class signupPage2 extends StatelessWidget {
   final AboutController = TextEditingController();
   final AgeController = TextEditingController();
   final SubjectsController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+
 
   final Page2Bloc page2Bloc = Page2Bloc();
 
@@ -88,6 +90,13 @@ class signupPage2 extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(20),
                     child: textFormField(
+                        Controller: phoneNumberController,
+                        hintText: "Phone Number",
+                        prefixIcon: Icons.app_registration),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: textFormField(
                         Controller: AgeController,
                         hintText: "Age",
                         prefixIcon: Icons.app_registration),
@@ -133,6 +142,7 @@ class signupPage2 extends StatelessWidget {
                             Teacherinfo teacher = Teacherinfo(
                                 id: id,
                                 age: AgeController.text,
+                                phoneNumber: phoneNumberController.text,
                                 qualification: QualificationController.text,
                                 subjects: SubjectsController.text.split(","),
                                 description: AboutController.text);
@@ -160,6 +170,13 @@ class signupPage2 extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           color: Colors.blue),
                     ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: textFormField(
+                        Controller: phoneNumberController,
+                        hintText: "Phone Number",
+                        prefixIcon: Icons.app_registration),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20),
@@ -202,6 +219,7 @@ class signupPage2 extends StatelessWidget {
                             Studentinfo studentinfo = Studentinfo(
                                 id: id,
                                 age: AgeController.text,
+                                phoneNumber: phoneNumberController.text,
                                 qualification: QualificationController.text,
                                 description: AboutController.text);
                             page2Bloc.add(

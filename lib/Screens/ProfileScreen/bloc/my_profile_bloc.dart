@@ -6,6 +6,7 @@ import 'package:tuition_app_project/Models/studentInfoModel.dart';
 import 'package:tuition_app_project/Models/teacherInfoModel.dart';
 import 'package:tuition_app_project/Models/userModel.dart';
 import 'package:tuition_app_project/Repositories/teacherRepository.dart';
+import 'package:tuition_app_project/Utils/constants.dart';
 
 import '../../../Repositories/studentRepository.dart';
 
@@ -24,13 +25,16 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
       FirebaseStudentRepository studentinfoRepo = FirebaseStudentRepository();
       Studentinfo studentinfo =
           await studentinfoRepo.getStudentinfo(event.User.id);
-      emit(MyProfileLoadedState(studentinfo: studentinfo, teacherinfo: null));
+          double avgRating = await Userrepo.userRepo.getAvgUserRating(event.User.id);
+      emit(MyProfileLoadedState(studentinfo: studentinfo, teacherinfo: null, avgRating: avgRating));
+      
     }
     else{
       FirebaseTeacherRepository teacherinfoRepo = FirebaseTeacherRepository();
       Teacherinfo teacherinfo =
           await teacherinfoRepo.getTeacher(event.User.id);
-      emit(MyProfileLoadedState(studentinfo: null, teacherinfo: teacherinfo));
+          double avgRating = await Userrepo.userRepo.getAvgUserRating(event.User.id);
+      emit(MyProfileLoadedState(studentinfo: null, teacherinfo: teacherinfo, avgRating: avgRating));
     }
   }
 }

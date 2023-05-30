@@ -13,7 +13,10 @@ class BottomNavigationBarItemHomeClickedEvent extends HomeEvent {}
 
 class BottomNavigationBarItemMeetingsClickedEvent extends HomeEvent {}
 
-class BottomNavigationBarItemChatClickedEvent extends HomeEvent {}
+class BottomNavigationBarItemTeachersClickedEvent extends HomeEvent {}
+
+class BottomNavigationBarItemStudentsClickedEvent extends HomeEvent {}
+
 
 class LearnButtonClickedEvent extends HomeEvent {
   final String studentId;
@@ -29,20 +32,21 @@ class LearnButtonClickedEvent extends HomeEvent {
 
 class TeachButtonClickedEvent extends HomeEvent {}
 
-class TeacherListItemClickedEvent extends HomeEvent {
+class ListItemClickedEvent extends HomeEvent {
   final String id;
   final String imagepath;
   final String fullname;
+  final String userType;
 
-  TeacherListItemClickedEvent(
-      {required this.id, required this.imagepath, required this.fullname});
+  ListItemClickedEvent(
+      {required this.id, required this.imagepath, required this.fullname, required this.userType});
 }
 
 class MeetingRequestTickButtonClickedEvent extends HomeEvent {
   final String meetingId;
   final String teacherId;
   final String studentName;
-  final String imagepath;
+  final String studentimagepath;
   final String studentId;
   final String subject;
   final String topic;
@@ -50,19 +54,21 @@ class MeetingRequestTickButtonClickedEvent extends HomeEvent {
   final String date;
   final String time;
   final String teacherName;
+  final String teacherimagepath;
 
   MeetingRequestTickButtonClickedEvent(
       {required this.meetingId,
       required this.teacherId,
       required this.studentName,
-      required this.imagepath,
+      required this.studentimagepath,
       required this.studentId,
       required this.subject,
       required this.topic,
       required this.note,
       required this.date,
       required this.time,
-      required this.teacherName});
+      required this.teacherName,
+      required this.teacherimagepath});
 }
 
 class MeetingRequestCrossButtonClickedEvent extends HomeEvent {
@@ -80,5 +86,13 @@ class ProfileButtonClickedEvent extends HomeEvent {
 
   ProfileButtonClickedEvent({
     required this.User,
+  });
+}
+
+class EndMeetingButtonClickedEvent extends HomeEvent {
+  final String meetingId;
+
+  EndMeetingButtonClickedEvent({
+    required this.meetingId,
   });
 }

@@ -6,8 +6,9 @@ abstract class UserRepository {
   setuser(user User);
   getUser(String userId);
   Future<List<user>> fetchTeacherList();
+  Future<List<user>> fetchStudentList();
   setRating(Ratings rating);
-  Future<int> getAvgUserRating(String userId);
+  Future<double> getAvgUserRating(String userId);
 }
 
 class FirebaseUserRepository implements UserRepository {
@@ -55,9 +56,9 @@ class FirebaseUserRepository implements UserRepository {
   }
 
   @override
-  Future<int> getAvgUserRating(String userID) async {
-    int avgRating = 0;
-    int count = 0;
+  Future<double> getAvgUserRating(String userID) async {
+    double avgRating = 0;
+    double count = 0;
     final QuerySnapshot result = await db.collection("Ratings $userID").get();
     if (result.size == 0) {
       return 0;
@@ -68,8 +69,20 @@ class FirebaseUserRepository implements UserRepository {
       avgRating += Ratings.fromJson(element).rating;
       count++;
     }
-    return avgRating ~/ count;
+    return avgRating / count;
     }
     
+  }
+  
+  @override
+  Future<List<user>> fetchStudentList() async {
+    List<user> students = [];
+    final QuerySnapshot result = await db.collection("Students").get();
+    final List<DocumentSnapshot<Map<String, dynamic>>> documents =
+        result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
+    for (var element in documents) {
+      students.add(user.fromJson(element));
+    }
+    return students;
   }
 }

@@ -9,6 +9,7 @@ abstract class MeetingRequestRepository {
   Future<List<meetingRequestModel>> fetchMeetingRequestList(
       String Id, String userType);
   deleteMeetingRequest(String meetingId);
+  deleteAcceptedMeeting(String meetingId);
   setAcceptedMeeting(meetingAcceptedModel acceptedMeeting);
   Future<List<meetingAcceptedModel>> fetchAcceptedMeetingList(
       String Id, String userType);
@@ -115,5 +116,10 @@ class FirebaseMeetingRequestRepository implements MeetingRequestRepository {
     }
 
     return meetingHistory;
+  }
+  
+  @override
+  deleteAcceptedMeeting(String meetingId) async {
+    await db.collection("Accepted Meetings").doc(meetingId).delete();
   }
 }

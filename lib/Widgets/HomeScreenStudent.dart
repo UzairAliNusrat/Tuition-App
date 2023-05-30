@@ -5,7 +5,7 @@ import 'package:tuition_app_project/Models/meetingAcceptedModel.dart';
 import 'package:tuition_app_project/Models/userModel.dart';
 import 'package:tuition_app_project/Screens/HomeScreen/bloc/home_bloc.dart';
 import 'package:tuition_app_project/Widgets/sideDrawer.dart';
-import 'package:tuition_app_project/Widgets/teacherList.dart';
+import 'package:tuition_app_project/Widgets/userList.dart';
 
 import 'MeetingList.dart';
 import 'bottomNavigationBar.dart';
@@ -46,7 +46,7 @@ class HomeScreenStudent extends StatelessWidget {
       ),
       drawer: side_drawer(User: User, homeBloc: homeBloc,),
       bottomNavigationBar:
-          bottomNavigationBar(index: bottomNavigationBarIndex, homeBloc: homeBloc),
+          bottomNavigationBar(index: bottomNavigationBarIndex, homeBloc: homeBloc, userType: "Student",),
       body: ListView(
         children: [
           Container(
@@ -84,7 +84,7 @@ class HomeScreenStudent extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 3,
+                        left: 7,
                       ),
                       child: Text(User.last_name ?? "",
                           style: GoogleFonts.arvo(
@@ -128,7 +128,8 @@ class HomeScreenStudent extends StatelessWidget {
             padding: const EdgeInsets.all(15),
             child: meetingList(
               acceptedMeetings: acceptedMeetings,
-              userType: "Student",
+              User: User,
+              homeBloc: homeBloc,
             ),
           ),
           Center(
@@ -136,7 +137,7 @@ class HomeScreenStudent extends StatelessWidget {
               padding: const EdgeInsets.only(top: 7, bottom: 10),
               child: RichText(
                 text: TextSpan(
-                    text: "Top Ranking Teachers",
+                    text: "Top Rated Teachers",
                     style: GoogleFonts.arvo(
                       textStyle: const TextStyle(
                           decoration: TextDecoration.underline,
@@ -149,9 +150,11 @@ class HomeScreenStudent extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: teacherList(
+            child: userList(
               teachers: teachers,
+              students: const [],
               homebloc: homeBloc,
+              userType: "Teacher",
             ),
           )
         ],

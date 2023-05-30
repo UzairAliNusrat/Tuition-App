@@ -47,7 +47,7 @@ class Login extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(top: 50),
                         child: Text(
-                          'Teach N Learn',
+                          'Teach n Learn',
                           style: GoogleFonts.arvo(
                             textStyle: const TextStyle(
                                 color: Colors.blue, fontSize: 30),

@@ -14,8 +14,10 @@ class MyProfileLoadingState extends MyProfileState {}
 class MyProfileLoadedState extends MyProfileState {
   final Studentinfo? studentinfo;
   final Teacherinfo? teacherinfo;
+  final double avgRating;
 
   MyProfileLoadedState(
       {required this.studentinfo,
-      required this.teacherinfo});
+      required this.teacherinfo,
+      required this.avgRating});
 }

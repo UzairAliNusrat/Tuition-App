@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuition_app_project/Screens/FindTeachersScreen/bloc/findteachers_bloc.dart';
 
@@ -77,12 +78,32 @@ class findTeachers extends StatelessWidget {
                           ),
                           child: ListTile(
                             leading: CircleAvatar(
-                              foregroundImage: NetworkImage(state.teachers[index].ProfileImagePath),
+                              radius: 30,
+                              foregroundImage: NetworkImage(
+                                  state.teachers[index].ProfileImagePath),
                             ),
-                            title: Text(state.teachers[index].first_name +
-                                " " +
-                                state.teachers[index].last_name),
-                            subtitle: const Text('Teacher Rating'),
+                            title: Padding(
+                              padding: const EdgeInsets.only(left: 6),
+                              child: Text(state.teachers[index].first_name +
+                                  " " +
+                                  state.teachers[index].last_name),
+                            ),
+                            subtitle: RatingBar.builder(
+                              itemSize: 20,
+                              initialRating: state.teacherRatings[index].toDouble(),
+                              minRating: 0,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              ignoreGestures: true,
+                              itemCount: 5,
+                              itemPadding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              itemBuilder: (context, _) => const Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              onRatingUpdate: (rating) {},
+                            ),
                             trailing: Container(
                               width: 40,
                               height: 40,
@@ -97,23 +118,28 @@ class findTeachers extends StatelessWidget {
                                       onPressed: () {
                                         findteachersBloc.add(
                                             MeetingRequestButtonClickedEvent(
-                                          teacherId: state.teachers[index].id,
-                                          studentId: studentId,
-                                          subject: subject,
-                                          topic: topic,
-                                          note: note,
-                                          teacherIndex: index,
-                                          teacherRequestSent:
-                                              state.teacherRequestSent,
-                                          teachers: state.teachers,
-                                          studentName: studentName,
-                                          Studentimagepath: studentPicturePath,
-                                          teacherName: state
-                                                  .teachers[index].first_name +
-                                              " " +
-                                              state.teachers[index].last_name,
-                                          teacherImagepath: state.teachers[index].ProfileImagePath
-                                        ));
+                                                teacherId:
+                                                    state.teachers[index].id,
+                                                studentId: studentId,
+                                                subject: subject,
+                                                topic: topic,
+                                                note: note,
+                                                teacherIndex: index,
+                                                teacherRequestSent:
+                                                    state.teacherRequestSent,
+                                                teachers: state.teachers,
+                                                studentName: studentName,
+                                                Studentimagepath:
+                                                    studentPicturePath,
+                                                teacherName: state
+                                                        .teachers[index]
+                                                        .first_name +
+                                                    " " +
+                                                    state.teachers[index]
+                                                        .last_name,
+                                                teacherImagepath: state
+                                                    .teachers[index]
+                                                    .ProfileImagePath));
                                       },
                                       icon: const Icon(Icons.send)),
                             ),
@@ -123,6 +149,10 @@ class findTeachers extends StatelessWidget {
                     ),
                   ),
                 ),
+              );
+            } else if (state is FindTeachersErrorState) {
+              return Center(
+                child: Text(state.message),
               );
             } else {
               return const Center(

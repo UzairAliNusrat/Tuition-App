@@ -24,14 +24,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<BottomNavigationBarItemMeetingsClickedEvent>(
         bottomNavigationBarItemMeetingsClickedEvent);
 
-    on<BottomNavigationBarItemChatClickedEvent>(
-        bottomNavigationBarItemChatClickedEvent);
+    on<BottomNavigationBarItemTeachersClickedEvent>(
+        bottomNavigationBarItemTeachersClickedEvent);
+
+    on<BottomNavigationBarItemStudentsClickedEvent>(
+        bottomNavigationBarItemStudentsClickedEvent);
 
     on<LearnButtonClickedEvent>(learnButtonClickedEvent);
 
     on<TeachButtonClickedEvent>(teachButtonClickedEvent);
 
-    on<TeacherListItemClickedEvent>(teacherListItemClickedEvent);
+    on<ListItemClickedEvent>(listItemClickedEvent);
 
     on<MeetingRequestTickButtonClickedEvent>(
         meetingRequestTickButtonClickedEvent);
@@ -42,6 +45,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<SignOutButtonClickedEvent>(signOutButtonClickedEvent);
 
     on<ProfileButtonClickedEvent>(profileButtonClickedEvent);
+
+    on<EndMeetingButtonClickedEvent>(endMeetingButtonClickedEvent);
   }
 
   FutureOr<void> homeInitialEvent(
@@ -49,12 +54,28 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeLoadingState(0));
     await Userrepo.userRepo.getUser(event.id);
     List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
+    List<user> students = await Userrepo.userRepo.fetchStudentList();
+    List<user> topRatedTeachers = [];
+    List<user> topRatedStudents = [];
+
+    for (int i = 0; i < teachers.length; i++) {
+      double avgRating = await Userrepo.userRepo.getAvgUserRating(teachers[i].id);
+      if (avgRating >= 2) {
+        topRatedTeachers.add(teachers[i]);
+      }
+    }
+    for (int i = 0; i < students.length; i++) {
+      double avgRating = await Userrepo.userRepo.getAvgUserRating(students[i].id);
+      if (avgRating >= 2) {
+        topRatedStudents.add(students[i]);
+      }
+    }
     FirebaseMeetingRequestRepository meetingRequestRepo =
         FirebaseMeetingRequestRepository();
     List<meetingAcceptedModel> acceptedMeetings = await meetingRequestRepo
         .fetchAcceptedMeetingList(event.id, Userrepo.userRepo.User.UserType);
-    emit(HomeLoadedState(0, teachers, Userrepo.userRepo.User, const [],
-        acceptedMeetings, const []));
+    emit(HomeLoadedState(0, topRatedTeachers, Userrepo.userRepo.User, const [],
+        acceptedMeetings, const [], topRatedStudents));
   }
 
   Future<FutureOr<void>> bottomNavigationBarItemHomeClickedEvent(
@@ -62,13 +83,31 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       Emitter<HomeState> emit) async {
     emit(HomeLoadingState(0));
     List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
+    List<user> students = await Userrepo.userRepo.fetchStudentList();
+
+    List<user> topRatedTeachers = [];
+    List<user> topRatedStudents = [];
+
+    for (int i = 0; i < teachers.length; i++) {
+      double avgRating = await Userrepo.userRepo.getAvgUserRating(teachers[i].id);
+      if (avgRating >= 2) {
+        topRatedTeachers.add(teachers[i]);
+      }
+    }
+    for (int i = 0; i < students.length; i++) {
+      double avgRating = await Userrepo.userRepo.getAvgUserRating(students[i].id);
+      if (avgRating >= 2) {
+        topRatedStudents.add(students[i]);
+      }
+    }
+
     FirebaseMeetingRequestRepository meetingRequestRepo =
         FirebaseMeetingRequestRepository();
     List<meetingAcceptedModel> acceptedMeetings =
         await meetingRequestRepo.fetchAcceptedMeetingList(
             Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
-    emit(HomeLoadedState(0, teachers, Userrepo.userRepo.User, const [],
-        acceptedMeetings, const []));
+    emit(HomeLoadedState(0, topRatedTeachers, Userrepo.userRepo.User, const [],
+        acceptedMeetings, const [], topRatedStudents));
     print("Home Clicked");
   }
 
@@ -88,16 +127,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     print("hello2");
 
     emit(HomeLoadedState(1, const [], Userrepo.userRepo.User, meetingRequests,
-        const [], meetingHistory));
+        const [], meetingHistory, const []));
     print("Meetings Clicked");
   }
 
-  FutureOr<void> bottomNavigationBarItemChatClickedEvent(
-      BottomNavigationBarItemChatClickedEvent event, Emitter<HomeState> emit) {
+  Future<FutureOr<void>> bottomNavigationBarItemTeachersClickedEvent(
+      BottomNavigationBarItemTeachersClickedEvent event,
+      Emitter<HomeState> emit) async {
     emit(HomeLoadingState(2));
-    emit(HomeLoadedState(
-        2, const [], Userrepo.userRepo.User, const [], const [], const []));
+    List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
+    emit(HomeLoadedState(2, teachers, Userrepo.userRepo.User, const [],
+        const [], const [], const []));
     print("Chat Clicked");
+  }
+
+  Future<FutureOr<void>> bottomNavigationBarItemStudentsClickedEvent(
+      BottomNavigationBarItemStudentsClickedEvent event,
+      Emitter<HomeState> emit) async {
+    emit(HomeLoadingState(2));
+    List<user> students = await Userrepo.userRepo.fetchStudentList();
+    emit(HomeLoadedState(2, const [], Userrepo.userRepo.User, const [],
+        const [], const [], students));
   }
 
   FutureOr<void> learnButtonClickedEvent(
@@ -113,10 +163,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeNavigateToTeachScreenState());
   }
 
-  FutureOr<void> teacherListItemClickedEvent(
-      TeacherListItemClickedEvent event, Emitter<HomeState> emit) {
-    emit(HomeNavigateToTeacherProfileScreenState(
-        id: event.id, imagepath: event.imagepath, fullname: event.fullname));
+  FutureOr<void> listItemClickedEvent(
+      ListItemClickedEvent event, Emitter<HomeState> emit) {
+    emit(HomeNavigateToListProfileScreenState(
+        id: event.id,
+        imagepath: event.imagepath,
+        fullname: event.fullname,
+        userType: event.userType));
   }
 
   FutureOr<void> meetingRequestTickButtonClickedEvent(
@@ -129,20 +182,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         await meetingRequestRepo.fetchMeetingRequestList(
             Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
     meetingAcceptedModel meetingAccepted = meetingAcceptedModel(
-        teacherId: event.teacherId,
-        studentId: event.studentId,
-        studentName: event.studentName,
-        meetingId: event.meetingId,
-        date: event.date,
-        imagepath: event.imagepath,
-        note: event.note,
-        subject: event.subject,
-        time: event.time,
-        topic: event.topic,
-        teacherName: event.teacherName);
+      teacherId: event.teacherId,
+      studentId: event.studentId,
+      studentName: event.studentName,
+      meetingId: event.meetingId,
+      date: event.date,
+      studentimagepath: event.studentimagepath,
+      note: event.note,
+      subject: event.subject,
+      time: event.time,
+      topic: event.topic,
+      teacherName: event.teacherName,
+      teacherimagepath: event.teacherimagepath,
+    );
     await meetingRequestRepo.setAcceptedMeeting(meetingAccepted);
     emit(HomeLoadedState(1, const [], Userrepo.userRepo.User, meetingRequests,
-        const [], const []));
+        const [], const [], const []));
   }
 
   Future<FutureOr<void>> meetingRequestCrossButtonClickedEvent(
@@ -155,7 +210,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         await meetingRequestRepo.fetchMeetingRequestList(
             Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
     emit(HomeLoadedState(1, const [], Userrepo.userRepo.User, meetingRequests,
-        const [], const []));
+        const [], const [], const []));
   }
 
   Future<FutureOr<void>> signOutButtonClickedEvent(
@@ -166,7 +221,30 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
   }
 
-  FutureOr<void> profileButtonClickedEvent(ProfileButtonClickedEvent event, Emitter<HomeState> emit) {
+  FutureOr<void> profileButtonClickedEvent(
+      ProfileButtonClickedEvent event, Emitter<HomeState> emit) {
     emit(HomeNavigateToProfileScreenState(User: event.User));
+  }
+
+  Future<FutureOr<void>> endMeetingButtonClickedEvent(EndMeetingButtonClickedEvent event, Emitter<HomeState> emit) async {
+    FirebaseMeetingRequestRepository meetingRequestRepo =
+        FirebaseMeetingRequestRepository();
+    meetingRequestRepo.deleteAcceptedMeeting(event.meetingId);
+    List<meetingAcceptedModel> acceptedMeetings =
+        await meetingRequestRepo.fetchAcceptedMeetingList(
+            Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
+
+    List<user> students = await Userrepo.userRepo.fetchStudentList();
+
+    List<user> topRatedStudents = [];
+    for (int i = 0; i < students.length; i++) {
+      double avgRating = await Userrepo.userRepo.getAvgUserRating(students[i].id);
+      if (avgRating >= 2) {
+        topRatedStudents.add(students[i]);
+      }
+    }
+     emit(HomeLoadedState(0, const [], Userrepo.userRepo.User, const [],
+        acceptedMeetings, const [], topRatedStudents));
+
   }
 }

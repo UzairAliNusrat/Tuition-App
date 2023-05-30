@@ -89,7 +89,7 @@ class Auth {
           id: id,
           ProfileImagePath: imagePath,
           UserType: userType);
-      Userrepo.userRepo.setuser(User);
+      await Userrepo.userRepo.setuser(User);
       await FirebaseAuth.instance.signOut();
       Navigator.push(
               context, MaterialPageRoute(builder: (context) => signupPage2(id: id, userType: userType,)));

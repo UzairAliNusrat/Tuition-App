@@ -14,10 +14,11 @@ class ProfileLoadedState extends ProfileState {
   final String imagepath;
   final String age;
   final String qualification;
-  final List<String> subjects;
+  final List<String>? subjects;
   final String description;
-  final int rating;
-  final int initialRating;
+  final double rating;
+  final double initialRating;
+  final String phoneNumber;
 
   ProfileLoadedState(
       {required this.fullname,
@@ -27,6 +28,6 @@ class ProfileLoadedState extends ProfileState {
       required this.subjects,
       required this.description,
       required this.rating,
-      required this.initialRating});
-
+      required this.initialRating,
+      required this.phoneNumber});
 }
