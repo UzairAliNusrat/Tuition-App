@@ -20,19 +20,22 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     on<BackArrowIconClickedEvent>(backArrowIconClickedEvent);
     on<SignUpButtonClickedEvent>(signUpButtonClickedEvent);
     on<SignUpNextButtonClickedEvent>(signUpNextButtonClickedEvent);
+    on<SignUpHideButtonClickedEvent>(signUpHideButtonClickedEvent);
   }
 
   FutureOr<void> signUpInitialEvent(
       SignUpInitialEvent event, Emitter<SignUpState> emit) {
     emit(SignUpLoadingState());
     emit(SignUpLoadedSuccessfulState(
-        selectedValue: event.selectedValue, image: ""));
+        selectedValue: event.selectedValue, image: "", hide: event.hide));
   }
 
   FutureOr<void> dropDownValueChangedEvent(
       DropDownValueChangedEvent event, Emitter<SignUpState> emit) {
     emit(SignUpLoadedSuccessfulState(
-        selectedValue: event.selectedValue, image: event.image));
+        selectedValue: event.selectedValue,
+        image: event.image,
+        hide: event.hide));
   }
 
   FutureOr<void> imagePickerEvent(
@@ -49,11 +52,13 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       await uploadTask.whenComplete(() async {
         String downloadUrl = await storageReference.getDownloadURL();
         emit(SignUpLoadedSuccessfulState(
-          selectedValue: event.selectedValue, image: downloadUrl));
+            selectedValue: event.selectedValue,
+            image: downloadUrl,
+            hide: event.hide));
       });
     } else {
       emit(SignUpLoadedSuccessfulState(
-          selectedValue: event.selectedValue, image: ""));
+          selectedValue: event.selectedValue, image: "", hide: event.hide));
     }
   }
 
@@ -72,5 +77,13 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   FutureOr<void> signUpNextButtonClickedEvent(
       SignUpNextButtonClickedEvent event, Emitter<SignUpState> emit) {
     emit(NavigateToSignUpPage2State());
+  }
+
+  FutureOr<void> signUpHideButtonClickedEvent(
+      SignUpHideButtonClickedEvent event, Emitter<SignUpState> emit) {
+    emit(SignUpLoadedSuccessfulState(
+        hide: !event.hide,
+        image: event.image,
+        selectedValue: event.selectedValue));
   }
 }

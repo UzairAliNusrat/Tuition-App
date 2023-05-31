@@ -9,11 +9,10 @@ class LoginInitial extends LoginState {}
 
 class LoginLoadingState extends LoginState {}
 
-class LoginLoadedSuccessfulState extends LoginState {}
+class LoginLoadedSuccessfulState extends LoginState {
+  final bool hide;
+
+  LoginLoadedSuccessfulState({required this.hide});
+}
 
 class NavigatetoSignUpState extends LoginActionState {}
-
-
-
-
-

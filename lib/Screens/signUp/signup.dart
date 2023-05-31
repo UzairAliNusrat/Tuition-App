@@ -26,7 +26,7 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var _formKey = GlobalKey<FormState>();
-    signUpBloc.add(SignUpInitialEvent(selectedValue: "Student"));
+    signUpBloc.add(SignUpInitialEvent(selectedValue: "Student", hide: true));
     return Scaffold(
         appBar: AppBar(
           title: Center(
@@ -65,7 +65,7 @@ class SignUp extends StatelessWidget {
           buildWhen: (previous, current) => current is! SignUpActionState,
           listener: (context, state) {
             // TODO: implement listener
-            if (state is NavigateToSignUpPage2State){
+            if (state is NavigateToSignUpPage2State) {
               // Navigator.push(
               // context, MaterialPageRoute(builder: (context) => signupPage2()));
             }
@@ -92,7 +92,8 @@ class SignUp extends StatelessWidget {
                           ),
                           onTap: () {
                             signUpBloc.add(ImagePickerEvent(
-                                selectedValue: state.selectedValue));
+                                selectedValue: state.selectedValue,
+                                hide: state.hide));
                           },
                         ),
                         Padding(
@@ -116,54 +117,73 @@ class SignUp extends StatelessWidget {
                                     onChanged: (value) {
                                       signUpBloc.add(DropDownValueChangedEvent(
                                           selectedValue: value!,
-                                          image: state.image));
+                                          image: state.image,
+                                          hide: state.hide!));
                                     }),
                               ),
                             )),
                         Padding(
                           padding: const EdgeInsets.only(left: 50, right: 50),
                           child: textFormField(
-                              Controller: firstNameController,
-                              hintText: "First Name",
-                              prefixIcon: Icons.person),
+                            Controller: firstNameController,
+                            hintText: "First Name",
+                            prefixIcon: Icons.person,
+                            loginBloc: null,
+                            signUpBloc: null,
+                            hide: false,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 50, right: 50, top: 20),
                           child: textFormField(
-                              Controller: lastNameController,
-                              hintText: "Last Name",
-                              prefixIcon: Icons.person),
+                            Controller: lastNameController,
+                            hintText: "Last Name",
+                            prefixIcon: Icons.person,
+                            loginBloc: null,
+                            signUpBloc: null,
+                            hide: false,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 50, right: 50, top: 20),
                           child: textFormField(
-                              Controller: emailController,
-                              hintText: "Email",
-                              prefixIcon: Icons.email_outlined),
+                            Controller: emailController,
+                            hintText: "Email",
+                            prefixIcon: Icons.email_outlined,
+                            loginBloc: null,
+                            signUpBloc: null,
+                            hide: false,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 50, right: 50, top: 20),
                           child: textFormField(
-                              Controller: passwordController,
-                              hintText: "Password",
-                              prefixIcon: Icons.lock_outline),
+                            Controller: passwordController,
+                            hintText: "Password",
+                            prefixIcon: Icons.lock_outline,
+                            loginBloc: null,
+                            signUpBloc: signUpBloc,
+                            hide: state.hide!,
+                            image: state.image,
+                            selectedVal: state.selectedValue,
+                          ),
                         ),
                         Padding(
                             padding: const EdgeInsets.only(
                                 left: 50, right: 50, top: 40),
                             child: signUp_button(
-                            formkey: _formKey,
-                            emailController: emailController,
-                            passwordController: passwordController,
-                            firstNameController: firstNameController,
-                            lastNameController: lastNameController,
-                            imagePath: state.image,
-                            userType: state.selectedValue.trim(),
-                            signUpBloc: signUpBloc,))
-                        
+                              formkey: _formKey,
+                              emailController: emailController,
+                              passwordController: passwordController,
+                              firstNameController: firstNameController,
+                              lastNameController: lastNameController,
+                              imagePath: state.image,
+                              userType: state.selectedValue.trim(),
+                              signUpBloc: signUpBloc,
+                            ))
                       ],
                     ),
                   ),

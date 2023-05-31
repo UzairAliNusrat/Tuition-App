@@ -149,7 +149,7 @@ class meetingList extends StatelessWidget {
                                       textStyle: const TextStyle(
                                           color:
                                               Color.fromARGB(255, 3, 66, 102),
-                                          fontSize: 15),
+                                          fontSize: 13.5),
                                     )),
                                 leading: CircleAvatar(
                                   radius: 30,

@@ -16,12 +16,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     on<JoinNowButtonClickedEvent>(joinNowButtonClickedEvent);
     on<LoginButtonClickedEvent>(loginButtonClickedEvent);
     on<GoogleLoginButtonClickedEvent>(googleLoginButtonClickedEvent);
+    on<PasswordHideButtonClickedEvent>(passwordHideButtonClickedEvent);
   }
 
   FutureOr<void> loginInitialEvent(
       LoginInitialEvent event, Emitter<LoginState> emit) {
     emit(LoginLoadingState());
-    emit(LoginLoadedSuccessfulState());
+    emit(LoginLoadedSuccessfulState(hide: true));
   }
 
   FutureOr<void> joinNowButtonClickedEvent(
@@ -37,5 +38,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   FutureOr<void> googleLoginButtonClickedEvent(
       GoogleLoginButtonClickedEvent event, Emitter<LoginState> emit) {
     auth.signInWithGoogle(event.context);
+  }
+
+  FutureOr<void> passwordHideButtonClickedEvent(
+      PasswordHideButtonClickedEvent event, Emitter<LoginState> emit) {
+    emit(LoginLoadedSuccessfulState(hide: !event.hide));
   }
 }
