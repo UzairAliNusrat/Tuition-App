@@ -22,17 +22,15 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
 
     emit(MyProfileLoadingState());
     if (event.User.UserType == "Student") {
-      FirebaseStudentRepository studentinfoRepo = FirebaseStudentRepository();
       Studentinfo studentinfo =
-          await studentinfoRepo.getStudentinfo(event.User.id);
+          await StudentInfoRepo.studentInfoRepo.getStudentinfo(event.User.id);
           double avgRating = await Userrepo.userRepo.getAvgUserRating(event.User.id);
       emit(MyProfileLoadedState(studentinfo: studentinfo, teacherinfo: null, avgRating: avgRating));
       
     }
     else{
-      FirebaseTeacherRepository teacherinfoRepo = FirebaseTeacherRepository();
       Teacherinfo teacherinfo =
-          await teacherinfoRepo.getTeacher(event.User.id);
+          await TeacherInfoRepo.teacherInfoRepo.getTeacher(event.User.id);
           double avgRating = await Userrepo.userRepo.getAvgUserRating(event.User.id);
       emit(MyProfileLoadedState(studentinfo: null, teacherinfo: teacherinfo, avgRating: avgRating));
     }

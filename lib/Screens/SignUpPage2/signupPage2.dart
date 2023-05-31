@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuition_app_project/Models/studentInfoModel.dart';
@@ -65,7 +63,6 @@ class signupPage2 extends StatelessWidget {
           if (state is NavigateToLoginPageState) {
             Navigator.popUntil(context, (route) => route.isFirst);
           }
-          // TODO: implement listener
         },
         builder: (context, state) {
           if (state is Page2LoadingState) {
@@ -77,7 +74,7 @@ class signupPage2 extends StatelessWidget {
                     child: Column(
                   children: [
                     const Padding(
-                      padding: EdgeInsets.only(top: 70, bottom: 20),
+                      padding: EdgeInsets.only(top: 45, bottom: 20),
                       child: Text(
                         "Personal Information",
                         style: TextStyle(
@@ -145,7 +142,7 @@ class signupPage2 extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                        padding: const EdgeInsets.only(top: 40),
+                        padding: const EdgeInsets.only(top: 20),
                         child: SizedBox(
                           width: 200,
                           height: 50,
@@ -166,10 +163,14 @@ class signupPage2 extends StatelessWidget {
                             },
                             child: Text("Sign Up",
                                 style: GoogleFonts.arvo(
-                                    textStyle: const TextStyle(
-                                        color: Colors.blue, fontSize: 30))),
+                                      textStyle: const TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 3, 66, 102),
+                                          fontSize: 22),
+                                    )),
                           ),
-                        ))
+                        )),
+                        const SizedBox(height: 20,),
                   ],
                 )),
               );
@@ -236,7 +237,7 @@ class signupPage2 extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 40),
+                      padding: const EdgeInsets.only(top: 20),
                       child: SizedBox(
                         width: 200,
                         height: 50,
@@ -254,7 +255,12 @@ class signupPage2 extends StatelessWidget {
                               page2Bloc.add(SignUpbuttonStudentClickedEvent(
                                   studentinfo: studentinfo));
                             },
-                            child: Text("SignUp")),
+                            child: Text("Sign Up", style: GoogleFonts.arvo(
+                                      textStyle: const TextStyle(
+                                          color:
+                                              Color.fromARGB(255, 3, 66, 102),
+                                          fontSize: 22),
+                                    ))),
                       ),
                     )
                   ],

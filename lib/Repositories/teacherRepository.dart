@@ -9,9 +9,7 @@ abstract class TeacherRepository {
 }
 
 class FirebaseTeacherRepository implements TeacherRepository {
-  static var i = 0;
   final db = FirebaseFirestore.instance;
-  late Teacherinfo teacherinfo;
 
   @override
   Future<Teacherinfo> getTeacher(String teacherId) async {
@@ -32,7 +30,7 @@ class FirebaseTeacherRepository implements TeacherRepository {
     final List<DocumentSnapshot<Map<String, dynamic>>> documents =
         result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
     for (var element in documents) {
-      for (i = 0; i < Teacherinfo.fromJson(element).subjects.length; i++) {
+      for (int i = 0; i < Teacherinfo.fromJson(element).subjects.length; i++) {
         if (Teacherinfo.fromJson(element).subjects[i].trim().toLowerCase() ==
             subject) {
           teachersinfo.add(Teacherinfo.fromJson(element));

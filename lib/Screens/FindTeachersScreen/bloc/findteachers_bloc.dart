@@ -6,9 +6,6 @@ import 'package:meta/meta.dart';
 import 'package:tuition_app_project/Models/meetingRequestModel.dart';
 import 'package:tuition_app_project/Models/teacherInfoModel.dart';
 import 'package:tuition_app_project/Models/userModel.dart';
-import 'package:tuition_app_project/Repositories/meetingRequestRepository.dart';
-import 'package:tuition_app_project/Repositories/teacherRepository.dart';
-import 'package:tuition_app_project/Screens/LearnScreen/bloc/learn_bloc.dart';
 import 'package:tuition_app_project/Utils/constants.dart';
 
 part 'findteachers_event.dart';
@@ -24,10 +21,9 @@ class FindteachersBloc extends Bloc<FindteachersEvent, FindteachersState> {
       FindTeachersInitialEvent event, Emitter<FindteachersState> emit) async {
     emit(FindTeachersLoadingState());
     List<user> teacherslist = [];
-    FirebaseTeacherRepository teacherInfoRepository =
-        FirebaseTeacherRepository();
+    
     List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
-    List<Teacherinfo> teachersinfo = await teacherInfoRepository
+    List<Teacherinfo> teachersinfo = await TeacherInfoRepo.teacherInfoRepo
         .fetchTeacherinfoListbySubject(event.subject);
     if (teachersinfo.isEmpty) {
       emit(FindTeachersErrorState(message: "No teachers found"));
@@ -56,10 +52,8 @@ class FindteachersBloc extends Bloc<FindteachersEvent, FindteachersState> {
   Future<FutureOr<void>> meetingRequestButtonClickedEvent(
       MeetingRequestButtonClickedEvent event,
       Emitter<FindteachersState> emit) async {
-    FirebaseMeetingRequestRepository meetingRequestRepository =
-        FirebaseMeetingRequestRepository();
     String meetingId = IDgenerator.uuid.v4();
-    await meetingRequestRepository.setMeetingRequest(meetingRequestModel(
+    await MeetingRequestRepo.meetingRequestRepo.setMeetingRequest(meetingRequestModel(
         meetingId: meetingId,
         studentName: event.studentName,
         Studentimagepath: event.Studentimagepath,
@@ -70,7 +64,7 @@ class FindteachersBloc extends Bloc<FindteachersEvent, FindteachersState> {
         note: event.note,
         teacherName: event.teacherName,
         teacherimagepath: event.teacherImagepath));
-    await meetingRequestRepository.setMeetingHistory(meetingRequestModel(
+    await MeetingRequestRepo.meetingRequestRepo.setMeetingHistory(meetingRequestModel(
         meetingId: meetingId,
         studentName: event.studentName,
         Studentimagepath: event.Studentimagepath,

@@ -9,14 +9,13 @@ abstract class StudentRepository {
 }
 
 class FirebaseStudentRepository implements StudentRepository {
-  static var i = 0;
   final db = FirebaseFirestore.instance;
   
   @override
   Future<Studentinfo> getStudentinfo(String studentId) async {
     // Get the user document from Firestore based on the provided user ID
     final StudentDoc =
-        await FirebaseFirestore.instance.collection("Student Information").doc(studentId).get();
+        await db.collection("Student Information").doc(studentId).get();
     return Studentinfo.fromJson(StudentDoc);
   }
   

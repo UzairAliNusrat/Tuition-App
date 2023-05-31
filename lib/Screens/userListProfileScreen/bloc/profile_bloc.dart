@@ -24,10 +24,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoadingState());
     if (event.userType == "Teacher") {
       print("hello1");
-      FirebaseTeacherRepository firebaseTeacherRepository =
-          FirebaseTeacherRepository();
       Teacherinfo teacherinfo =
-          await firebaseTeacherRepository.getTeacher(event.id);
+          await TeacherInfoRepo.teacherInfoRepo.getTeacher(event.id);
       double avgRating = await Userrepo.userRepo.getAvgUserRating(event.id);
       emit(ProfileLoadedState(
           fullname: event.fullname,
@@ -41,10 +39,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           phoneNumber: teacherinfo.phoneNumber));
     } else {
       print("hello3");
-      FirebaseStudentRepository firebaseStudentRepository =
-          FirebaseStudentRepository();
       Studentinfo studentinfo =
-          await firebaseStudentRepository.getStudentinfo(event.id);
+          await StudentInfoRepo.studentInfoRepo.getStudentinfo(event.id);
       double avgRating = await Userrepo.userRepo.getAvgUserRating(event.id);
       emit(ProfileLoadedState(
           fullname: event.fullname,

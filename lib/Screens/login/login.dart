@@ -72,8 +72,6 @@ class Login extends StatelessWidget {
                             Controller: emailController,
                             hintText: "Email",
                             prefixIcon: Icons.email_outlined,
-                            loginBloc: null,
-                            signUpBloc: null,
                             hide: false,
                           ),
                         ),
@@ -85,7 +83,6 @@ class Login extends StatelessWidget {
                             hintText: "Password",
                             prefixIcon: Icons.lock_outline,
                             loginBloc: loginBloc,
-                            signUpBloc: null,
                             hide: state.hide,
                           ),
                         ),
@@ -93,6 +90,7 @@ class Login extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 left: 50, right: 50, top: 40),
                             child: login_button(
+                              key: Key("login button"),
                               type: "Login",
                               formkey: formKey,
                               emailController: emailController,

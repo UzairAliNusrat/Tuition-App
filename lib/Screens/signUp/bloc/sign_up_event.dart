@@ -13,7 +13,8 @@ class DropDownValueChangedEvent extends SignUpEvent {
   final String selectedValue;
   final String image;
   final bool hide;
-  DropDownValueChangedEvent({required this.selectedValue, required this.image, required this.hide});
+  DropDownValueChangedEvent(
+      {required this.selectedValue, required this.image, required this.hide});
 }
 
 class ImagePickerEvent extends SignUpEvent {
@@ -53,5 +54,6 @@ class SignUpHideButtonClickedEvent extends SignUpEvent {
   final String selectedValue;
   final String image;
 
-  SignUpHideButtonClickedEvent({required this.hide, required this.selectedValue, required this.image});
+  SignUpHideButtonClickedEvent(
+      {required this.hide, required this.selectedValue, required this.image});
 }

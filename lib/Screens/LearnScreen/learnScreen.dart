@@ -94,25 +94,17 @@ class learnScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               left: 50, right: 50, top: 80),
                           child: textFormField(
-                            Controller: subjectNameController,
-                            hintText: "Subject Name",
-                            prefixIcon: Icons.subject_sharp,
-                            loginBloc: null,
-                            signUpBloc: null,
-                            hide: false,
-                          ),
+                              Controller: subjectNameController,
+                              hintText: "Subject Name",
+                              prefixIcon: Icons.subject_sharp,),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 50, right: 50, top: 20),
                           child: textFormField(
-                            Controller: topicController,
-                            hintText: "Topic",
-                            prefixIcon: Icons.topic_sharp,
-                            loginBloc: null,
-                            signUpBloc: null,
-                            hide: false,
-                          ),
+                              Controller: topicController,
+                              hintText: "Topic",
+                              prefixIcon: Icons.topic_sharp,),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(

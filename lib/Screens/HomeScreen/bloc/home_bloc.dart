@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +7,6 @@ import 'package:tuition_app_project/Models/meetingAcceptedModel.dart';
 import 'package:tuition_app_project/Models/meetingRequestModel.dart';
 import 'package:tuition_app_project/Models/userModel.dart';
 import 'package:tuition_app_project/Repositories/meetingRequestRepository.dart';
-import 'package:tuition_app_project/Repositories/userRepository.dart';
 import 'package:tuition_app_project/Utils/constants.dart';
 
 part 'home_event.dart';
@@ -68,9 +66,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         topRatedStudents.add(students[i]);
       }
     }
-    FirebaseMeetingRequestRepository meetingRequestRepo =
-        FirebaseMeetingRequestRepository();
-    List<meetingAcceptedModel> acceptedMeetings = await meetingRequestRepo
+    List<meetingAcceptedModel> acceptedMeetings = await MeetingRequestRepo.meetingRequestRepo
         .fetchAcceptedMeetingList(event.id, Userrepo.userRepo.User.UserType);
     emit(HomeLoadedState(0, topRatedTeachers, Userrepo.userRepo.User, const [],
         acceptedMeetings, const [], topRatedStudents));
@@ -98,11 +94,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         topRatedStudents.add(students[i]);
       }
     }
-
-    FirebaseMeetingRequestRepository meetingRequestRepo =
-        FirebaseMeetingRequestRepository();
     List<meetingAcceptedModel> acceptedMeetings =
-        await meetingRequestRepo.fetchAcceptedMeetingList(
+        await MeetingRequestRepo.meetingRequestRepo.fetchAcceptedMeetingList(
             Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
     emit(HomeLoadedState(0, topRatedTeachers, Userrepo.userRepo.User, const [],
         acceptedMeetings, const [], topRatedStudents));
@@ -115,12 +108,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeLoadingState(1));
     List<meetingRequestModel> meetingRequests = [];
     List<meetingRequestModel> meetingHistory = [];
-    FirebaseMeetingRequestRepository meetingRequestRepo =
-        FirebaseMeetingRequestRepository();
     print("hello");
-    meetingRequests = await meetingRequestRepo.fetchMeetingRequestList(
+    meetingRequests = await MeetingRequestRepo.meetingRequestRepo.fetchMeetingRequestList(
         Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
-    meetingHistory = await meetingRequestRepo
+    meetingHistory = await MeetingRequestRepo.meetingRequestRepo
         .fetchMeetingHistoryList(Userrepo.userRepo.User.id);
     print("hello2");
 
@@ -168,11 +159,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> meetingRequestTickButtonClickedEvent(
       MeetingRequestTickButtonClickedEvent event,
       Emitter<HomeState> emit) async {
-    FirebaseMeetingRequestRepository meetingRequestRepo =
-        FirebaseMeetingRequestRepository();
-    await meetingRequestRepo.deleteMeetingRequest(event.meetingId);
+    await MeetingRequestRepo.meetingRequestRepo.deleteMeetingRequest(event.meetingId);
     List<meetingRequestModel> meetingRequests =
-        await meetingRequestRepo.fetchMeetingRequestList(
+        await MeetingRequestRepo.meetingRequestRepo.fetchMeetingRequestList(
             Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
     meetingAcceptedModel meetingAccepted = meetingAcceptedModel(
       teacherId: event.teacherId,
@@ -188,7 +177,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       teacherName: event.teacherName,
       teacherimagepath: event.teacherimagepath,
     );
-    await meetingRequestRepo.setAcceptedMeeting(meetingAccepted);
+    await MeetingRequestRepo.meetingRequestRepo.setAcceptedMeeting(meetingAccepted);
     emit(HomeLoadedState(1, const [], Userrepo.userRepo.User, meetingRequests,
         const [], const [], const []));
   }
@@ -196,11 +185,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   Future<FutureOr<void>> meetingRequestCrossButtonClickedEvent(
       MeetingRequestCrossButtonClickedEvent event,
       Emitter<HomeState> emit) async {
-    FirebaseMeetingRequestRepository meetingRequestRepo =
-        FirebaseMeetingRequestRepository();
-    meetingRequestRepo.deleteMeetingRequest(event.meetingId);
+    MeetingRequestRepo.meetingRequestRepo.deleteMeetingRequest(event.meetingId);
     List<meetingRequestModel> meetingRequests =
-        await meetingRequestRepo.fetchMeetingRequestList(
+        await MeetingRequestRepo.meetingRequestRepo.fetchMeetingRequestList(
             Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
     emit(HomeLoadedState(1, const [], Userrepo.userRepo.User, meetingRequests,
         const [], const [], const []));
@@ -220,11 +207,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<FutureOr<void>> endMeetingButtonClickedEvent(EndMeetingButtonClickedEvent event, Emitter<HomeState> emit) async {
-    FirebaseMeetingRequestRepository meetingRequestRepo =
-        FirebaseMeetingRequestRepository();
-    meetingRequestRepo.deleteAcceptedMeeting(event.meetingId);
+    MeetingRequestRepo.meetingRequestRepo.deleteAcceptedMeeting(event.meetingId);
     List<meetingAcceptedModel> acceptedMeetings =
-        await meetingRequestRepo.fetchAcceptedMeetingList(
+        await MeetingRequestRepo.meetingRequestRepo.fetchAcceptedMeetingList(
             Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
 
     List<user> students = await Userrepo.userRepo.fetchStudentList();

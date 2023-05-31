@@ -18,9 +18,7 @@ abstract class MeetingRequestRepository {
 }
 
 class FirebaseMeetingRequestRepository implements MeetingRequestRepository {
-  static var i = 0;
   final db = FirebaseFirestore.instance;
-  late Teacherinfo teacherinfo;
 
   @override
   Future<List<meetingRequestModel>> fetchMeetingRequestList(

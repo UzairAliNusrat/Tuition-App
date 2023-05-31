@@ -10,7 +10,6 @@ void main() async {
   runApp(const MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -27,10 +26,9 @@ class MyApp extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(child: CircularProgressIndicator());
-              } 
-              else if (snapshot.hasError) {
+              } else if (snapshot.hasError) {
                 return const Center(child: Text("Something went wrong!"));
-              } else if (snapshot.hasData ) {
+              } else if (snapshot.hasData) {
                 return HomeScreen();
               } else {
                 return Login();

@@ -9,7 +9,7 @@ class textFormField extends StatelessWidget {
   IconData prefixIcon;
   LoginBloc? loginBloc;
   SignUpBloc? signUpBloc;
-  final bool hide;
+  bool? hide;
   String? selectedVal;
   String? image;
   textFormField(
@@ -17,9 +17,9 @@ class textFormField extends StatelessWidget {
       required this.Controller,
       required this.hintText,
       required this.prefixIcon,
-      required this.loginBloc,
-      required this.signUpBloc,
-      required this.hide,
+      this.loginBloc,
+      this.signUpBloc,
+      this.hide,
       this.image,
       this.selectedVal});
 
@@ -28,14 +28,17 @@ class textFormField extends StatelessWidget {
     if (hintText == "Password") {
       return TextFormField(
         controller: Controller,
-        obscureText: hide,
+        obscureText: hide!,
         decoration: InputDecoration(
             suffixIcon: IconButton(
                 onPressed: () {
                   if (loginBloc != null) {
                     loginBloc!.add(PasswordHideButtonClickedEvent(hide: hide!));
                   } else {
-                    signUpBloc!.add(SignUpHideButtonClickedEvent(hide: hide!, image: image!, selectedValue: selectedVal!));
+                    signUpBloc!.add(SignUpHideButtonClickedEvent(
+                        hide: hide!,
+                        image: image!,
+                        selectedValue: selectedVal!));
                   }
                 },
                 icon: Icon(Icons.remove_red_eye)),

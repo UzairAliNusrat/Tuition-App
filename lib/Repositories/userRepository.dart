@@ -31,7 +31,7 @@ class FirebaseUserRepository implements UserRepository {
   getUser(String userId) async {
     // Get the user document from Firestore based on the provided user ID
     final userDoc =
-        await FirebaseFirestore.instance.collection("Users").doc(userId).get();
+        await db.collection("Users").doc(userId).get();
     User = user.fromJson(userDoc);
   }
 

@@ -27,6 +27,7 @@ class login_button extends StatelessWidget {
   Widget build(BuildContext context) {
     if (type == "Login") {
       return SizedBox(
+        key: key,
         width: 450,
         height: 50,
         child: ElevatedButton(
