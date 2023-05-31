@@ -46,7 +46,7 @@ class MeetingsScreenTeacher extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
-                color: Colors.blue[100],
+                color: Colors.cyan,
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -60,7 +60,11 @@ class MeetingsScreenTeacher extends StatelessWidget {
                         leading: CircleAvatar(
                             radius: 40,
                             foregroundImage: NetworkImage(meetingRequests[index].Studentimagepath)),
-                        title: Text(meetingRequests[index].studentName),
+                        title: Text(meetingRequests[index].studentName, style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 19),
+                                )),
                         trailing: SizedBox(
                           width: 120,
                           height: 50,
@@ -156,17 +160,33 @@ class MeetingsScreenTeacher extends StatelessWidget {
                       ),
                       ListTile(
                         title:
-                            Text("Subject: " + meetingRequests[index].subject),
+                            Text("Subject: ${meetingRequests[index].subject}", style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 19),
+                                )),
                         subtitle:
-                            Text("Topic: " + meetingRequests[index].topic),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 15),
-                        child: Text("Additonal Information:"),
+                            Text("Topic: ${meetingRequests[index].topic}", style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 19),
+                                )),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 15),
-                        child: Text(meetingRequests[index].note),
+                        child: Text("Additonal Information:", style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 19),
+                                )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, bottom: 10),
+                        child: Text(meetingRequests[index].note, style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 19),
+                                )),
                       )
                     ],
                   ),

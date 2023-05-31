@@ -32,8 +32,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<LearnButtonClickedEvent>(learnButtonClickedEvent);
 
-    on<TeachButtonClickedEvent>(teachButtonClickedEvent);
-
     on<ListItemClickedEvent>(listItemClickedEvent);
 
     on<MeetingRequestTickButtonClickedEvent>(
@@ -156,11 +154,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         id: event.studentId,
         studentName: event.studentName,
         imagepath: event.imagepath));
-  }
-
-  FutureOr<void> teachButtonClickedEvent(
-      TeachButtonClickedEvent event, Emitter<HomeState> emit) {
-    emit(HomeNavigateToTeachScreenState());
   }
 
   FutureOr<void> listItemClickedEvent(

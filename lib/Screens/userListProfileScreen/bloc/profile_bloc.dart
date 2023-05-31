@@ -54,13 +54,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           subjects: const [],
           description: studentinfo.description,
           rating: avgRating,
-          initialRating: 0,
+          initialRating: event.initialRating,
           phoneNumber: studentinfo.phoneNumber));
     }
   }
 
   Future<FutureOr<void>> newratingEvent(
       NewRatingEvent event, Emitter<ProfileState> emit) async {
+        emit(ProfileLoadingState());
     Ratings rating = Ratings(
         rating: event.rating,
         userId: event.userId,

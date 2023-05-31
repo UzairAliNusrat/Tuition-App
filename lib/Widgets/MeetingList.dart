@@ -191,7 +191,7 @@ class meetingList extends StatelessWidget {
                                   )),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 15),
+                              padding: const EdgeInsets.only(bottom: 10, top: 10),
                               child: Center(
                                 child: homeScreenButton(text: "End Meeting", homeBloc: homeBloc, studentId: "", studentName: "", imagepath: "", meetingId: acceptedMeetings[index].meetingId,),
                               ),

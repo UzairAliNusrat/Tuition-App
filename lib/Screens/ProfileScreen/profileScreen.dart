@@ -62,28 +62,29 @@ class profileScreen extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 30),
-                          Text(
-                            "${User.first_name} ${User.last_name}",
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          Text("${User.first_name} ${User.last_name}",
+                              style: GoogleFonts.arvo(
+                                textStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 3, 66, 102),
+                                    fontSize: 30),
+                              )),
                           const SizedBox(height: 10),
                           Text(
                             state.studentinfo!.qualification,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
+                            style: GoogleFonts.arvo(
+                              textStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 3, 66, 102),
+                                  fontSize: 25),
                             ),
                           ),
                           const SizedBox(height: 20),
                           Text(
                             "Rating: ${state.avgRating}",
-                            style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                            style: GoogleFonts.arvo(
+                              textStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 3, 66, 102),
+                                  fontSize: 20),
+                            ),
                           ),
                           const SizedBox(height: 10),
                           RatingBar.builder(
@@ -106,37 +107,41 @@ class profileScreen extends StatelessWidget {
                             leading: const Icon(Icons.phone),
                             title: Text(
                                 "Phone Number: ${state.studentinfo!.phoneNumber}",
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
+                                style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 17),
+                                )),
                           ),
                           ListTile(
                             leading: const Icon(Icons.person),
                             title: Text("Age: ${state.studentinfo!.age}",
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
+                                style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 17),
+                                )),
                           ),
                           ListTile(
                             leading: const Icon(Icons.email),
                             title: Text(
                               User.email,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
+                              style: GoogleFonts.arvo(
+                                textStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 3, 66, 102),
+                                    fontSize: 17),
+                              ),
                             ),
                           ),
                           ListTile(
                             leading: const Icon(Icons.description),
                             title: Text(
                                 "About: ${state.studentinfo!.description}",
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
+                                style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 17),
+                                )),
                           ),
                         ],
                       )
@@ -153,33 +158,36 @@ class profileScreen extends StatelessWidget {
                           const SizedBox(height: 30),
                           Text(
                             "${User.first_name} ${User.last_name}",
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
+                            style: GoogleFonts.arvo(
+                              textStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 3, 66, 102),
+                                  fontSize: 30),
                             ),
                           ),
                           const SizedBox(height: 10),
                           Text(
                             state.teacherinfo!.qualification,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.black,
+                            style: GoogleFonts.arvo(
+                              textStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 3, 66, 102),
+                                  fontSize: 25),
                             ),
                           ),
                           const SizedBox(height: 20),
                           Text(
                             "Rating: ${state.avgRating}",
-                            style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                            style: GoogleFonts.arvo(
+                              textStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 3, 66, 102),
+                                  fontSize: 20),
+                            ),
                           ),
                           const SizedBox(height: 10),
                           RatingBar.builder(
                             initialRating: state.avgRating,
                             minRating: 0,
                             direction: Axis.horizontal,
-                            allowHalfRating: false,
+                            allowHalfRating: true,
                             ignoreGestures: true,
                             itemCount: 5,
                             itemPadding:
@@ -195,51 +203,62 @@ class profileScreen extends StatelessWidget {
                             leading: const Icon(Icons.phone),
                             title: Text(
                                 "Phone Number: ${state.teacherinfo!.phoneNumber}",
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
+                                style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 17),
+                                )),
                           ),
                           ListTile(
                             leading: const Icon(Icons.person),
                             title: Text("Age: ${state.teacherinfo!.age}",
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
+                                style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 17),
+                                )),
                           ),
                           ListTile(
                             leading: const Icon(Icons.email),
                             title: Text(
                               User.email,
-                              style: const TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
+                              style: GoogleFonts.arvo(
+                                textStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 3, 66, 102),
+                                    fontSize: 17),
+                              ),
                             ),
                           ),
                           ListTile(
                               leading: const Icon(Icons.subject),
                               title: Text(
                                 "Subjects: ${state.teacherinfo!.subjects.toString().substring(1, state.teacherinfo!.subjects.toString().length - 1)}",
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+                                style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 17),
+                                ),
                               )),
                           ListTile(
                             leading: const Icon(Icons.description),
                             title: Text(
                                 "About: ${state.teacherinfo!.description}",
-                                style: const TextStyle(
-                                    fontSize: 16,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold)),
+                                style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 17),
+                                )),
                           ),
                         ],
                       ));
           } else {
-            return const Text("Error Occured");
+            return Text(
+              "Error Occured",
+              style: GoogleFonts.arvo(
+                textStyle: const TextStyle(
+                    color: Color.fromARGB(255, 3, 66, 102), fontSize: 17),
+              ),
+            );
           }
         },
       ),

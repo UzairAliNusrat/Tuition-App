@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuition_app_project/Screens/HomeScreen/bloc/home_bloc.dart';
 import 'package:tuition_app_project/Screens/ProfileScreen/profileScreen.dart';
-import 'package:tuition_app_project/Screens/TeachScreen/teachScreen.dart';
 import 'package:tuition_app_project/Screens/userListProfileScreen/userListProfileScreen.dart';
+import 'package:tuition_app_project/Utils/constants.dart';
 import 'package:tuition_app_project/Widgets/HomeScreenStudent.dart';
 import 'package:tuition_app_project/Widgets/HomeScreenTeacher.dart';
 import 'package:tuition_app_project/Widgets/MeetingsScreenStudent.dart';
@@ -16,9 +16,9 @@ import '../LearnScreen/learnScreen.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
   final HomeBloc homeBloc = HomeBloc();
-
   @override
   Widget build(BuildContext context) {
+    
     homeBloc.add(HomeInitialEvent(FirebaseAuth.instance.currentUser!.uid));
     return BlocConsumer<HomeBloc, HomeState>(
       bloc: homeBloc,
@@ -35,9 +35,6 @@ class HomeScreen extends StatelessWidget {
                         studentName: state.studentName,
                         studentPicturePath: state.imagepath,
                       )));
-        } else if (state is HomeNavigateToTeachScreenState) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const teachScreen()));
         } else if (state is HomeNavigateToListProfileScreenState) {
           Navigator.push(
               context,
@@ -59,7 +56,7 @@ class HomeScreen extends StatelessWidget {
           return Scaffold(
             backgroundColor: Colors.cyan[100],
             bottomNavigationBar: bottomNavigationBar(
-                index: state.selectedIndex, homeBloc: homeBloc, userType: ""),
+                index: state.selectedIndex, homeBloc: homeBloc, userType: "Users"),
             body: const Center(
               child: CircularProgressIndicator(),
             ),

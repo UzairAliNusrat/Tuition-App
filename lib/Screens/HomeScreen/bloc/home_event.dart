@@ -30,7 +30,6 @@ class LearnButtonClickedEvent extends HomeEvent {
   });
 }
 
-class TeachButtonClickedEvent extends HomeEvent {}
 
 class ListItemClickedEvent extends HomeEvent {
   final String id;

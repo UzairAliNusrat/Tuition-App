@@ -50,8 +50,6 @@ class userList extends StatelessWidget {
                           "${teachers[index].first_name} ${teachers[index].last_name}",
                           style: const TextStyle(color: Colors.black)),
                     ),
-                    const Text("Teacher Expertise:",
-                        style: TextStyle(color: Colors.black)),
                     OutlinedButton(
                       onPressed: () {
                         homebloc.add(ListItemClickedEvent(
@@ -107,8 +105,6 @@ class userList extends StatelessWidget {
                           "${students[index].first_name} ${students[index].last_name}",
                           style: const TextStyle(color: Colors.black)),
                     ),
-                    const Text("Teacher Expertise:",
-                        style: TextStyle(color: Colors.black)),
                     OutlinedButton(
                       onPressed: () {
                         homebloc.add(ListItemClickedEvent(

@@ -8,7 +8,13 @@ class ProfileInitialEvent extends ProfileEvent {
   final String imagepath;
   final String fullname;
   final String userType;
-  ProfileInitialEvent({required this.id, required this.imagepath, required this.fullname, required this.userType});
+  final double initialRating;
+  ProfileInitialEvent(
+      {required this.id,
+      required this.imagepath,
+      required this.fullname,
+      required this.userType,
+      required this.initialRating});
 }
 
 class NewRatingEvent extends ProfileEvent {
@@ -22,5 +28,15 @@ class NewRatingEvent extends ProfileEvent {
   final String description;
   final double initialRating;
   final String phoneNumber;
-  NewRatingEvent({required this.rating, required this.userId, required this.imagepath, required this.fullname, required this.age, required this.qualification, required this.subjects, required this.description, required this.initialRating, required this.phoneNumber});
+  NewRatingEvent(
+      {required this.rating,
+      required this.userId,
+      required this.imagepath,
+      required this.fullname,
+      required this.age,
+      required this.qualification,
+      required this.subjects,
+      required this.description,
+      required this.initialRating,
+      required this.phoneNumber});
 }

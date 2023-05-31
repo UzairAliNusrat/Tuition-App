@@ -28,15 +28,9 @@ class bottomNavigationBar extends StatelessWidget {
             icon: const Icon(Icons.class_outlined),
             label: 'Meeting Requests',
             backgroundColor: Colors.blue[200]),
-        userType == "Student" ?
         BottomNavigationBarItem(
-            icon: const Icon(Icons.chat_outlined),
-            label: "Teachers",
-            backgroundColor: Colors.blue[200])
-        :
-        BottomNavigationBarItem(
-            icon: const Icon(Icons.chat_outlined),
-            label: "Students",
+            icon: const Icon(Icons.account_box),
+            label: "Users",
             backgroundColor: Colors.blue[200])
       ],
       selectedItemColor: const Color.fromARGB(255, 9, 137, 160),

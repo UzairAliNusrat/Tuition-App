@@ -22,8 +22,12 @@ class userListProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    profileBloc.add(
-        ProfileInitialEvent(id: id, imagepath: imagepath, fullname: fullname, userType: userType));
+    profileBloc.add(ProfileInitialEvent(
+        id: id,
+        imagepath: imagepath,
+        fullname: fullname,
+        userType: userType,
+        initialRating: 0.0));
     return Scaffold(
       backgroundColor: Colors.cyan[100],
       appBar: AppBar(
@@ -72,30 +76,30 @@ class userListProfileScreen extends StatelessWidget {
                   const SizedBox(height: 30),
                   Text(
                     state.fullname,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                    style: GoogleFonts.arvo(
+                      textStyle: const TextStyle(
+                          color: Color.fromARGB(255, 3, 66, 102), fontSize: 30),
                     ),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     state.qualification,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
+                    style: GoogleFonts.arvo(
+                      textStyle: const TextStyle(
+                          color: Color.fromARGB(255, 3, 66, 102), fontSize: 25),
                     ),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     "Rating: ${state.rating}",
-                    style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold),
+                    style: GoogleFonts.arvo(
+                      textStyle: const TextStyle(
+                          color: Color.fromARGB(255, 3, 66, 102), fontSize: 20),
+                    ),
                   ),
                   const SizedBox(height: 10),
                   RatingBar.builder(
-                    initialRating: state.rating.toDouble(),
+                    initialRating: state.rating,
                     minRating: 0,
                     direction: Axis.horizontal,
                     allowHalfRating: true,
@@ -112,37 +116,41 @@ class userListProfileScreen extends StatelessWidget {
                   ListTile(
                     leading: const Icon(Icons.phone),
                     title: Text("Phone Number: ${state.phoneNumber}",
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold)),
+                        style: GoogleFonts.arvo(
+                          textStyle: const TextStyle(
+                              color: Color.fromARGB(255, 3, 66, 102),
+                              fontSize: 17),
+                        )),
                   ),
                   ListTile(
                     leading: const Icon(Icons.person),
                     title: Text("Age: ${state.age}",
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold)),
+                        style: GoogleFonts.arvo(
+                          textStyle: const TextStyle(
+                              color: Color.fromARGB(255, 3, 66, 102),
+                              fontSize: 17),
+                        )),
                   ),
-                  state.subjects!.isNotEmpty ?
-                  ListTile(
-                      leading: const Icon(Icons.subject),
-                      title: Text(
-                        "Subjects: ${state.subjects.toString().substring(1, state.subjects.toString().length - 1)}",
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                      )) 
+                  state.subjects!.isNotEmpty
+                      ? ListTile(
+                          leading: const Icon(Icons.subject),
+                          title: Text(
+                            "Subjects: ${state.subjects.toString().substring(1, state.subjects.toString().length - 1)}",
+                            style: GoogleFonts.arvo(
+                              textStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 3, 66, 102),
+                                  fontSize: 17),
+                            ),
+                          ))
                       : const SizedBox(height: 0),
                   ListTile(
                     leading: const Icon(Icons.description),
                     title: Text("About: ${state.description}",
-                        style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold)),
+                        style: GoogleFonts.arvo(
+                          textStyle: const TextStyle(
+                              color: Color.fromARGB(255, 3, 66, 102),
+                              fontSize: 17),
+                        )),
                   ),
                   const SizedBox(height: 10),
                   Container(
@@ -151,17 +159,20 @@ class userListProfileScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         //color: Colors.blue,
-                        border: Border.all(color: Colors.black, width: 2)),
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 3, 66, 102),
+                            width: 2)),
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: Column(
                         children: [
-                          const Text(
+                          Text(
                             "Rate Teacher: ",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
+                            style: GoogleFonts.arvo(
+                              textStyle: const TextStyle(
+                                  color: Color.fromARGB(255, 3, 66, 102),
+                                  fontSize: 17),
+                            ),
                           ),
                           RatingBar.builder(
                             initialRating: state.initialRating,
@@ -187,41 +198,45 @@ class userListProfileScreen extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              if (state.subjects!.isNotEmpty){
+                              if (state.subjects!.isNotEmpty) {
                                 profileBloc.add(NewRatingEvent(
-                                  fullname: fullname,
-                                  subjects: state.subjects,
-                                  age: state.age,
-                                  qualification: state.qualification,
-                                  description: state.description,
-                                  rating: _rating,
-                                  userId: id,
-                                  imagepath: imagepath,
-                                  initialRating: 0.0,
-                                  phoneNumber: state.phoneNumber));
-                              }
-                              else{
+                                    fullname: fullname,
+                                    subjects: state.subjects,
+                                    age: state.age,
+                                    qualification: state.qualification,
+                                    description: state.description,
+                                    rating: _rating,
+                                    userId: id,
+                                    imagepath: imagepath,
+                                    initialRating: 0.0,
+                                    phoneNumber: state.phoneNumber));
+                              } else {
                                 profileBloc.add(NewRatingEvent(
-                                  fullname: fullname,
-                                  subjects: const [],
-                                  age: state.age,
-                                  qualification: state.qualification,
-                                  description: state.description,
-                                  rating: _rating,
-                                  userId: id,
-                                  imagepath: imagepath,
-                                  initialRating: 0.0,
-                                  phoneNumber: state.phoneNumber));
+                                    fullname: fullname,
+                                    subjects: const [],
+                                    age: state.age,
+                                    qualification: state.qualification,
+                                    description: state.description,
+                                    rating: _rating,
+                                    userId: id,
+                                    imagepath: imagepath,
+                                    initialRating: 0.0,
+                                    phoneNumber: state.phoneNumber));
                               }
-                              
                             },
-                            child: const Text("Submit Rating"),
+                            child: Text(
+                              "Submit Rating",
+                              style: GoogleFonts.arvo(
+                                textStyle: const TextStyle(
+                                    color: Color.fromARGB(255, 3, 66, 102),
+                                    fontSize: 17),
+                              ),
+                            ),
                           )
                         ],
                       ),
                     ),
                   ),
-                  
                 ],
               ),
             );

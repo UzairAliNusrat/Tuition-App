@@ -64,16 +64,17 @@ class FirebaseUserRepository implements UserRepository {
       return 0;
     } else {
       final List<DocumentSnapshot<Map<String, dynamic>>> documents =
-        result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
-    for (var element in documents) {
-      avgRating += Ratings.fromJson(element).rating;
-      count++;
+          result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
+      for (var element in documents) {
+        avgRating += Ratings.fromJson(element).rating;
+        count++;
+      }
+
+      double avg = avgRating / count;
+      return double.parse(avg.toStringAsFixed(1));
     }
-    return avgRating / count;
-    }
-    
   }
-  
+
   @override
   Future<List<user>> fetchStudentList() async {
     List<user> students = [];
