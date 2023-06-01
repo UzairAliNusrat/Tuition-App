@@ -73,9 +73,7 @@ class HomeScreenStudent extends StatelessWidget {
                         left: 20,
                       ),
                       child: Text(
-                          User.first_name ??
-                              FirebaseAuth.instance.currentUser?.displayName ??
-                              "",
+                          User.first_name,
                           style: GoogleFonts.arvo(
                             textStyle: const TextStyle(
                                 color: Color.fromARGB(255, 3, 66, 102),
@@ -86,7 +84,7 @@ class HomeScreenStudent extends StatelessWidget {
                       padding: const EdgeInsets.only(
                         left: 7,
                       ),
-                      child: Text(User.last_name ?? "",
+                      child: Text(User.last_name,
                           style: GoogleFonts.arvo(
                             textStyle: const TextStyle(
                                 color: Color.fromARGB(255, 3, 66, 102),
