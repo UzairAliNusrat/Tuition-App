@@ -13,9 +13,7 @@ abstract class UserRepository {
 
 class FirebaseUserRepository implements UserRepository {
   final db = FirebaseFirestore.instance;
-
   late user User;
-
   @override
   setuser(user User) async {
     await db.collection("Users").doc(User.id).set(User.toJson());
@@ -29,10 +27,10 @@ class FirebaseUserRepository implements UserRepository {
 
   @override
   getUser(String userId) async {
-    // Get the user document from Firestore based on the provided user ID
-    final userDoc =
+    final DocumentSnapshot<Map<String, dynamic>> userDoc =
         await db.collection("Users").doc(userId).get();
-    User = user.fromJson(userDoc);
+
+      User = user.fromJson(userDoc.data()!);
   }
 
   @override
@@ -42,7 +40,7 @@ class FirebaseUserRepository implements UserRepository {
     final List<DocumentSnapshot<Map<String, dynamic>>> documents =
         result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
     for (var element in documents) {
-      teachers.add(user.fromJson(element));
+      teachers.add(user.fromJson(element.data()!));
     }
     return teachers;
   }
@@ -66,7 +64,7 @@ class FirebaseUserRepository implements UserRepository {
       final List<DocumentSnapshot<Map<String, dynamic>>> documents =
           result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
       for (var element in documents) {
-        avgRating += Ratings.fromJson(element).rating;
+        avgRating += Ratings.fromJson(element.data()!).rating;
         count++;
       }
 
@@ -82,7 +80,7 @@ class FirebaseUserRepository implements UserRepository {
     final List<DocumentSnapshot<Map<String, dynamic>>> documents =
         result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
     for (var element in documents) {
-      students.add(user.fromJson(element));
+      students.add(user.fromJson(element.data()!));
     }
     return students;
   }

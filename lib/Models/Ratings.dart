@@ -7,7 +7,7 @@ class Ratings {
 
   Ratings({required this.rating, required this.userId, required this.ratingID});
 
-  factory Ratings.fromJson(DocumentSnapshot<Map<String, dynamic>> json) {
+  factory Ratings.fromJson(Map<String, dynamic> json) {
     return Ratings(
       rating: json['rating'],
       userId: json['user_id'],

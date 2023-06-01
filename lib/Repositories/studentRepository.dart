@@ -5,26 +5,25 @@ import '../Models/userModel.dart';
 
 abstract class StudentRepository {
   setStudentInfo(Studentinfo studentinfo);
-  Future<Studentinfo?> getStudentinfo(String studentId);
+  Future<Studentinfo?> getStudentInfo(String studentId);
 }
 
 class FirebaseStudentRepository implements StudentRepository {
   final db = FirebaseFirestore.instance;
-  
+
   @override
-  Future<Studentinfo> getStudentinfo(String studentId) async {
-    // Get the user document from Firestore based on the provided user ID
-    final StudentDoc =
+  Future<Studentinfo> getStudentInfo(String studentId) async {
+    final DocumentSnapshot<Map<String, dynamic>> studentDoc =
         await db.collection("Student Information").doc(studentId).get();
-    return Studentinfo.fromJson(StudentDoc);
+
+    return Studentinfo.fromJson(studentDoc.data()!);
   }
-  
+
   @override
   setStudentInfo(Studentinfo studentinfo) async {
-    await db.collection("Student Information").doc(studentinfo.id).set(studentinfo.toJson());
+    await db
+        .collection("Student Information")
+        .doc(studentinfo.id)
+        .set(studentinfo.toJson());
   }
-  
-  
-
-  
 }

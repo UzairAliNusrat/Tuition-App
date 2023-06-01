@@ -1,4 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class user {
   String first_name;
@@ -16,7 +16,7 @@ class user {
       required this.ProfileImagePath,
       required this.UserType});
 
-  static user fromJson(DocumentSnapshot<Map<String, dynamic>> json) {
+  static user fromJson(Map<String, dynamic> json) {
     return user(
       first_name: json['Firstname'] as String? ?? 'field empty',
       last_name: json['LastName'] as String? ?? 'field empty',

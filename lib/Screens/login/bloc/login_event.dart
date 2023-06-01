@@ -15,11 +15,6 @@ class LoginButtonClickedEvent extends LoginEvent {
       {required this.context, required this.email, required this.password});
 }
 
-class GoogleLoginButtonClickedEvent extends LoginEvent {
-  final BuildContext context;
-  GoogleLoginButtonClickedEvent({required this.context});
-}
-
 class PasswordHideButtonClickedEvent extends LoginEvent {
   final bool hide;
 

@@ -6,19 +6,19 @@ import 'Screens/SignUpPage2/signupPage2.dart';
 import 'Utils/constants.dart';
 
 class Auth {
-  Future<UserCredential?> signInWithGoogle(BuildContext context) async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    if (googleUser != null) {
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
-      final OAuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      return FirebaseAuth.instance.signInWithCredential(credential);
-    }
-    return null;
-  }
+  // Future<UserCredential?> signInWithGoogle(BuildContext context) async {
+  //   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+  //   if (googleUser != null) {
+  //     final GoogleSignInAuthentication googleAuth =
+  //         await googleUser.authentication;
+  //     final OAuthCredential credential = GoogleAuthProvider.credential(
+  //       accessToken: googleAuth.accessToken,
+  //       idToken: googleAuth.idToken,
+  //     );
+  //     return FirebaseAuth.instance.signInWithCredential(credential);
+  //   }
+  //   return null;
+  // }
 
   Future signIn(BuildContext context, String email, String password) async {
     try {

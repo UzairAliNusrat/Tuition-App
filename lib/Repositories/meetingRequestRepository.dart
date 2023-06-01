@@ -31,15 +31,15 @@ class FirebaseMeetingRequestRepository implements MeetingRequestRepository {
 
     if (userType == "Student") {
       for (var element in documents) {
-        if (meetingRequestModel.fromJson(element).studentId == Id) {
-          meetingRequests.add(meetingRequestModel.fromJson(element));
+        if (meetingRequestModel.fromJson(element.data()!).studentId == Id) {
+          meetingRequests.add(meetingRequestModel.fromJson(element.data()!));
         }
       }
     } else {
       for (var element in documents) {
-        if (meetingRequestModel.fromJson(element).teacherId == Id) {
+        if (meetingRequestModel.fromJson(element.data()!).teacherId == Id) {
           print("hello1");
-          meetingRequests.add(meetingRequestModel.fromJson(element));
+          meetingRequests.add(meetingRequestModel.fromJson(element.data()!));
         }
       }
     }
@@ -72,14 +72,14 @@ class FirebaseMeetingRequestRepository implements MeetingRequestRepository {
         result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
     if (userType == "Student") {
       for (var element in documents) {
-        if (meetingAcceptedModel.fromJson(element).studentId == Id) {
-          acceptedMeetings.add(meetingAcceptedModel.fromJson(element));
+        if (meetingAcceptedModel.fromJson(element.data()!).studentId == Id) {
+          acceptedMeetings.add(meetingAcceptedModel.fromJson(element.data()!));
         }
       }
     } else {
       for (var element in documents) {
-        if (meetingAcceptedModel.fromJson(element).teacherId == Id) {
-          acceptedMeetings.add(meetingAcceptedModel.fromJson(element));
+        if (meetingAcceptedModel.fromJson(element.data()!).teacherId == Id) {
+          acceptedMeetings.add(meetingAcceptedModel.fromJson(element.data()!));
         }
       }
     }
@@ -100,24 +100,25 @@ class FirebaseMeetingRequestRepository implements MeetingRequestRepository {
   }
 
   @override
-  Future<List<meetingRequestModel>> fetchMeetingHistoryList(String Id) async {
-    List<meetingRequestModel> meetingHistory = [];
-    final QuerySnapshot result = await db.collection("Meeting History").get();
+Future<List<meetingRequestModel>> fetchMeetingHistoryList(String Id) async {
+  List<meetingRequestModel> meetingHistory = [];
+  final QuerySnapshot result = await db.collection("Meeting History").get();
 
-    final List<DocumentSnapshot<Map<String, dynamic>>> documents =
-        result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
+  final List<DocumentSnapshot<Map<String, dynamic>>> documents =
+      result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
 
-    for (var element in documents) {
-      if (meetingRequestModel.fromJson(element).studentId == Id) {
-        meetingHistory.add(meetingRequestModel.fromJson(element));
-      }
+  for (var element in documents) {
+    if (meetingRequestModel.fromJson(element.data()!).studentId == Id) {
+      meetingHistory.add(meetingRequestModel.fromJson(element.data()!));
     }
-
-    return meetingHistory;
   }
-  
+
+  return meetingHistory;
+}
+
   @override
   deleteAcceptedMeeting(String meetingId) async {
     await db.collection("Accepted Meetings").doc(meetingId).delete();
   }
 }
+

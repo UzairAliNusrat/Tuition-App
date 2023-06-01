@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:meta/meta.dart';
 import 'package:tuition_app_project/Models/meetingRequestModel.dart';
 import 'package:tuition_app_project/Models/teacherInfoModel.dart';
@@ -24,7 +23,7 @@ class FindteachersBloc extends Bloc<FindteachersEvent, FindteachersState> {
     
     List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
     List<Teacherinfo> teachersinfo = await TeacherInfoRepo.teacherInfoRepo
-        .fetchTeacherinfoListbySubject(event.subject);
+        .fetchTeacherInfoListBySubject(event.subject);
     if (teachersinfo.isEmpty) {
       emit(FindTeachersErrorState(message: "No teachers found"));
     } else {

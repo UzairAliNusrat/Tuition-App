@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuition_app_project/Widgets/sideDrawer.dart';
-import 'package:tuition_app_project/Widgets/userList.dart';
+import 'package:tuition_app_project/Widgets/TopRateduserList.dart';
 
 import '../Models/meetingAcceptedModel.dart';
 import '../Models/userModel.dart';
@@ -52,8 +50,11 @@ class HomeScreenTeacher extends StatelessWidget {
         elevation: 2,
       ),
       drawer: side_drawer(User: User, homeBloc: homeBloc),
-      bottomNavigationBar:
-          bottomNavigationBar(index: bottomNavigationBarIndex, homeBloc: homeBloc, userType: "Teacher",),
+      bottomNavigationBar: bottomNavigationBar(
+        index: bottomNavigationBarIndex,
+        homeBloc: homeBloc,
+        userType: "Teacher",
+      ),
       body: ListView(
         children: [
           Container(

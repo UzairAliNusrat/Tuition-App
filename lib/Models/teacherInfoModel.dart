@@ -17,7 +17,7 @@ class Teacherinfo {
     required this.phoneNumber,
   });
 
-  static Teacherinfo fromJson(DocumentSnapshot<Map<String, dynamic>> json) {
+  static Teacherinfo fromJson(Map<String, dynamic> json) {
     return Teacherinfo(
       age: json['age'] as String? ?? 'field empty',
       qualification: json['qualification'] as String? ?? 'field empty',

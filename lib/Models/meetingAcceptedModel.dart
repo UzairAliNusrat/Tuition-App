@@ -29,8 +29,7 @@ class meetingAcceptedModel {
       required this.teacherimagepath
       });
 
-  static meetingAcceptedModel fromJson(
-      DocumentSnapshot<Map<String, dynamic>> json) {
+  static meetingAcceptedModel fromJson(Map<String, dynamic> json) {
     return meetingAcceptedModel(
       teacherId: json['teacherId'] as String? ?? 'field empty',
       meetingId: json['meetingId'] as String? ?? 'field empty',

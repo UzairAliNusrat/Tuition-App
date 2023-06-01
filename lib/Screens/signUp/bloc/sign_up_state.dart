@@ -20,4 +20,3 @@ class SignUpLoadedSuccessfulState extends SignUpState {
 
 class NavigateToLoginScreenState extends SignUpActionState {}
 
-class NavigateToSignUpPage2State extends SignUpActionState {}

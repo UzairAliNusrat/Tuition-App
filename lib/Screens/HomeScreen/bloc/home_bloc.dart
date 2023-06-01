@@ -49,57 +49,80 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       HomeInitialEvent event, Emitter<HomeState> emit) async {
     emit(HomeLoadingState(0));
     await Userrepo.userRepo.getUser(event.id);
-    List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
-    List<user> students = await Userrepo.userRepo.fetchStudentList();
-    List<user> topRatedTeachers = [];
-    List<user> topRatedStudents = [];
 
-    for (int i = 0; i < teachers.length; i++) {
-      double avgRating = await Userrepo.userRepo.getAvgUserRating(teachers[i].id);
-      if (avgRating >= 2) {
-        topRatedTeachers.add(teachers[i]);
+    if (Userrepo.userRepo.User.UserType == "Teacher") {
+      List<user> students = await Userrepo.userRepo.fetchStudentList();
+
+      List<user> topRatedStudents = [];
+
+      for (int i = 0; i < students.length; i++) {
+        double avgRating =
+            await Userrepo.userRepo.getAvgUserRating(students[i].id);
+        if (avgRating >= 4) {
+          topRatedStudents.add(students[i]);
+        }
       }
-    }
-    for (int i = 0; i < students.length; i++) {
-      double avgRating = await Userrepo.userRepo.getAvgUserRating(students[i].id);
-      if (avgRating >= 2) {
-        topRatedStudents.add(students[i]);
+      List<meetingAcceptedModel> acceptedMeetings = await MeetingRequestRepo
+          .meetingRequestRepo
+          .fetchAcceptedMeetingList(event.id, Userrepo.userRepo.User.UserType);
+      emit(HomeLoadedState(0, const [], Userrepo.userRepo.User, const [],
+          acceptedMeetings, const [], topRatedStudents));
+    } else {
+      List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
+      List<user> topRatedTeachers = [];
+      for (int i = 0; i < teachers.length; i++) {
+        double avgRating =
+            await Userrepo.userRepo.getAvgUserRating(teachers[i].id);
+        if (avgRating >= 4) {
+          topRatedTeachers.add(teachers[i]);
+        }
       }
+
+      List<meetingAcceptedModel> acceptedMeetings = await MeetingRequestRepo
+          .meetingRequestRepo
+          .fetchAcceptedMeetingList(event.id, Userrepo.userRepo.User.UserType);
+
+      emit(HomeLoadedState(0, topRatedTeachers, Userrepo.userRepo.User,
+          const [], acceptedMeetings, const [], const []));
     }
-    List<meetingAcceptedModel> acceptedMeetings = await MeetingRequestRepo.meetingRequestRepo
-        .fetchAcceptedMeetingList(event.id, Userrepo.userRepo.User.UserType);
-    emit(HomeLoadedState(0, topRatedTeachers, Userrepo.userRepo.User, const [],
-        acceptedMeetings, const [], topRatedStudents));
   }
 
   Future<FutureOr<void>> bottomNavigationBarItemHomeClickedEvent(
       BottomNavigationBarItemHomeClickedEvent event,
       Emitter<HomeState> emit) async {
     emit(HomeLoadingState(0));
-    List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
-    List<user> students = await Userrepo.userRepo.fetchStudentList();
-
-    List<user> topRatedTeachers = [];
-    List<user> topRatedStudents = [];
-
-    for (int i = 0; i < teachers.length; i++) {
-      double avgRating = await Userrepo.userRepo.getAvgUserRating(teachers[i].id);
-      if (avgRating >= 2) {
-        topRatedTeachers.add(teachers[i]);
-      }
-    }
-    for (int i = 0; i < students.length; i++) {
-      double avgRating = await Userrepo.userRepo.getAvgUserRating(students[i].id);
-      if (avgRating >= 2) {
-        topRatedStudents.add(students[i]);
-      }
-    }
     List<meetingAcceptedModel> acceptedMeetings =
         await MeetingRequestRepo.meetingRequestRepo.fetchAcceptedMeetingList(
             Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
-    emit(HomeLoadedState(0, topRatedTeachers, Userrepo.userRepo.User, const [],
-        acceptedMeetings, const [], topRatedStudents));
-    print("Home Clicked");
+    if (Userrepo.userRepo.User.UserType == "Teacher") {
+      List<user> students = await Userrepo.userRepo.fetchStudentList();
+
+      List<user> topRatedStudents = [];
+
+      for (int i = 0; i < students.length; i++) {
+        double avgRating =
+            await Userrepo.userRepo.getAvgUserRating(students[i].id);
+        if (avgRating >= 4) {
+          topRatedStudents.add(students[i]);
+        }
+      }
+
+      emit(HomeLoadedState(0, const [], Userrepo.userRepo.User, const [],
+          acceptedMeetings, const [], topRatedStudents));
+    } else {
+      List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
+      List<user> topRatedTeachers = [];
+      for (int i = 0; i < teachers.length; i++) {
+        double avgRating =
+            await Userrepo.userRepo.getAvgUserRating(teachers[i].id);
+        if (avgRating >= 4) {
+          topRatedTeachers.add(teachers[i]);
+        }
+      }
+
+      emit(HomeLoadedState(0, topRatedTeachers, Userrepo.userRepo.User,
+          const [], acceptedMeetings, const [], const []));
+    }
   }
 
   Future<FutureOr<void>> bottomNavigationBarItemMeetingsClickedEvent(
@@ -108,16 +131,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeLoadingState(1));
     List<meetingRequestModel> meetingRequests = [];
     List<meetingRequestModel> meetingHistory = [];
-    print("hello");
-    meetingRequests = await MeetingRequestRepo.meetingRequestRepo.fetchMeetingRequestList(
-        Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
+    meetingRequests = await MeetingRequestRepo.meetingRequestRepo
+        .fetchMeetingRequestList(
+            Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
     meetingHistory = await MeetingRequestRepo.meetingRequestRepo
         .fetchMeetingHistoryList(Userrepo.userRepo.User.id);
-    print("hello2");
 
     emit(HomeLoadedState(1, const [], Userrepo.userRepo.User, meetingRequests,
         const [], meetingHistory, const []));
-    print("Meetings Clicked");
   }
 
   Future<FutureOr<void>> bottomNavigationBarItemTeachersClickedEvent(
@@ -127,7 +148,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     List<user> teachers = await Userrepo.userRepo.fetchTeacherList();
     emit(HomeLoadedState(2, teachers, Userrepo.userRepo.User, const [],
         const [], const [], const []));
-    print("Chat Clicked");
   }
 
   Future<FutureOr<void>> bottomNavigationBarItemStudentsClickedEvent(
@@ -159,7 +179,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> meetingRequestTickButtonClickedEvent(
       MeetingRequestTickButtonClickedEvent event,
       Emitter<HomeState> emit) async {
-    await MeetingRequestRepo.meetingRequestRepo.deleteMeetingRequest(event.meetingId);
+    await MeetingRequestRepo.meetingRequestRepo
+        .deleteMeetingRequest(event.meetingId);
     List<meetingRequestModel> meetingRequests =
         await MeetingRequestRepo.meetingRequestRepo.fetchMeetingRequestList(
             Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
@@ -177,7 +198,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       teacherName: event.teacherName,
       teacherimagepath: event.teacherimagepath,
     );
-    await MeetingRequestRepo.meetingRequestRepo.setAcceptedMeeting(meetingAccepted);
+    await MeetingRequestRepo.meetingRequestRepo
+        .setAcceptedMeeting(meetingAccepted);
     emit(HomeLoadedState(1, const [], Userrepo.userRepo.User, meetingRequests,
         const [], const [], const []));
   }
@@ -206,8 +228,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeNavigateToProfileScreenState(User: event.User));
   }
 
-  Future<FutureOr<void>> endMeetingButtonClickedEvent(EndMeetingButtonClickedEvent event, Emitter<HomeState> emit) async {
-    MeetingRequestRepo.meetingRequestRepo.deleteAcceptedMeeting(event.meetingId);
+  Future<FutureOr<void>> endMeetingButtonClickedEvent(
+      EndMeetingButtonClickedEvent event, Emitter<HomeState> emit) async {
+    emit(HomeLoadingState(0));
+    MeetingRequestRepo.meetingRequestRepo
+        .deleteAcceptedMeeting(event.meetingId);
     List<meetingAcceptedModel> acceptedMeetings =
         await MeetingRequestRepo.meetingRequestRepo.fetchAcceptedMeetingList(
             Userrepo.userRepo.User.id, Userrepo.userRepo.User.UserType);
@@ -216,13 +241,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     List<user> topRatedStudents = [];
     for (int i = 0; i < students.length; i++) {
-      double avgRating = await Userrepo.userRepo.getAvgUserRating(students[i].id);
+      double avgRating =
+          await Userrepo.userRepo.getAvgUserRating(students[i].id);
       if (avgRating >= 2) {
         topRatedStudents.add(students[i]);
       }
     }
-     emit(HomeLoadedState(0, const [], Userrepo.userRepo.User, const [],
+    emit(HomeLoadedState(0, const [], Userrepo.userRepo.User, const [],
         acceptedMeetings, const [], topRatedStudents));
-
   }
 }

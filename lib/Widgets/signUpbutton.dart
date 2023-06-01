@@ -65,7 +65,6 @@ class signUp_button extends StatelessWidget {
                   );
                 });
           }
-          //Navigator.pop(context);
         },
         child: Text(
           "Next",

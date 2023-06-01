@@ -64,11 +64,6 @@ class SignUp extends StatelessWidget {
           listenWhen: (previous, current) => current is SignUpActionState,
           buildWhen: (previous, current) => current is! SignUpActionState,
           listener: (context, state) {
-            // TODO: implement listener
-            if (state is NavigateToSignUpPage2State) {
-              // Navigator.push(
-              // context, MaterialPageRoute(builder: (context) => signupPage2()));
-            }
           },
           builder: (context, state) {
             if (state is SignUpLoadingState) {
@@ -118,7 +113,7 @@ class SignUp extends StatelessWidget {
                                       signUpBloc.add(DropDownValueChangedEvent(
                                           selectedValue: value!,
                                           image: state.image,
-                                          hide: state.hide!));
+                                          hide: state.hide));
                                     }),
                               ),
                             )),

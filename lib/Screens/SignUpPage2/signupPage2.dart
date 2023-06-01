@@ -25,6 +25,7 @@ class signupPage2 extends StatelessWidget {
     page2Bloc.add(Page2InitialEvent());
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Center(
           child: Text(
             'Create Account',
@@ -36,21 +37,6 @@ class signupPage2 extends StatelessWidget {
             ),
           ),
         ),
-        leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            color: Colors.black,
-            onPressed: () {}
-            //signUpBloc.add(BackArrowIconClickedEvent(context: context)),
-            ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(left: 25),
-            child: Opacity(
-              opacity: 0,
-              child: Icon(Icons.transform_sharp),
-            ),
-          )
-        ],
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),

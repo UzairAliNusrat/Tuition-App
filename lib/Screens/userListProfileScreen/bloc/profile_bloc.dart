@@ -40,7 +40,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     } else {
       print("hello3");
       Studentinfo studentinfo =
-          await StudentInfoRepo.studentInfoRepo.getStudentinfo(event.id);
+          await StudentInfoRepo.studentInfoRepo.getStudentInfo(event.id);
       double avgRating = await Userrepo.userRepo.getAvgUserRating(event.id);
       emit(ProfileLoadedState(
           fullname: event.fullname,

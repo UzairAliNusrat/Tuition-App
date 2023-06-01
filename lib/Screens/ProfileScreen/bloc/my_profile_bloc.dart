@@ -23,7 +23,7 @@ class MyProfileBloc extends Bloc<MyProfileEvent, MyProfileState> {
     emit(MyProfileLoadingState());
     if (event.User.UserType == "Student") {
       Studentinfo studentinfo =
-          await StudentInfoRepo.studentInfoRepo.getStudentinfo(event.User.id);
+          await StudentInfoRepo.studentInfoRepo.getStudentInfo(event.User.id);
           double avgRating = await Userrepo.userRepo.getAvgUserRating(event.User.id);
       emit(MyProfileLoadedState(studentinfo: studentinfo, teacherinfo: null, avgRating: avgRating));
       

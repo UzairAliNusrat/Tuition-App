@@ -51,7 +51,7 @@ class Login extends StatelessWidget {
                             'Teach n Learn',
                             style: GoogleFonts.arvo(
                               textStyle: const TextStyle(
-                                  color: Colors.blue, fontSize: 30),
+                                  color: Colors.blue, fontSize: 40),
                             ),
                           ),
                         ),
@@ -90,24 +90,15 @@ class Login extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 left: 50, right: 50, top: 40),
                             child: login_button(
-                              key: Key("login button"),
-                              type: "Login",
+                              key: const Key("login button"),
                               formkey: formKey,
                               emailController: emailController,
                               passwordController: passwordController,
                               loginBloc: loginBloc,
                             )),
+                        
                         Padding(
-                            padding: const EdgeInsets.only(
-                                top: 20, left: 50, right: 50),
-                            child: login_button(
-                                type: "Google",
-                                formkey: formKey,
-                                emailController: emailController,
-                                passwordController: passwordController,
-                                loginBloc: loginBloc)),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 50, left: 70),
+                          padding: const EdgeInsets.only(top: 80, left: 70),
                           child: Row(
                             children: [
                               Text(
@@ -142,11 +133,9 @@ class Login extends StatelessWidget {
                 ),
               ));
             } else {
-              return Center(
-                  child: Text("Error Occurred",
-                      style: GoogleFonts.arvo(
-                          textStyle: const TextStyle(
-                              color: Colors.blue, fontSize: 25))));
+              return Scaffold(
+                  backgroundColor: Colors.cyan[100],
+                );
             }
           },
         ));

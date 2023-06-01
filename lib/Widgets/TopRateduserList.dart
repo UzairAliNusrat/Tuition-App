@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:tuition_app_project/Models/userModel.dart';
 import 'package:tuition_app_project/Screens/HomeScreen/bloc/home_bloc.dart';
 
@@ -34,6 +35,10 @@ class userList extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.lightBlueAccent[100],
                 borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+            color: const Color.fromARGB(255, 3, 66, 102),
+            width: 3,
+          ),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(15),
@@ -47,8 +52,13 @@ class userList extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(12),
                       child: Text(
-                          "${teachers[index].first_name} ${teachers[index].last_name}",
-                          style: const TextStyle(color: Colors.black)),
+                        "${teachers[index].first_name} ${teachers[index].last_name}",
+                        style: GoogleFonts.arvo(
+                          textStyle: const TextStyle(
+                              color: Color.fromARGB(255, 3, 66, 102),
+                              fontSize: 18),
+                        ),
+                      ),
                     ),
                     OutlinedButton(
                       onPressed: () {
@@ -65,8 +75,14 @@ class userList extends StatelessWidget {
                         ),
                         side: const BorderSide(width: 2.0, color: Colors.blue),
                       ),
-                      child: const Text("View profile",
-                          style: TextStyle(color: Colors.black)),
+                      child: Text(
+                        "View profile",
+                        style: GoogleFonts.arvo(
+                          textStyle: const TextStyle(
+                              color: Color.fromARGB(255, 3, 66, 102),
+                              fontSize: 15),
+                        ),
+                      ),
                     )
                   ],
                 ),
@@ -89,6 +105,10 @@ class userList extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.lightBlueAccent[100],
                 borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: const Color.fromARGB(255, 3, 66, 102),
+                  width: 3,
+                ),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(15),
@@ -102,8 +122,13 @@ class userList extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(12),
                       child: Text(
-                          "${students[index].first_name} ${students[index].last_name}",
-                          style: const TextStyle(color: Colors.black)),
+                        "${students[index].first_name} ${students[index].last_name}",
+                        style: GoogleFonts.arvo(
+                          textStyle: const TextStyle(
+                              color: Color.fromARGB(255, 3, 66, 102),
+                              fontSize: 18),
+                        ),
+                      ),
                     ),
                     OutlinedButton(
                       onPressed: () {
@@ -120,8 +145,14 @@ class userList extends StatelessWidget {
                         ),
                         side: const BorderSide(width: 2.0, color: Colors.blue),
                       ),
-                      child: const Text("View profile",
-                          style: TextStyle(color: Colors.black)),
+                      child: Text(
+                        "View profile",
+                        style: GoogleFonts.arvo(
+                          textStyle: const TextStyle(
+                              color: Color.fromARGB(255, 3, 66, 102),
+                              fontSize: 15),
+                        ),
+                      ),
                     )
                   ],
                 ),

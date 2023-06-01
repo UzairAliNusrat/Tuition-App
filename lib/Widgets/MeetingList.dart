@@ -13,7 +13,11 @@ class meetingList extends StatelessWidget {
   List<meetingAcceptedModel> acceptedMeetings;
   final user User;
   final HomeBloc homeBloc;
-  meetingList({super.key, required this.acceptedMeetings, required this.User, required this.homeBloc});
+  meetingList(
+      {super.key,
+      required this.acceptedMeetings,
+      required this.User,
+      required this.homeBloc});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,10 @@ class meetingList extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.lightBlueAccent[100],
           borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+            color: const Color.fromARGB(255, 3, 66, 102),
+            width: 3,
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -115,6 +123,10 @@ class meetingList extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.lightBlueAccent[100],
           borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+            color: const Color.fromARGB(255, 3, 66, 102),
+            width: 3,
+          ),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -178,22 +190,28 @@ class meetingList extends StatelessWidget {
                               title: Text("Additional Information:",
                                   style: GoogleFonts.arvo(
                                     textStyle: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 3, 66, 102),
+                                        color: Color.fromARGB(255, 3, 66, 102),
                                         fontSize: 18),
                                   )),
                               subtitle: Text(acceptedMeetings[index].note,
                                   style: GoogleFonts.arvo(
                                     textStyle: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 3, 66, 102),
+                                        color: Color.fromARGB(255, 3, 66, 102),
                                         fontSize: 18),
                                   )),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 10, top: 10),
+                              padding:
+                                  const EdgeInsets.only(bottom: 10, top: 10),
                               child: Center(
-                                child: homeScreenButton(text: "End Meeting", homeBloc: homeBloc, studentId: "", studentName: "", imagepath: "", meetingId: acceptedMeetings[index].meetingId,),
+                                child: homeScreenButton(
+                                  text: "End Meeting",
+                                  homeBloc: homeBloc,
+                                  studentId: "",
+                                  studentName: "",
+                                  imagepath: "",
+                                  meetingId: acceptedMeetings[index].meetingId,
+                                ),
                               ),
                             ),
                           ],

@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tuition_app_project/Models/teacherInfoModel.dart';
-import '../Models/userModel.dart';
 
 abstract class TeacherRepository {
   setTeacherInfo(Teacherinfo teacher);
   Future<Teacherinfo?> getTeacher(String teacherId);
-  Future<List<Teacherinfo>> fetchTeacherinfoListbySubject(String subject);
+  Future<List<Teacherinfo>> fetchTeacherInfoListBySubject(String subject);
 }
 
 class FirebaseTeacherRepository implements TeacherRepository {
@@ -13,31 +12,32 @@ class FirebaseTeacherRepository implements TeacherRepository {
 
   @override
   Future<Teacherinfo> getTeacher(String teacherId) async {
-    // Get the user document from Firestore based on the provided user ID
-    final TeacherDoc = await FirebaseFirestore.instance
-        .collection("Teacher Information")
-        .doc(teacherId)
-        .get();
-    return Teacherinfo.fromJson(TeacherDoc);
+    final DocumentSnapshot<Map<String, dynamic>> teacherDoc =
+        await db.collection("Teacher Information").doc(teacherId).get();
+
+    return Teacherinfo.fromJson(teacherDoc.data()!);
   }
 
   @override
-  Future<List<Teacherinfo>> fetchTeacherinfoListbySubject(
+  Future<List<Teacherinfo>> fetchTeacherInfoListBySubject(
       String subject) async {
-    List<Teacherinfo> teachersinfo = [];
+    List<Teacherinfo> teachersInfo = [];
     final QuerySnapshot result =
         await db.collection("Teacher Information").get();
     final List<DocumentSnapshot<Map<String, dynamic>>> documents =
         result.docs.cast<DocumentSnapshot<Map<String, dynamic>>>();
+
     for (var element in documents) {
-      for (int i = 0; i < Teacherinfo.fromJson(element).subjects.length; i++) {
-        if (Teacherinfo.fromJson(element).subjects[i].trim().toLowerCase() ==
-            subject) {
-          teachersinfo.add(Teacherinfo.fromJson(element));
+      final Teacherinfo teacherInfo = Teacherinfo.fromJson(element.data()!);
+      for (int i = 0; i < teacherInfo.subjects.length; i++) {
+        if (teacherInfo.subjects[i].trim().toLowerCase() == subject) {
+          teachersInfo.add(teacherInfo);
+          break;
         }
       }
     }
-    return teachersinfo;
+
+    return teachersInfo;
   }
 
   @override
