@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:tuition_app_project/Screens/HomeScreen/bloc/home_bloc.dart';
-import 'package:tuition_app_project/Screens/login/bloc/login_bloc.dart';
 import 'package:tuition_app_project/Screens/signUp/bloc/sign_up_bloc.dart';
-import 'package:tuition_app_project/Widgets/bottomNavigationBar.dart';
-import 'package:tuition_app_project/Widgets/homeScreenButton.dart';
-import 'package:tuition_app_project/Widgets/loginbutton.dart';
 import 'package:tuition_app_project/Widgets/signUpbutton.dart';
 
 class MockSignUpBloc extends Mock implements SignUpBloc {}
@@ -18,7 +13,7 @@ void main() {
     mockSignUpBloc = MockSignUpBloc();
   });
 
-  testWidgets('homeScreenButton widget ...', (tester) async {
+  testWidgets('SignUpButton widget ...', (tester) async {
     // TODO: Implement test
 
     final GlobalKey<FormState> formkey = MockFormState();

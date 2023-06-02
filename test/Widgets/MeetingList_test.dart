@@ -16,7 +16,7 @@ void main() {
     mockhomeBloc = MockHomeBloc();
   });
 
-  testWidgets('homeScreenStudent widget ...', (tester) async {
+  testWidgets('meetingList widget ...', (tester) async {
     // TODO: Implement test
 
     final user User = user(

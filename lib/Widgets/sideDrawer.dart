@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import '../Models/userModel.dart';
 import '../Screens/HomeScreen/bloc/home_bloc.dart';

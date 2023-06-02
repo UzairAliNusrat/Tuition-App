@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:tuition_app_project/Models/meetingAcceptedModel.dart';
 import 'package:tuition_app_project/Models/meetingRequestModel.dart';
-import 'package:tuition_app_project/Models/userModel.dart';
 import 'package:tuition_app_project/Screens/HomeScreen/bloc/home_bloc.dart';
-import 'package:tuition_app_project/Widgets/HomeScreenStudent.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 import 'package:tuition_app_project/Widgets/MeetingsScreenStudent.dart';
 
