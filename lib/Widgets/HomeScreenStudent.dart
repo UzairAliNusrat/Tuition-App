@@ -152,12 +152,11 @@ class HomeScreenStudent extends StatelessWidget {
               teachers: teachers,
               students: const [],
               homebloc: homeBloc,
-              userType: "Teacher",
             ),
           )
         ],
       ),
     );
-    ;
+    
   }
 }

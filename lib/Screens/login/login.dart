@@ -90,7 +90,6 @@ class Login extends StatelessWidget {
                             padding: const EdgeInsets.only(
                                 left: 50, right: 50, top: 40),
                             child: login_button(
-                              key: const Key("login button"),
                               formkey: formKey,
                               emailController: emailController,
                               passwordController: passwordController,

@@ -20,10 +20,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   FutureOr<void> profileInitialEvent(
       ProfileInitialEvent event, Emitter<ProfileState> emit) async {
-        print("hello");
     emit(ProfileLoadingState());
     if (event.userType == "Teacher") {
-      print("hello1");
       Teacherinfo teacherinfo =
           await TeacherInfoRepo.teacherInfoRepo.getTeacher(event.id);
       double avgRating = await Userrepo.userRepo.getAvgUserRating(event.id);
@@ -38,7 +36,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           initialRating: 0,
           phoneNumber: teacherinfo.phoneNumber));
     } else {
-      print("hello3");
       Studentinfo studentinfo =
           await StudentInfoRepo.studentInfoRepo.getStudentInfo(event.id);
       double avgRating = await Userrepo.userRepo.getAvgUserRating(event.id);

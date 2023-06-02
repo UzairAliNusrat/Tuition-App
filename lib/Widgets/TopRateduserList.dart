@@ -11,20 +11,18 @@ class userList extends StatelessWidget {
   final List<user> teachers;
   final List<user> students;
   final HomeBloc homebloc;
-  final String userType;
   const userList(
       {super.key,
       required this.teachers,
       required this.homebloc,
-      required this.students,
-      required this.userType});
+      required this.students,});
 
   @override
   Widget build(BuildContext context) {
     if (teachers.isNotEmpty) {
       return SizedBox(
         width: double.infinity,
-        height: 250,
+        height: 255,
         child: ListView.builder(
           itemCount: teachers.length,
           scrollDirection: Axis.horizontal,
@@ -67,7 +65,7 @@ class userList extends StatelessWidget {
                             imagepath: teachers[index].ProfileImagePath,
                             fullname:
                                 "${teachers[index].first_name} ${teachers[index].last_name}",
-                            userType: userType));
+                            userType: teachers[index].UserType));
                       },
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -94,7 +92,7 @@ class userList extends StatelessWidget {
     } else {
       return SizedBox(
         width: double.infinity,
-        height: 250,
+        height: 255,
         child: ListView.builder(
           itemCount: students.length,
           scrollDirection: Axis.horizontal,
@@ -137,7 +135,7 @@ class userList extends StatelessWidget {
                             imagepath: students[index].ProfileImagePath,
                             fullname:
                                 "${students[index].first_name} ${students[index].last_name}",
-                            userType: userType));
+                            userType: students[index].UserType));
                       },
                       style: OutlinedButton.styleFrom(
                         shape: RoundedRectangleBorder(

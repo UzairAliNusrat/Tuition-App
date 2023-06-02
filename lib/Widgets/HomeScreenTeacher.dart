@@ -89,7 +89,7 @@ class HomeScreenTeacher extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                        left: 3,
+                        left: 7,
                       ),
                       child: Text(User.last_name,
                           style: GoogleFonts.arvo(
@@ -149,7 +149,6 @@ class HomeScreenTeacher extends StatelessWidget {
               teachers: const [],
               homebloc: homeBloc,
               students: students,
-              userType: "Student",
             ),
           )
         ],

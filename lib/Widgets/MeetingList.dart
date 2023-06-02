@@ -14,8 +14,7 @@ class meetingList extends StatelessWidget {
   final user User;
   final HomeBloc homeBloc;
   meetingList(
-      {super.key,
-      required this.acceptedMeetings,
+      {required this.acceptedMeetings,
       required this.User,
       required this.homeBloc});
 

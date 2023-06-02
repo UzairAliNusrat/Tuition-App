@@ -13,7 +13,7 @@ void main() {
         email: 'johndoe@example.com',
         id: 'user123',
         ProfileImagePath: '/path/to/profile/image.jpg',
-        UserType: 'regular',
+        UserType: 'Teacher',
       );
     });
 
@@ -24,7 +24,7 @@ void main() {
         'email': 'johndoe@example.com',
         'id': 'user123',
         'ProfileImagePath': '/path/to/profile/image.jpg',
-        'UserType': 'regular',
+        'UserType': 'Teacher',
       };
 
       final result = user.fromJson(json);
@@ -35,7 +35,7 @@ void main() {
       expect(result.email, 'johndoe@example.com');
       expect(result.id, 'user123');
       expect(result.ProfileImagePath, '/path/to/profile/image.jpg');
-      expect(result.UserType, 'regular');
+      expect(result.UserType, 'Teacher');
     });
 
     test('toJson() should convert a User instance to JSON', () {
@@ -47,7 +47,7 @@ void main() {
       expect(result['email'], 'johndoe@example.com');
       expect(result['id'], 'user123');
       expect(result['ProfileImagePath'], '/path/to/profile/image.jpg');
-      expect(result['UserType'], 'regular');
+      expect(result['UserType'], 'Teacher');
     });
   });
 }
