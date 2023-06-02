@@ -94,17 +94,19 @@ class learnScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(
                               left: 50, right: 50, top: 80),
                           child: textFormField(
-                              Controller: subjectNameController,
-                              hintText: "Subject Name",
-                              prefixIcon: Icons.subject_sharp,),
+                            Controller: subjectNameController,
+                            hintText: "Subject Name",
+                            prefixIcon: Icons.subject_sharp,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 50, right: 50, top: 20),
                           child: textFormField(
-                              Controller: topicController,
-                              hintText: "Topic",
-                              prefixIcon: Icons.topic_sharp,),
+                            Controller: topicController,
+                            hintText: "Topic",
+                            prefixIcon: Icons.topic_sharp,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
@@ -112,6 +114,8 @@ class learnScreen extends StatelessWidget {
                           child: TextField(
                             controller: noteController,
                             decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 241, 235, 232),
                                 prefixIcon: Icon(Icons.description),
                                 hintText: "Description",
                                 border: OutlineInputBorder(

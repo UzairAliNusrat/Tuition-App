@@ -116,16 +116,19 @@ class signupPage2 extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: TextField(
-                        controller: AboutController,
-                        decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.description),
-                            hintText: "Description",
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30)),
-                                borderSide: BorderSide(color: Colors.blue))),
-                        maxLines: null,
-                      ),
+                            controller: AboutController,
+                            decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Color.fromARGB(255, 241, 235, 232),
+                                prefixIcon: Icon(Icons.description),
+                                hintText: "Description",
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(30)),
+                                    borderSide:
+                                        BorderSide(color: Colors.blue))),
+                            maxLines: null,
+                          ),
                     ),
                     Padding(
                         padding: const EdgeInsets.only(top: 20),
@@ -149,14 +152,15 @@ class signupPage2 extends StatelessWidget {
                             },
                             child: Text("Sign Up",
                                 style: GoogleFonts.arvo(
-                                      textStyle: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 3, 66, 102),
-                                          fontSize: 22),
-                                    )),
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 22),
+                                )),
                           ),
                         )),
-                        const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                   ],
                 )),
               );
@@ -241,12 +245,12 @@ class signupPage2 extends StatelessWidget {
                               page2Bloc.add(SignUpbuttonStudentClickedEvent(
                                   studentinfo: studentinfo));
                             },
-                            child: Text("Sign Up", style: GoogleFonts.arvo(
-                                      textStyle: const TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 3, 66, 102),
-                                          fontSize: 22),
-                                    ))),
+                            child: Text("Sign Up",
+                                style: GoogleFonts.arvo(
+                                  textStyle: const TextStyle(
+                                      color: Color.fromARGB(255, 3, 66, 102),
+                                      fontSize: 22),
+                                ))),
                       ),
                     )
                   ],

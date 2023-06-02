@@ -30,6 +30,8 @@ class textFormField extends StatelessWidget {
         controller: Controller,
         obscureText: hide!,
         decoration: InputDecoration(
+            filled: true,
+            fillColor: const Color.fromARGB(255, 241, 235, 232),
             suffixIcon: IconButton(
                 onPressed: () {
                   if (loginBloc != null) {
@@ -60,6 +62,8 @@ class textFormField extends StatelessWidget {
       return TextFormField(
         controller: Controller,
         decoration: InputDecoration(
+            filled: true,
+            fillColor: const Color.fromARGB(255, 241, 235, 232),
             prefixIcon: Icon(prefixIcon),
             hintText: hintText,
             border: const OutlineInputBorder(
@@ -83,6 +87,8 @@ class textFormField extends StatelessWidget {
       return TextFormField(
         controller: Controller,
         decoration: InputDecoration(
+            filled: true,
+            fillColor: const Color.fromARGB(255, 241, 235, 232),
             prefixIcon: Icon(prefixIcon),
             hintText: hintText,
             border: const OutlineInputBorder(
@@ -111,6 +117,8 @@ class textFormField extends StatelessWidget {
     return TextFormField(
       controller: Controller,
       decoration: InputDecoration(
+          filled: true,
+          fillColor: const Color.fromARGB(255, 241, 235, 232),
           prefixIcon: Icon(prefixIcon),
           hintText: hintText,
           border: const OutlineInputBorder(

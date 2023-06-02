@@ -24,7 +24,8 @@ class login_button extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30))),
+                  borderRadius: BorderRadius.circular(30)), backgroundColor: Colors.brown,),
+              
           onPressed: () {
             if (formkey.currentState!.validate()) {
               loginBloc.add(LoginButtonClickedEvent(
@@ -37,7 +38,7 @@ class login_button extends StatelessWidget {
             "Login",
             style: GoogleFonts.arvo(
               textStyle: const TextStyle(
-                  color: Color.fromARGB(255, 3, 66, 102), fontSize: 18),
+                  color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
         ),
