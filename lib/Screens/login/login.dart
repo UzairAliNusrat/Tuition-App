@@ -7,7 +7,6 @@ import 'package:tuition_app_project/Widgets/loginbutton.dart';
 import 'package:tuition_app_project/Screens/signUp/signUp.dart';
 
 import '../../Widgets/textFormField.dart';
-import '../HomeScreen/HomeScreen.dart';
 
 class Login extends StatelessWidget {
   Login({Key? key}) : super(key: key);

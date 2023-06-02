@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tuition_app_project/Screens/signUp/bloc/sign_up_bloc.dart';
-import 'package:tuition_app_project/Screens/signUp/signup.dart';
 
 import '../Auth.dart';
 

@@ -5,10 +5,7 @@ import 'package:meta/meta.dart';
 import 'package:tuition_app_project/Models/studentInfoModel.dart';
 import 'package:tuition_app_project/Models/teacherInfoModel.dart';
 import 'package:tuition_app_project/Models/userModel.dart';
-import 'package:tuition_app_project/Repositories/teacherRepository.dart';
 import 'package:tuition_app_project/Utils/constants.dart';
-
-import '../../../Repositories/studentRepository.dart';
 
 part 'my_profile_event.dart';
 part 'my_profile_state.dart';

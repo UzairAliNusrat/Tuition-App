@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tuition_app_project/Models/studentInfoModel.dart';
-import 'package:tuition_app_project/Models/teacherInfoModel.dart';
-import '../Models/userModel.dart';
 
 abstract class StudentRepository {
   setStudentInfo(Studentinfo studentinfo);

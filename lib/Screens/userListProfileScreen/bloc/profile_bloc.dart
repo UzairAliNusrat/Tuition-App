@@ -5,8 +5,6 @@ import 'package:meta/meta.dart';
 import 'package:tuition_app_project/Models/Ratings.dart';
 import 'package:tuition_app_project/Models/studentInfoModel.dart';
 import 'package:tuition_app_project/Models/teacherInfoModel.dart';
-import 'package:tuition_app_project/Repositories/studentRepository.dart';
-import 'package:tuition_app_project/Repositories/teacherRepository.dart';
 import 'package:tuition_app_project/Utils/constants.dart';
 
 part 'profile_event.dart';

@@ -12,7 +12,7 @@ import 'bottomNavigationBar.dart';
 class MeetingsScreenStudent extends StatelessWidget {
   final List<meetingRequestModel> meetingHistory;
   final HomeBloc homeBloc;
-  final bottomNavigationBarIndex;
+  final int bottomNavigationBarIndex;
   const MeetingsScreenStudent(
       {super.key,
       required this.homeBloc,

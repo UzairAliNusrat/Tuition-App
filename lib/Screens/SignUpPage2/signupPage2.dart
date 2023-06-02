@@ -106,7 +106,7 @@ class signupPage2 extends StatelessWidget {
                       padding: const EdgeInsets.all(20),
                       child: textFormField(
                         Controller: SubjectsController,
-                        hintText: "Subjects",
+                        hintText: "Subjects eg: Math,Physics",
                         prefixIcon: Icons.app_registration,
                         loginBloc: null,
                         signUpBloc: null,

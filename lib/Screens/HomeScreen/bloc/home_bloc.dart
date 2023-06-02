@@ -6,7 +6,6 @@ import 'package:meta/meta.dart';
 import 'package:tuition_app_project/Models/meetingAcceptedModel.dart';
 import 'package:tuition_app_project/Models/meetingRequestModel.dart';
 import 'package:tuition_app_project/Models/userModel.dart';
-import 'package:tuition_app_project/Repositories/meetingRequestRepository.dart';
 import 'package:tuition_app_project/Utils/constants.dart';
 
 part 'home_event.dart';

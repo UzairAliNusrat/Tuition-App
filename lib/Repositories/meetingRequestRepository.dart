@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tuition_app_project/Models/meetingRequestModel.dart';
-import 'package:tuition_app_project/Models/teacherInfoModel.dart';
 import '../Models/meetingAcceptedModel.dart';
-import '../Models/userModel.dart';
 
 abstract class MeetingRequestRepository {
   setMeetingRequest(meetingRequestModel meetingRequest);

@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../Auth.dart';
 import '../Screens/login/bloc/login_bloc.dart';
 
 class login_button extends StatelessWidget {
