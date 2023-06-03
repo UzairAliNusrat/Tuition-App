@@ -116,19 +116,18 @@ class signupPage2 extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: TextField(
-                            controller: AboutController,
-                            decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Color.fromARGB(255, 241, 235, 232),
-                                prefixIcon: Icon(Icons.description),
-                                hintText: "Description",
-                                border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30)),
-                                    borderSide:
-                                        BorderSide(color: Colors.blue))),
-                            maxLines: null,
-                          ),
+                        controller: AboutController,
+                        decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 241, 235, 232),
+                            prefixIcon: Icon(Icons.description),
+                            hintText: "Description",
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30)),
+                                borderSide: BorderSide(color: Colors.blue))),
+                        maxLines: null,
+                      ),
                     ),
                     Padding(
                         padding: const EdgeInsets.only(top: 20),
@@ -217,6 +216,8 @@ class signupPage2 extends StatelessWidget {
                       child: TextField(
                         controller: AboutController,
                         decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Color.fromARGB(255, 241, 235, 232),
                             prefixIcon: Icon(Icons.description),
                             hintText: "Description",
                             border: OutlineInputBorder(
