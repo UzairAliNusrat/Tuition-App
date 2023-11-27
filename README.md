@@ -1,16 +1,16 @@
 # tuition_app_project
 
-A new Flutter project.
+TutorConnect: Empowering Peer-to-Peer Learning
+Overview
+TutorConnect is a mobile application designed to facilitate seamless connections between students and tutors, fostering a dynamic peer-to-peer teaching environment. Built with Flutter and powered by Firebase as a backend-as-a-service (BaaS), PeerConnect simplifies the process of finding and engaging with tutors, creating an interactive and collaborative learning experience.
 
-## Getting Started
+Features
+User Authentication: Securely authenticate users with Firebase authentication to ensure a safe and personalized experience.
 
-This project is a starting point for a Flutter application.
+Peer Matching: Effortlessly connect students with tutors based on their academic needs and availability.
 
-A few resources to get you started if this is your first Flutter project:
+Real-time Messaging: Enable real-time communication between students and tutors to facilitate a fluid learning process.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Appointment Scheduling: Streamline the scheduling of tutoring sessions with a user-friendly interface, helping users manage their time effectively.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Flutter Bloc for State Management: Utilize the Flutter Bloc library for efficient and maintainable state management, ensuring a smooth user experience.
