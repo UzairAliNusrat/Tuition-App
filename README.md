@@ -1,4 +1,4 @@
-# tuition_app_project
+# TutorConnect
 
 TutorConnect: Empowering Peer-to-Peer Learning
 Overview
